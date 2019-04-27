@@ -4,7 +4,7 @@ public class Produtos {
   
     private String codigoProduto;
     private String nomeProduto;
-    private String descricao;
+    private String descricao; // fabricante(produzido por:), origem, peso, tipo, grad. alc,conteudo liquido, aditivos, validade, composição, importador, distribuidor, fornecedor, lote, ...
     private float preco;
   
     public Produto(String codigoProduto,String nomeProduto, String descricao, float preco){
