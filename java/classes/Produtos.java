@@ -2,12 +2,12 @@ package classes;
 
 public class Produtos { 
   
-    private String codigoProduto;
+    private int codigoProduto;
     private String nomeProduto;
     private String descricao; // fabricante(produzido por:), origem, peso, tipo, grad. alc,conteudo liquido, aditivos, validade, composição, importador, distribuidor, fornecedor, lote, ...
     private float preco;
   
-    public Produto(String codigoProduto,String nomeProduto, String descricao, float preco){
+    public Produtos(int codigoProduto,String nomeProduto, String descricao, float preco){
     
       this.codigoProduto = codigoProduto;
       this.nomeProduto = nomeProduto;
@@ -15,10 +15,10 @@ public class Produtos {
       this.preco = preco;
 	    
     }
-    public String getCodigoProduto() {
+    public int getCodigoProduto() {
 	return codigoProduto;
     }
-    public void setCodigoProduto(String codigoProduto) {
+    public void setCodigoProduto(int codigoProduto) {
 	this.codigoProduto = codigoProduto;
     }
     public String getNomeProduto() {
@@ -26,6 +26,7 @@ public class Produtos {
     }
     public void setNomeProduto(String nomeProduto) {
 	this.nomeProduto = nomeProduto;
+    }
     public String getDescricao() {
 	return descricao;
     }
@@ -37,6 +38,10 @@ public class Produtos {
     }
     public void setPreco(float preco) {
 	this.preco = preco;
+    }
+    
+    public void mostrarProduto() {
+    	System.out.println(this.codigoProduto + ' ' + this.nomeProduto + ' ' + this.descricao + ' ' + this.preco);
     }
   
 }

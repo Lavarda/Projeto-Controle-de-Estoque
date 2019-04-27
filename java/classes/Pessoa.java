@@ -9,11 +9,11 @@ public class Pessoa {
 	private int rg;
 	private String dataNascimento;
 	private String endereco; // Digitar CPF fazer busca automatizca do endereço
-	private char sexo;
+	private String sexo;
 	private String estadoCivil;
 	
 	
-	public Pessoa(String nome,String email,String numeroCelular, String cpf, int rg,String dataNascimento, String endereco, char sexo, String estadoCivil) {
+	public Pessoa(String nome,String email,String numeroCelular, String cpf, int rg,String dataNascimento, String endereco, String sexo, String estadoCivil) {
 		this.nome = nome;
 		this.email = email;
 		this.numeroCelular = numeroCelular;
@@ -33,11 +33,11 @@ public class Pessoa {
 		this.endereco = endereco;
 	}
 
-	public char getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(char sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 
@@ -95,5 +95,17 @@ public class Pessoa {
 
 	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
+	}
+	
+	public void dadosPessoa() {
+		System.out.println("Nome: " + this.nome);
+		System.out.println("Email: " + this.email);
+		System.out.println("Numero de Celular: " + this.numeroCelular);
+		System.out.println("Cpf: " + this.cpf);
+		System.out.println("Data de nascimento: " + this.dataNascimento);
+		System.out.println("Endereço: " + this.endereco);
+		System.out.println("RG: " + this.rg);
+		System.out.println("Sexo: " + this.sexo);
+		System.out.println("Estado Civil: " + this.estadoCivil);
 	}
 }
