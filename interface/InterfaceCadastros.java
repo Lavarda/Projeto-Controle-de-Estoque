@@ -15,6 +15,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import java.awt.Color;
+import javax.swing.border.BevelBorder;
 
 public class InterfaceCadastros extends JFrame {
 
@@ -24,6 +25,7 @@ public class InterfaceCadastros extends JFrame {
 	private JTextField fieldCpf;
 	private JTextField fieldRg;
 	private JTextField fieldEndereco;
+	private JTextField fieldRua;
 
 	/**
 	 * Launch the application.
@@ -55,28 +57,32 @@ public class InterfaceCadastros extends JFrame {
 		setContentPane(fieldFuncionario);
 		fieldFuncionario.setLayout(null);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(41, 11, 46, 14);
-		fieldFuncionario.add(label);
+		JButton botaoCancelar = new JButton("Cancelar");
+		botaoCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		botaoCancelar.setBackground(Color.WHITE);
+		botaoCancelar.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
+		botaoCancelar.setBounds(451, 359, 89, 23);
+		fieldFuncionario.add(botaoCancelar);
 		
-		JButton btnBotaocancelar = new JButton("Cancelar");
-		btnBotaocancelar.setBackground(Color.WHITE);
-		btnBotaocancelar.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
-		btnBotaocancelar.setBounds(658, 359, 89, 23);
-		fieldFuncionario.add(btnBotaocancelar);
+		JButton botaoLimpar = new JButton("Limpar");
+		botaoLimpar.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
+		botaoLimpar.setBackground(Color.WHITE);
+		botaoLimpar.setBounds(550, 359, 98, 23);
+		fieldFuncionario.add(botaoLimpar);
 		
-		JButton btnBotaolimpar = new JButton("Limpar");
-		btnBotaolimpar.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
-		btnBotaolimpar.setBackground(Color.WHITE);
-		btnBotaolimpar.setBounds(550, 359, 98, 23);
-		fieldFuncionario.add(btnBotaolimpar);
-		
-		JButton btnBotaocadastrar = new JButton("Cadastrar");
-		btnBotaocadastrar.setForeground(Color.BLACK);
-		btnBotaocadastrar.setBackground(Color.WHITE);
-		btnBotaocadastrar.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
-		btnBotaocadastrar.setBounds(442, 359, 98, 23);
-		fieldFuncionario.add(btnBotaocadastrar);
+		JButton botaoCadastrar = new JButton("Cadastrar");
+		botaoCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		botaoCadastrar.setForeground(Color.BLACK);
+		botaoCadastrar.setBackground(Color.WHITE);
+		botaoCadastrar.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
+		botaoCadastrar.setBounds(658, 359, 98, 23);
+		fieldFuncionario.add(botaoCadastrar);
 		
 		JLabel lblNome = new JLabel(" Nome:");
 		lblNome.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
@@ -84,6 +90,7 @@ public class InterfaceCadastros extends JFrame {
 		fieldFuncionario.add(lblNome);
 		
 		fieldNome = new JTextField();
+		fieldNome.setBackground(Color.WHITE);
 		fieldNome.setBounds(112, 78, 192, 20);
 		fieldFuncionario.add(fieldNome);
 		fieldNome.setColumns(10);
@@ -173,10 +180,10 @@ public class InterfaceCadastros extends JFrame {
 		lblSetor.setBounds(397, 136, 60, 23);
 		fieldFuncionario.add(lblSetor);
 		
-		JLabel lblSalrio = new JLabel("Sal\u00E1rio:");
-		lblSalrio.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
-		lblSalrio.setBounds(397, 167, 64, 23);
-		fieldFuncionario.add(lblSalrio);
+		JLabel lblSalario = new JLabel("Sal\u00E1rio:");
+		lblSalario.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+		lblSalario.setBounds(397, 167, 64, 23);
+		fieldFuncionario.add(lblSalario);
 		
 		JFormattedTextField fieldDataAdmissao = new JFormattedTextField();
 		fieldDataAdmissao.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
@@ -206,8 +213,49 @@ public class InterfaceCadastros extends JFrame {
 		
 		JFormattedTextField fieldSalario = new JFormattedTextField();
 		fieldSalario.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
-		fieldSalario.setBounds(467, 170, 109, 20);
+		fieldSalario.setBounds(467, 170, 89, 20);
 		fieldSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####.## R$")));
 		fieldFuncionario.add(fieldSalario);
+		
+		JLabel lblCidade = new JLabel("Cidade:");
+		lblCidade.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+		lblCidade.setBounds(397, 201, 64, 23);
+		fieldFuncionario.add(lblCidade);
+		
+		JComboBox comboBoxCidade = new JComboBox();
+		comboBoxCidade.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
+		comboBoxCidade.setBounds(467, 201, 106, 20);
+		fieldFuncionario.add(comboBoxCidade);
+		
+		JLabel lblEstado = new JLabel("Estado:");
+		lblEstado.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+		lblEstado.setBounds(397, 236, 64, 23);
+		fieldFuncionario.add(lblEstado);
+		
+		JComboBox comboBoxEstado = new JComboBox();
+		comboBoxEstado.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
+		comboBoxEstado.setBounds(467, 240, 106, 20);
+		fieldFuncionario.add(comboBoxEstado);
+		
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+		lblCep.setBounds(397, 270, 38, 23);
+		fieldFuncionario.add(lblCep);
+		
+		JFormattedTextField fieldCep = new JFormattedTextField();
+		fieldCep.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+		fieldCep.setBounds(447, 274, 98, 20);
+		fieldCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+		fieldFuncionario.add(fieldCep);
+		
+		JLabel lblRua = new JLabel("Rua:");
+		lblRua.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+		lblRua.setBounds(397, 304, 38, 23);
+		fieldFuncionario.add(lblRua);
+		
+		fieldRua = new JTextField();
+		fieldRua.setColumns(10);
+		fieldRua.setBounds(447, 308, 192, 20);
+		fieldFuncionario.add(fieldRua);
 	}
 }
