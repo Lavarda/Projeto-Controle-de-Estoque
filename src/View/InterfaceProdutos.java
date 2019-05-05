@@ -16,7 +16,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import java.awt.Color;
 
-public class InterfaceProdutos extends JFrame {
+public class InterfaceProdutos extends InterfacePrincipal {
 
 	private JPanel fieldProdutos;
 	private JTextField fieldCodigo;
@@ -59,7 +59,7 @@ public class InterfaceProdutos extends JFrame {
 		fieldProdutos.add(fieldNome);
 		fieldNome.setColumns(10);
 		
-		JLabel lblDescricao = new JLabel(" Descrição:");
+		JLabel lblDescricao = new JLabel(" DescriÃ§Ã£o:");
 		lblDescricao.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
 		lblDescricao.setBounds(32, 145, 120, 20);
 		fieldProdutos.add(lblDescricao);
@@ -70,7 +70,7 @@ public class InterfaceProdutos extends JFrame {
 		fieldProdutos.add(fieldDescricao);
 		fieldDescricao.setColumns(10);
 		
-		JLabel lblPreco = new JLabel(" Preço:");
+		JLabel lblPreco = new JLabel(" PreÃ§o:");
 		lblPreco.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
 		lblPreco.setBounds(32, 104, 120, 20);
 		fieldProdutos.add(lblPreco);
