@@ -7,6 +7,7 @@ public class Produtos {
     private String nomeProduto;
     private String descricao;
     private float preco;
+    private int quantidade;
   
     public Produtos(int codigoProduto,String nomeProduto, String descricao, float preco){
     
@@ -14,6 +15,7 @@ public class Produtos {
       this.nomeProduto = nomeProduto;
       this.descricao = descricao;
       this.preco = preco;
+      this.quantidade = quantidade;
 	    
     }
     public int getCodigoProduto() {
@@ -40,8 +42,14 @@ public class Produtos {
     public void setPreco(float preco) {
 	this.preco = preco;
     }
+    public void getQuantidade() {
+    return quantidade;
+    }
+    public void setQuantidade(int quantidade) {
+    this.quantidade = quantidade;
+    }
     public void mostrarProduto() {
-    	System.out.println(this.codigoProduto + ' ' + this.nomeProduto + ' ' + this.descricao + ' ' + this.preco);
+    	System.out.println(this.codigoProduto + ' ' + this.nomeProduto + ' ' + this.descricao + ' ' + this.preco + ' ' + this.quantidade);
     }
   
 }
