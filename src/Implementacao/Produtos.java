@@ -5,43 +5,52 @@ public class Produtos {
 
     private int codigoProduto;
     private String nomeProduto;
-    private String descricao;
     private float preco;
-  
-    public Produtos(int codigoProduto,String nomeProduto, String descricao, float preco){
+    private int codigoCategoria;
+    
+    public Produtos(int codigoProduto,String nomeProduto, float preco, int codigoCategoria){
     
       this.codigoProduto = codigoProduto;
       this.nomeProduto = nomeProduto;
-      this.descricao = descricao;
       this.preco = preco;
+      this.codigoCategoria = codigoCategoria;
 	    
-    }
+    } 
+   
     public int getCodigoProduto() {
-	return codigoProduto;
-    }
-    public void setCodigoProduto(int codigoProduto) {
-	this.codigoProduto = codigoProduto;
-    }
-    public String getNomeProduto() {
-	return nomeProduto;
-    }
-    public void setNomeProduto(String nomeProduto) {
-	this.nomeProduto = nomeProduto;
+		return codigoProduto;
 	}
-    public String getDescricao() {
-	return descricao;
-    }
-    public void setDescricao(String descricao) {
-	this.descricao = descricao;
-    }
-    public float getPreco() {
-	return preco;
-    }
-    public void setPreco(float preco) {
-	this.preco = preco;
-    }
-    public void mostrarProduto() {
-    	System.out.println(this.codigoProduto + ' ' + this.nomeProduto + ' ' + this.descricao + ' ' + this.preco);
+
+	public void setCodigoProduto(int codigoProduto) {
+		this.codigoProduto = codigoProduto;
+	}
+
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+
+	public float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
+
+	public int getCodigoCategoria() {
+		return codigoCategoria;
+	}
+
+	public void setCodigoCategoria(int codigoCategoria) {
+		this.codigoCategoria = codigoCategoria;
+	}
+
+	public void mostrarProduto() {
+    	System.out.println(' ' + getCodigoProduto() + ' ' + getNomeProduto() + ' ' + getPreco() + ' ' + getCodigoCategoria() );
     }
   
 }

@@ -8,7 +8,7 @@ public class ConnectionDB {
     private Connection db = null; // Conexão
     public Statement query; // Query
     public ResultSet result; // Resultado da query
-    private String URL = "jdbc:postgresql://192.168.6.153:5432/"; // url do servidor
+    private String URL = "jdbc:postgresql://192.168.4.204:5432/"; // url do servidor
     private String USER = "groupaps"; // usuario do db
     private String PASSWORD = "aps2019-1"; // senha do usuario
     private String DATABASE = "projeto_estoque"; // banco 
@@ -31,19 +31,17 @@ public class ConnectionDB {
         }
     }
     
-    public void SelectQuery(String qr){
+    public ResultSet SelectQuery(String qr){
     	
     	try {
     		query = db.createStatement();
-            ResultSet result = query.executeQuery(qr);
-            while (result.next()) {
-        	  String nome = result.getString("nome_usuario");
-        	  System.out.println(nome + "\n");
-        	}
+            this.result = query.executeQuery(qr);
+            
      	} catch (SQLException sqlex) {
      		JOptionPane.showMessageDialog(null, "erro na query");
      		sqlex.printStackTrace();
      	}
+		return result;
     	
     }
     
