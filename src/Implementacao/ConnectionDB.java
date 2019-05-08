@@ -18,6 +18,7 @@ public class ConnectionDB {
     	try {
             Class.forName("org.postgresql.Driver");
             db = DriverManager.getConnection(this.URL + this.DATABASE, this.USER, this.PASSWORD);
+            db.setAutoCommit(false);
             if( db != null ) {
             	System.out.println("Conexão realizada com sucesso!");
             }
@@ -46,12 +47,20 @@ public class ConnectionDB {
     	
     }
     
-    public void InsertQuery(String qr) {
+    public void InsertQuery(String qr){
     	
     	try {
-    		PreparedStatement query = db.prepareStatement(qr);
-    		query.executeUpdate();
+    		Statement stmt = db.createStatement();
+//    		Statement query = db.prepareStatement(qr);
+    		stmt.executeUpdate(qr);
+    		db.commit();
     	} catch ( Exception e) {
+    		try {
+				db.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
     		System.out.println(e);
     	}
     	
@@ -70,8 +79,8 @@ public class ConnectionDB {
     public static void main(String args[]) {
     	ConnectionDB db = new ConnectionDB();
     	db.Conectar(); // Conectar com o DB
-    	//db.SelectQuery("SELECT * FROM cadastro_usuario"); // Fazer querys de consulta no banco.
-    	//db.InsertQuery("DELETE table filiais"); // Fazer query de modificação UPDATE,INSERT e DELETE.
+//    	db.SelectQuery("SELECT * FROM cadastro_usuario"); // Fazer querys de consulta no banco.
+//    	db.InsertQuery("insert into venda_produtos(cod_produto,cod_usuario,dt_compra_produto) values(1,23,'10')"); // Fazer query de modificação UPDATE,INSERT e DELETE.
     	db.Desconectar(); // Desconectar do DB.
     	
     }
