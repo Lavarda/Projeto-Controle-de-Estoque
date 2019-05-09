@@ -1,14 +1,18 @@
 package Implementacao;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class ConnectionDB {
 
     private Connection db = null; // Conexão
-    public Statement query; // Query
-    public ResultSet result; // Resultado da query
-    private String URL = "jdbc:postgresql://192.168.6.153:5432/"; // url do servidor
+    private Statement query; // Query
+    private PreparedStatement stm = null; // Query modificavel
+    private ResultSet result; // Resultado da query
+    // HOST PADRÂO USAR QUANDO ESTIVER SEM O DB "jdbc:postgresql://127.0.0.1:5432/"
+    private String URL = "jdbc:postgresql://192.168.4.204:5432/"; // url do servidor
     private String USER = "groupaps"; // usuario do db
     private String PASSWORD = "aps2019-1"; // senha do usuario
     private String DATABASE = "projeto_estoque"; // banco 
@@ -31,19 +35,17 @@ public class ConnectionDB {
         }
     }
     
-    public void SelectQuery(String qr){
+    public ResultSet SelectQuery(String qr){
     	
     	try {
     		query = db.createStatement();
-            ResultSet result = query.executeQuery(qr);
-            while (result.next()) {
-        	  String nome = result.getString("nome_usuario");
-        	  System.out.println(nome + "\n");
-        	}
+            this.result = query.executeQuery(qr);
+            
      	} catch (SQLException sqlex) {
      		JOptionPane.showMessageDialog(null, "erro na query");
      		sqlex.printStackTrace();
      	}
+		return result;
     	
     }
     
@@ -64,6 +66,26 @@ public class ConnectionDB {
     		System.out.println(e);
     	}
     	
+    }
+    
+    public PreparedStatement preparedStament(String qr) {	
+		try {
+			stm = db.prepareStatement(qr);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return stm;
+    }
+    
+    public void runPreparedStatment(PreparedStatement qr) throws SQLException {
+    	try {
+			qr.executeUpdate();
+			db.commit();
+		} catch (SQLException e) {
+			db.rollback();
+			e.printStackTrace();
+		}
     }
     
     public void Desconectar() {
