@@ -6,7 +6,7 @@ public  abstract class Pessoa {
 	private String email;
 	private String numeroCelular;
 	private String cpf;
-	private int rg;
+	private String rg;
 	private String dataNascimento;
 	private String endereco; // Digitar CPF fazer busca automatizca do endereço
 	private String sexo;
@@ -15,7 +15,7 @@ public  abstract class Pessoa {
 	public Pessoa() {
 		
 	}
-	public Pessoa(String nome,String email,String numeroCelular, String cpf, int rg,String dataNascimento, String endereco, String sexo, String estadoCivil) {
+	public Pessoa(String nome,String email,String numeroCelular, String cpf, String rg,String dataNascimento, String endereco, String sexo, String estadoCivil) {
 		this.nome = nome;
 		this.email = email;
 		this.numeroCelular = numeroCelular;
@@ -75,11 +75,11 @@ public  abstract class Pessoa {
 		this.cpf = cpf;
 	}
 
-	public int getRg() {
+	public String getRg() {
 		return rg;
 	}
 
-	public void setRg(int rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
 	}
 

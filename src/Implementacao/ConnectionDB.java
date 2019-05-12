@@ -1,50 +1,96 @@
 package Implementacao;
 
-
 import java.sql.*;
+
 import javax.swing.JOptionPane;
 
 public class ConnectionDB {
-	 /** Usada para a conexao com o banco de dados */
-    private Connection con = null;
-    
-    /** Usada para realizar as instrucoes SQL */
-    public Statement stmt; 
-    
-    /** Retorna os dados das tabelas do banco */
-    public ResultSet rs; 
-    
-    /**Usada para receber o endereco da base de dados*/
-    private String endereco;
-    
-    /**Usada para receber o nome do usuario do banco */
-    private String usuario;
-    
-    /**Usada para receber a senha do usuario do banco */
-    private String senha; 
 
-    public void Conectar(String strEnd, String strUsuario, String strSenha) {
-        endereco = strEnd; 
-        usuario = strUsuario;
-        senha = strSenha;
-        try {
+    private Connection db = null; // Conexão
+    private Statement query; // Query
+    private PreparedStatement stm = null; // Query modificavel
+    private ResultSet result; // Resultado da query
+    // HOST PADRÂO USAR QUANDO ESTIVER SEM O DB "jdbc:postgresql://127.0.0.1:5432/"
+    private String URL = "jdbc:postgresql://192.168.4.204:5432/"; // url do servidor
+    private String USER = "groupaps"; // usuario do db
+    private String PASSWORD = "aps2019-1"; // senha do usuario
+    private String DATABASE = "projeto_estoque"; // banco 
+    
+    public void Conectar() {
+        
+    	try {
             Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(endereco, usuario, strSenha);
-            stmt = con.createStatement();
-       
+            db = DriverManager.getConnection(this.URL + this.DATABASE, this.USER, this.PASSWORD);
+            db.setAutoCommit(false);
+            if( db != null ) {
+            	System.out.println("Conexão realizada com sucesso!");
+            }
         } catch (ClassNotFoundException cnfe) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar o driver");
             cnfe.printStackTrace();
-         
         } catch (SQLException sqlex) {
             JOptionPane.showMessageDialog(null, "erro na query");
             sqlex.printStackTrace();
         }
     }
     
+    public ResultSet SelectQuery(String qr){
+    	
+    	try {
+    		query = db.createStatement();
+            this.result = query.executeQuery(qr);
+            
+     	} catch (SQLException sqlex) {
+     		JOptionPane.showMessageDialog(null, "erro na query");
+     		sqlex.printStackTrace();
+     	}
+		return result;
+    	
+    }
+    
+    public void InsertQuery(String qr){
+    	
+    	try {
+    		Statement stmt = db.createStatement();
+//    		Statement query = db.prepareStatement(qr);
+    		stmt.executeUpdate(qr);
+    		db.commit();
+    	} catch ( Exception e) {
+    		try {
+				db.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+    		System.out.println(e);
+    	}
+    	
+    }
+    
+    public PreparedStatement preparedStament(String qr) {	
+		try {
+			stm = db.prepareStatement(qr);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return stm;
+    }
+    
+    public void runPreparedStatment(PreparedStatement qr) throws SQLException {
+    	try {
+			qr.executeUpdate();
+			db.commit();
+		} catch (SQLException e) {
+			db.rollback();
+			e.printStackTrace();
+		}
+    }
+    
     public void Desconectar() {
         try {
-            con.close();
+			db.close();
+        	System.out.println("Conexão cancelada com sucesso!");
         } catch (SQLException onConClose) {
             JOptionPane.showMessageDialog(null, "Erro ao desconectar o banco");
             onConClose.printStackTrace();
@@ -52,8 +98,11 @@ public class ConnectionDB {
     }
     
     public static void main(String args[]) {
-    	ConnectionDB con = new ConnectionDB();
-//    	jdbc:postgresql://localhost:5432/projeto_01
-    	con.Conectar("jdbc:postgresql://127.0.0.1:5432/projeto_estoque", "projeto_estoque", "projeto_estoque123");
+    	ConnectionDB db = new ConnectionDB();
+    	db.Conectar(); // Conectar com o DB
+//    	db.SelectQuery("SELECT * FROM cadastro_usuario"); // Fazer querys de consulta no banco.
+//    	db.InsertQuery("insert into venda_produtos(cod_produto,cod_usuario,dt_compra_produto) values(1,23,'10')"); // Fazer query de modificação UPDATE,INSERT e DELETE.
+    	db.Desconectar(); // Desconectar do DB.
+    	
     }
 }
