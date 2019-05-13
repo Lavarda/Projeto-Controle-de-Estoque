@@ -1,7 +1,14 @@
 package Implementacao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+
 public class Fornecedor{
 	
+	private Scanner s = new Scanner(System.in);
+	private ConnectionDB db = new ConnectionDB();
 	private String nomeFornecedor;
 	private String produtoFornecido;
 	private String dataEntrega;
@@ -46,14 +53,96 @@ public class Fornecedor{
 		this.cnpjForncedor = cnpjForncedor;
 	}
 	
-	public void envioProduto() {
-		Produtos produtoEnviado = new Produtos(1,"Nome","Descrição", 0);
-		produtoEnviado.mostrarProduto();
-		
-		// Enviar produto para o estoque
+	public void cadastrarCategoria(String nmCat) throws SQLException {
+		System.out.println("Nome da categoria a ser inserida: " + nmCat);
+		String sql = "insert into categoria_produtos(nome_categoria) values(?)";
+		PreparedStatement stm = db.preparedStament(sql);
+		stm.setString(1, nmCat);
+		db.runPreparedStatment(stm);
 	}
 	
-	public static void main(String args[]) {
+	public ResultSet verificarProduto(String nm) throws SQLException {
+		String sqlVerify = "select nome_produto from produtos where nome_produto = ?";
+		PreparedStatement stmVerify = db.preparedStament(sqlVerify);
+		stmVerify.setString(1, nm);
+		ResultSet result = db.runPreparedSelect(stmVerify);
+		
+		return result;
+	}
+	
+//	public int verificarCategoria(int codC) throws SQLException {
+//		
+//		int codCategoria = 0;
+//		System.out.println("Cod Categoria : " + codC);
+//		String sql = "select cod_categoria from categoria_produtos where cod_categoria = ?";
+//		PreparedStatement stm = db.preparedStament(sql);
+//		stm.setInt(1, codC);
+//		ResultSet result = db.runPreparedSelect(stm);
+//		while( result.next() ) {
+//			codCategoria = result.getInt("cod_categoria");
+//		}
+//		
+//		return codCategoria;
+//	}
+	
+	public int categoriaProduto(String nomeCategoria) throws SQLException {
+
+		int codCategoria = 0;
+		System.out.println("Categoria : " + nomeCategoria);
+		String sql = "select cod_categoria from categoria_produtos where nome_categoria = ?";
+		PreparedStatement stm = db.preparedStament(sql);
+		stm.setString(1, nomeCategoria);
+		ResultSet result = db.runPreparedSelect(stm);
+		while( result.next() ) {
+			codCategoria = result.getInt("cod_categoria");
+		}
+		
+		if ( codCategoria == 0 ) {
+			cadastrarCategoria(nomeCategoria);
+		}
+		
+		return codCategoria;
+		
+	}
+	
+	public void inserirProduto(String nm, Float pc, int codC, String nmCat) throws SQLException {
+		ResultSet result = verificarProduto(nm);
+		
+		if ( result.next() ) {
+			System.out.println("Produto já está cadastrado");
+			return;
+		} else {
+			
+			String sql = "insert into produtos(nome_produto,preco_produto,cod_categoria) values(?,?,?)";
+			PreparedStatement stm = db.preparedStament(sql);
+			stm.setString(1, nm);
+			stm.setFloat(2, pc);
+			stm.setInt(3, codC);
+			db.runPreparedStatment(stm);
+			
+			System.out.println("Produto cadastrado com sucesso");
+		}
+	
+	}
+	
+	public void envioProduto() throws SQLException {
+		db.Conectar();
+		
+		System.out.println("Nome do produto a ser enviado: ");
+		String nomeProduto = s.nextLine();
+		System.out.println("Preço do produto: ");
+		Float precoProduto = s.nextFloat(); 
+		System.out.println("Nome da categoria:");
+		String nomeCategoria = s.nextLine();
+		nomeCategoria = s.nextLine();
+
+		int codCategoria = categoriaProduto(nomeCategoria);
+		inserirProduto(nomeProduto,precoProduto,codCategoria,nomeCategoria);
+
+		db.Desconectar();
+	}
+	
+	public static void main(String args[]) throws SQLException {
 		Fornecedor c = new Fornecedor("Nome Fornecedor","Produto Fornecido","Data entrega","Cnpj Fornecedor");
 		c.envioProduto();
 	}

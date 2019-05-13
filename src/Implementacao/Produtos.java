@@ -50,7 +50,7 @@ public class Produtos {
 	}
 
 	public void mostrarProduto() {
-    	System.out.println(' ' + getCodigoProduto() + ' ' + getNomeProduto() + ' ' + getPreco() + ' ' + getCodigoCategoria() );
+    	System.out.println(" " + getCodigoProduto() + " " + getNomeProduto() + " " + getPreco() + " " + getCodigoCategoria() );
     }
   
 }
