@@ -53,12 +53,24 @@ public class Fornecedor{
 		this.cnpjForncedor = cnpjForncedor;
 	}
 	
-	public void cadastrarCategoria(String nmCat) throws SQLException {
+	public int cadastrarCategoria(String nmCat) throws SQLException {
+		
+		int count = 1;
+		String sql_verify = "select cod_categoria from categoria_produtos";
+		ResultSet result = db.SelectQuery(sql_verify);
+		while ( result.next() ) {
+			count = count + 1;
+		}
+		
 		System.out.println("Nome da categoria a ser inserida: " + nmCat);
-		String sql = "insert into categoria_produtos(nome_categoria) values(?)";
+		
+		String sql = "insert into categoria_produtos(cod_categoria , nome_categoria) values(?,?)";
 		PreparedStatement stm = db.preparedStament(sql);
-		stm.setString(1, nmCat);
+		stm.setInt(1, count + 1);
+		stm.setString(2, nmCat);
 		db.runPreparedStatment(stm);
+		
+		return (count + 1);
 	}
 	
 	public ResultSet verificarProduto(String nm) throws SQLException {
@@ -70,35 +82,17 @@ public class Fornecedor{
 		return result;
 	}
 	
-//	public int verificarCategoria(int codC) throws SQLException {
-//		
-//		int codCategoria = 0;
-//		System.out.println("Cod Categoria : " + codC);
-//		String sql = "select cod_categoria from categoria_produtos where cod_categoria = ?";
-//		PreparedStatement stm = db.preparedStament(sql);
-//		stm.setInt(1, codC);
-//		ResultSet result = db.runPreparedSelect(stm);
-//		while( result.next() ) {
-//			codCategoria = result.getInt("cod_categoria");
-//		}
-//		
-//		return codCategoria;
-//	}
-	
 	public int categoriaProduto(String nomeCategoria) throws SQLException {
 
 		int codCategoria = 0;
 		System.out.println("Categoria : " + nomeCategoria);
+		
 		String sql = "select cod_categoria from categoria_produtos where nome_categoria = ?";
 		PreparedStatement stm = db.preparedStament(sql);
 		stm.setString(1, nomeCategoria);
 		ResultSet result = db.runPreparedSelect(stm);
 		while( result.next() ) {
 			codCategoria = result.getInt("cod_categoria");
-		}
-		
-		if ( codCategoria == 0 ) {
-			cadastrarCategoria(nomeCategoria);
 		}
 		
 		return codCategoria;
@@ -117,7 +111,15 @@ public class Fornecedor{
 			PreparedStatement stm = db.preparedStament(sql);
 			stm.setString(1, nm);
 			stm.setFloat(2, pc);
-			stm.setInt(3, codC);
+			
+			if ( codC == 0 ) {
+				int newCod = cadastrarCategoria(nmCat);
+				System.out.println("new codigo" + newCod);
+				stm.setInt(3, newCod);
+			} else { 				
+				stm.setInt(3, codC);
+			}
+			
 			db.runPreparedStatment(stm);
 			
 			System.out.println("Produto cadastrado com sucesso");
@@ -137,14 +139,15 @@ public class Fornecedor{
 		nomeCategoria = s.nextLine();
 
 		int codCategoria = categoriaProduto(nomeCategoria);
+		
 		inserirProduto(nomeProduto,precoProduto,codCategoria,nomeCategoria);
 
 		db.Desconectar();
 	}
 	
-	public static void main(String args[]) throws SQLException {
-		Fornecedor c = new Fornecedor("Nome Fornecedor","Produto Fornecido","Data entrega","Cnpj Fornecedor");
-		c.envioProduto();
-	}
+//	public static void main(String args[]) throws SQLException {
+//		Fornecedor c = new Fornecedor("Nome Fornecedor","Produto Fornecido","Data entrega","Cnpj Fornecedor");
+//		c.envioProduto();
+//	}
 	
 }
