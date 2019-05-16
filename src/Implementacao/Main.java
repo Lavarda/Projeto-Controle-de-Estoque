@@ -1,16 +1,12 @@
 package Implementacao;
-import java.text.ParseException;
-import View.*;
-
 
 public class Main {
 	 public static void main(String args[]) {
-	    	ConnectionDB db = new ConnectionDB();
-	    	db.Conectar(); // Conectar com o DB
-	    	//db.SelectQuery("SELECT * FROM cadastro_usuario"); // Fazer querys de consulta no banco.
-	    	//db.InsertQuery("DELETE table filiais"); // Fazer query de modificação UPDATE,INSERT e DELETE.
-	    	db.Desconectar(); // Desconectar do DB.
-	    	
+		 Funcionario a = new Funcionario("aaa@aaaa.com","123456","111.222.333-44");
+		 System.out.println(a.getCpf()+ " | " + a.getEmail());
+		 System.out.println(a.getSenha());
+		 a.realizarAutenticacao("aaa@aaaa.com","123456");
+		 
 	    }
 	
 }
