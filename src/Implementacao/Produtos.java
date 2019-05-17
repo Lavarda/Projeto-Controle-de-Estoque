@@ -84,7 +84,7 @@ public class Produtos {
         db.runPreparedStatment(stm);
 		db.Desconectar();
     }
-   /* public ArrayList<Produtos> listarTodos() throws Exception {
+    public ArrayList<Produtos> listarTodos() throws Exception {
     	db.Conectar();
         String sql = "SELECT * FROM PRODUTO ORDER BY nome_produto";
         PreparedStatement stm = db.preparedStament(sql);
@@ -102,7 +102,7 @@ public class Produtos {
         }
 
         return listaProdutos;
-    }*/
+    }
     public static void main(String[]args) throws Exception {
     	Produtos p = new Produtos (1, "Cerveja", 3.50, 1);
     	p.inserir();
