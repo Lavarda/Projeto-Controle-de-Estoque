@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,20 +11,16 @@ import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Font;
-import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import java.awt.Color;
 
 public class InterfaceProdutos extends InterfacePrincipal {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel fieldProdutos;
-	private JTextField fieldCodigo;
 	private JTextField fieldNome;
-	private JTextField fieldDescricao;
 	private JTextField fieldPreco;
 	private JTextField fieldQuantidade;
-	private JTextField fieldCategoria;
-	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -59,16 +54,6 @@ public class InterfaceProdutos extends InterfacePrincipal {
 		fieldProdutos.add(fieldNome);
 		fieldNome.setColumns(10);
 		
-		JLabel lblDescricao = new JLabel(" Descrição:");
-		lblDescricao.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
-		lblDescricao.setBounds(32, 145, 120, 20);
-		fieldProdutos.add(lblDescricao);
-		
-		fieldDescricao = new JTextField();
-		fieldNome.setBackground(Color.WHITE);
-		fieldDescricao.setBounds(135, 148, 275, 20);
-		fieldProdutos.add(fieldDescricao);
-		fieldDescricao.setColumns(10);
 		
 		JLabel lblPreco = new JLabel(" Preço:");
 		lblPreco.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
