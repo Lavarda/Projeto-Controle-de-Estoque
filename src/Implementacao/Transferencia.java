@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Connections.ConnectionDB;
+
 public class Transferencia {
 	
 	private ConnectionDB db = new ConnectionDB();

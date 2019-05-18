@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import Connections.ConnectionDB;
+
 public class Filiais {
 	
 	private ConnectionDB db = new ConnectionDB();

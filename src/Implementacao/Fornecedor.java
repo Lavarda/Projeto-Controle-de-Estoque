@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import Connections.ConnectionDB;
+
 public class Fornecedor{
 	
 	private Scanner s = new Scanner(System.in);
