@@ -103,7 +103,7 @@ public class Produtos {
     }
     public static void listarTodos() throws Exception {
     	db.Conectar();
-    		String sql = "SELECT * FROM PRODUTOS";
+    		String sql = "SELECT * FROM PRODUTOS ORDER BY nome_produto";
     		PreparedStatement stm = db.preparedStament(sql);
     		try {
     		ResultSet result = stm.executeQuery();
@@ -116,7 +116,7 @@ public class Produtos {
     			JOptionPane.showMessageDialog(null, "Erro ao listar dados \nErro: "+ex);
     		}
     }
-   /* public static void main(String[]args) throws Exception {
+    /*public static void main(String[]args) throws Exception {
     	String selecao = JOptionPane.showInputDialog("Selecione:\n1 - Inserir produto\n2 - Alterar produto\n3- Excluir produto\n4 - Listar produtos\n0 - Sair");
     	while(!selecao.equals("0")){
     		if(selecao.equals("1"))	{
