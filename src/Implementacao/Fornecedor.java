@@ -47,7 +47,7 @@ public class Fornecedor{
 	}
 	
 	public void envioProduto() {
-		Produtos produtoEnviado = new Produtos(1,"Nome","DescriÃ§Ã£o", 0);
+		Produtos produtoEnviado = new Produtos(1,"Nome","Descrição", 0);
 		produtoEnviado.mostrarProduto();
 		
 		// Enviar produto para o estoque
