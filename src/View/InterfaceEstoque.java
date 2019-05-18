@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 //import javax.swing.border.EmptyBorder;
 //import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -33,7 +34,7 @@ public class InterfaceEstoque extends InterfacePrincipal{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfaceProdutos frame = new InterfaceProdutos();
+					InterfaceEstoque frame = new InterfaceEstoque();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,41 +44,47 @@ public class InterfaceEstoque extends InterfacePrincipal{
 	}	
 		public InterfaceEstoque() throws ParseException{
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 980, 600);
+			setBounds(100, 100, 900, 600);
+			fieldProdutos = new JPanel();
+			fieldProdutos.setForeground(Color.BLACK);
+			fieldProdutos.setBackground(Color.WHITE);
+			fieldProdutos.setBorder(new EmptyBorder(5, 5, 5, 5));
+			setContentPane(fieldProdutos);
+			fieldProdutos.setLayout(null);
 			
 			JPanel panelBuscaProdutos = new JPanel();
 			panelBuscaProdutos.setBackground(Color.WHITE);
 			panelBuscaProdutos.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
-			panelBuscaProdutos.setBounds(472, 30, 400, 25);
+			panelBuscaProdutos.setBounds(50, 30, 765, 25);
 			fieldProdutos.add(panelBuscaProdutos);
 			panelBuscaProdutos.setLayout(null);
 			
 			JLabel lblBuscaCodigoProdutos = new JLabel("Código");
 			lblBuscaCodigoProdutos.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-			lblBuscaCodigoProdutos.setBounds(50, 0, 47, 25);
+			lblBuscaCodigoProdutos.setBounds(80, 0, 47, 25);
 			panelBuscaProdutos.add(lblBuscaCodigoProdutos);
 			
 			JLabel lblBuscaNomeProdutos = new JLabel("Nome");
 			lblBuscaNomeProdutos.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-			lblBuscaNomeProdutos.setBounds(50, 0, 47, 25);
+			lblBuscaNomeProdutos.setBounds(220, 0, 50, 25);
 			panelBuscaProdutos.add(lblBuscaNomeProdutos);
 			
 			JLabel lblBuscaCodigoCategoria = new JLabel("Categoria");
 			lblBuscaCodigoCategoria.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-			lblBuscaCodigoCategoria.setBounds(180, 0, 77, 25);
+			lblBuscaCodigoCategoria.setBounds(340, 0, 77, 25);
 			panelBuscaProdutos.add(lblBuscaCodigoCategoria);
 			
 			JLabel lblBuscaPrecoProdutos = new JLabel("Preço");
 			lblBuscaPrecoProdutos.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-			lblBuscaPrecoProdutos.setBounds(280, 0, 77, 25);
+			lblBuscaPrecoProdutos.setBounds(485, 0, 77, 25);
 			panelBuscaProdutos.add(lblBuscaPrecoProdutos);	
 			
 			JLabel lblBuscaQuantidadeProdutos = new JLabel("Quantidade");
 			lblBuscaQuantidadeProdutos.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-			lblBuscaQuantidadeProdutos.setBounds(280, 0, 77, 25);
+			lblBuscaQuantidadeProdutos.setBounds(590, 0, 100, 25);
 			panelBuscaProdutos.add(lblBuscaQuantidadeProdutos);
 			
-			JButton botaoAtualizar = new JButton("Atualizar");
+			/*JButton botaoAtualizar = new JButton("Atualizar");
 			botaoAtualizar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
@@ -97,7 +104,7 @@ public class InterfaceEstoque extends InterfacePrincipal{
 			botaoSair.setBackground(Color.WHITE);
 			botaoSair.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
 			botaoSair.setBounds(320, 450, 89, 23);
-			fieldProdutos.add(botaoSair);
+			fieldProdutos.add(botaoSair);*/
 		}
 }
 
