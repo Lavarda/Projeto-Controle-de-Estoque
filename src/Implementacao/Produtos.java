@@ -109,7 +109,7 @@ public class Produtos {
     		ResultSet result = stm.executeQuery();
     		String lista = "";
     		while(result.next()) {
-    			lista= lista + result.getInt("cod_produto") + " - " + result.getString("nome_produto") + " - " + result.getDouble("preco_produto") + " - " + result.getInt("cod_categoria") + "\n";
+    			lista= lista + result.getInt("cod_produto") + " - " + result.getString("nome_produto") + " - " + result.getDouble("preco_produto") + " - " + result.getInt("cod_categoria") + " - " + result.getInt("qntd_produto") + "\n";
     		}
     		JOptionPane.showMessageDialog(null, lista);
     		}catch(SQLException ex) {
