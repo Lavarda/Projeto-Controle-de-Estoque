@@ -11,10 +11,10 @@ public class ConnectionDB {
     private PreparedStatement stm = null; // Query modificavel
     private ResultSet result; // Resultado da query
     // HOST PADRÂO USAR QUANDO ESTIVER SEM O DB "jdbc:postgresql://127.0.0.1:5432/"
-    private String URL = "jdbc:postgresql://127.0.0.1:5432/";//"jdbc:postgresql://192.168.4.204:5432/"; // url do servidor
-    private String USER = "projeto-estoque"; // usuario do db
-    private String PASSWORD = "projeto-estoque123"; // senha do usuario
-    private String DATABASE = "projeto-estoque"; // banco 
+    private String URL = "jdbc:postgresql://192.168.4.204:5432/"; // url do servidor
+    private String USER = "groupaps"; // usuario do db
+    private String PASSWORD = "aps2019-1"; // senha do usuario
+    private String DATABASE = "projeto_estoque"; // banco 
     
     public void Conectar() {
         
