@@ -5,9 +5,10 @@ package Implementacao;
 //import java.sql.SQLException;
 //import java.text.DateFormat;
 //import java.util.*;
+//import java.util.ArrayList;
 import java.sql.*;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import Connections.ConnectionDB;
 
 public class Produtos { 
     private int codigoProduto;
@@ -67,7 +68,7 @@ public class Produtos {
         db.runPreparedStatment(stm);
 		JOptionPane.showMessageDialog(null, "Produto cadastrado com exito.");
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Erro ao inserir dados /nErro: "+ex);
+			JOptionPane.showMessageDialog(null, "Erro ao inserir dados \nErro: "+ex);
 		}
        db.Desconectar();
     }
@@ -83,7 +84,7 @@ public class Produtos {
     		db.runPreparedStatment(stm);
     		JOptionPane.showMessageDialog(null, "Produto alterado com exito.");
     	} catch (SQLException ex) {
-    		JOptionPane.showMessageDialog(null,"Erro ao alterar dados /nErro: "+ex);
+    		JOptionPane.showMessageDialog(null,"Erro ao alterar dados \nErro: "+ex);
     	}
     	db.Desconectar();
     }
@@ -96,30 +97,41 @@ public class Produtos {
         	db.runPreparedStatment(stm);
         	JOptionPane.showMessageDialog(null, "Produto excluido com exito.");
         } catch (SQLException ex) {
-        	JOptionPane.showMessageDialog(null, "Erro ao excluir dados /nErro: "+ex);
+        	JOptionPane.showMessageDialog(null, "Erro ao excluir dados \nErro: "+ex);
         }
         db.Desconectar();
     }
-    public ArrayList<Produtos> listarTodos() throws Exception {
+    public static void listarTodos() throws Exception {
     	db.Conectar();
-    		String sql = "SELECT * FROM PRODUTOS ORDER BY nome_produto";
+    		String sql = "SELECT * FROM PRODUTOS";
     		PreparedStatement stm = db.preparedStament(sql);
-    		ResultSet lp = stm.executeQuery();
-
-    		ArrayList<Produtos> listaProdutos = new ArrayList<Produtos>();
-    		while (lp.next()) {
-    			Produtos produtos = new Produtos(codigoProduto, nomeProduto, preco, codigoCategoria);
-    			produtos.setCodigoProduto(lp.getInt("codigo_produto"));
-    			produtos.setNomeProduto(lp.getString("nome_produto"));
-    			produtos.setPreco(lp.getDouble("preco_produto"));
-    			produtos.setCodigoCategoria(lp.getInt("cod_categoria"));
- 
-            listaProdutos.add(produtos);
-        }
-        return listaProdutos;
+    		try {
+    		ResultSet result = stm.executeQuery();
+    		String lista = "";
+    		while(result.next()) {
+    			lista= lista + result.getInt("cod_produto") + " - " + result.getString("nome_produto") + " - " + result.getDouble("preco_produto") + " - " + result.getInt("cod_categoria") + "\n";
+    		}
+    		JOptionPane.showMessageDialog(null, lista);
+    		}catch(SQLException ex) {
+    			JOptionPane.showMessageDialog(null, "Erro ao listar dados \nErro: "+ex);
+    		}
     }
-    public static void main(String[]args) throws Exception {
-    	Produtos p = new Produtos (1, "Cerveja", 3.50, 1);
-    	p.inserir();
-    }
+   /* public static void main(String[]args) throws Exception {
+    	String selecao = JOptionPane.showInputDialog("Selecione:\n1 - Inserir produto\n2 - Alterar produto\n3- Excluir produto\n4 - Listar produtos\n0 - Sair");
+    	while(!selecao.equals("0")){
+    		if(selecao.equals("1"))	{
+    			Produtos p = new Produtos(1, "Whiskey", 4.0, 2);
+    			p.inserir();
+    		} else if(selecao.equals("2")){
+    			Produtos p = new Produtos(13, "Schin", 4.0, 2);
+    			p.alterar();
+    		} else if(selecao.equals("3")){
+    			Produtos p = new Produtos(13, "Schin", 4.0, 2);
+    			p.excluir();
+    		} else if (selecao.equals("4")) {
+    			listarTodos();
+    		}
+    			System.exit(0);
+    	}
+    }*/
 }

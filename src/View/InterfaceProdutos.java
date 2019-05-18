@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 
 public class InterfaceProdutos extends InterfacePrincipal {
-
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel fieldProdutos;
 	private JTextField fieldNome;
