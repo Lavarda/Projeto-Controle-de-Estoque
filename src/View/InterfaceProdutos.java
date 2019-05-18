@@ -3,6 +3,7 @@ package View;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -35,7 +36,7 @@ public class InterfaceProdutos extends InterfacePrincipal {
 	}
 	public InterfaceProdutos() throws ParseException{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 750, 550);
+		setBounds(100, 100, 980, 600);
 		fieldProdutos = new JPanel();
 		fieldProdutos.setForeground(Color.BLACK);
 		fieldProdutos.setBackground(Color.WHITE);
@@ -55,7 +56,7 @@ public class InterfaceProdutos extends InterfacePrincipal {
 		fieldNome.setColumns(10);
 		
 		
-		JLabel lblPreco = new JLabel(" PreÃ§o:");
+		JLabel lblPreco = new JLabel(" Preço:");
 		lblPreco.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
 		lblPreco.setBounds(32, 104, 120, 20);
 		fieldProdutos.add(lblPreco);
@@ -68,23 +69,23 @@ public class InterfaceProdutos extends InterfacePrincipal {
 		
 		JLabel lblQuantidade = new JLabel(" Quantidade:");
 		lblQuantidade.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
-		lblQuantidade.setBounds(32, 185, 120, 20);
+		lblQuantidade.setBounds(32, 145, 120, 20);
 		fieldProdutos.add(lblQuantidade);
 		
 		fieldQuantidade = new JTextField();
 		fieldQuantidade.setBackground(Color.WHITE);
-		fieldQuantidade.setBounds(150, 188, 260, 20);
+		fieldQuantidade.setBounds(150, 148, 260, 20);
 		fieldProdutos.add(fieldQuantidade);
 		fieldQuantidade.setColumns(10);
 		
 		JLabel lblCategoria = new JLabel(" Categoria:");
 		lblCategoria.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
-		lblCategoria.setBounds(32, 220, 120, 25);
+		lblCategoria.setBounds(32, 180, 120, 25);
 		fieldProdutos.add(lblCategoria);
 		
 		JComboBox comboBoxCategoria = new JComboBox();
 		comboBoxCategoria.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
-		comboBoxCategoria.setBounds(135, 225, 275, 20);
+		comboBoxCategoria.setBounds(135, 185, 275, 20);
 		fieldProdutos.add(comboBoxCategoria);
 		
 		JButton botaoCadastrar = new JButton("Cadastrar");
@@ -116,6 +117,37 @@ public class InterfaceProdutos extends InterfacePrincipal {
 		botaoCancelar.setBounds(320, 300, 89, 23);
 		fieldProdutos.add(botaoCancelar);
 		
+		JPanel panelDivisao = new JPanel();
+		panelDivisao.setBackground(Color.BLACK);
+		panelDivisao.setBounds(445, 10, 2, 500);
+		fieldProdutos.add(panelDivisao);
+		
+		JPanel panelBuscaProdutos = new JPanel();
+		panelBuscaProdutos.setBackground(Color.WHITE);
+		panelBuscaProdutos.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
+		panelBuscaProdutos.setBounds(472, 23, 452, 25);
+		fieldProdutos.add(panelBuscaProdutos);
+		panelBuscaProdutos.setLayout(null);
+		
+		JLabel lblBuscaCodigoProduto = new JLabel("Código");
+		lblBuscaCodigoProduto.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+		lblBuscaCodigoProduto.setBounds(30, 0, 47, 25);
+		panelBuscaProdutos.add(lblBuscaCodigoProduto);
+		
+		JLabel lblBuscaNomeProdutos = new JLabel("Nome");
+		lblBuscaNomeProdutos.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+		lblBuscaNomeProdutos.setBounds(160, 0, 77, 25);
+		panelBuscaProdutos.add(lblBuscaNomeProdutos);
+		
+		JLabel lblBuscaPrecoProdutos = new JLabel("Preço");
+		lblBuscaPrecoProdutos.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+		lblBuscaPrecoProdutos.setBounds(260, 0, 77, 25);
+		panelBuscaProdutos.add(lblBuscaPrecoProdutos);
+		
+		JLabel lblBuscaCodigoCategoria = new JLabel("Categoria");
+		lblBuscaCodigoCategoria.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+		lblBuscaCodigoCategoria.setBounds(360, 0, 77, 25);
+		panelBuscaProdutos.add(lblBuscaCodigoCategoria);		
 	}
 
 }
