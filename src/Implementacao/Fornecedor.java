@@ -83,7 +83,7 @@ public class Fornecedor{
 	}
 	
 	public int categoriaProduto(String nomeCategoria) throws SQLException {
-
+		
 		int codCategoria = 0;
 		System.out.println("Categoria : " + nomeCategoria);
 		
@@ -143,6 +143,22 @@ public class Fornecedor{
 		inserirProduto(nomeProduto,precoProduto,codCategoria,nomeCategoria);
 
 		db.Desconectar();
+	}	
+	
+	public void newFornecedor() {
+		db.Conectar();
+		
+//		String sql = "insert into fornecedor(nome_fornecedor)"
+		
+		db.Desconectar();
+	}
+	
+	public void editFornecedor() {
+		
+	}
+	
+	public void removeFornecedor() {
+		
 	}
 	
 //	public static void main(String args[]) throws SQLException {

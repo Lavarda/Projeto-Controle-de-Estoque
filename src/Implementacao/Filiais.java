@@ -1,10 +1,14 @@
 package Implementacao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
 public class Filiais {
 	
 	private ConnectionDB db = new ConnectionDB();
-	private int codFilial;
 	private String nomeFilial;
+	private Scanner s = new Scanner(System.in);
 	private String telefoneFilial;
 	private String cpnjFilial;
 	private String bairroFilial;
@@ -12,11 +16,14 @@ public class Filiais {
 	private String cidadeFilial;
 	private String estado;
 	private String cepFilial;
-
-	public Filiais(int codFilial, String nomeFilial, String telefoneFilial, String cnpjFilial, String bairroFilial,
-					int numeroEndereco, String cidadeFilial, String estado, String cepFilial) {
+	
+	public Filiais() {
 		
-		this.codFilial = codFilial;
+	}
+
+	public Filiais(String nomeFilial, String telefoneFilial, String cnpjFilial, String bairroFilial,
+					int numeroEndereco, String cidadeFilial, String estado, String cepFilial) {
+
 		this.nomeFilial = nomeFilial;
 		this.telefoneFilial = telefoneFilial;
 		this.cpnjFilial = cnpjFilial;
@@ -26,14 +33,6 @@ public class Filiais {
 		this.estado = estado;
 		this.cepFilial = cepFilial;
 		
-	}
-
-	public int getCodFilial() {
-		return codFilial;
-	}
-
-	public void setCodFilial(int codFilial) {
-		this.codFilial = codFilial;
 	}
 
 	public String getNomeFilial() {
@@ -100,8 +99,59 @@ public class Filiais {
 		this.cepFilial = cepFilial;
 	}
 	
-	public void receberProduto() {
+	public void cadastroFilial() throws SQLException {
 		db.Conectar();
+		String sql = "insert into filiais(nome_filial,cnpj_filial) values (?,?)";
+
+		PreparedStatement stm = db.preparedStament(sql);
+		
+		stm.setString(1, this.getNomeFilial() );
+		stm.setString(2, this.getCpnjFilial() );
+		
+		db.runPreparedStatment(stm);
+		
+		System.out.println("Filial inserida");
+		
+		String sql_endereco = "insert into endereco_filial(cep_filial,cidade_filial,bairro_filial,estado_filial,numero_loja_filial) "
+							  + "values(?,?,?,?,?)";
+		PreparedStatement stm_endereco = db.preparedStament(sql_endereco);
+		
+		stm_endereco.setString(1, this.getCepFilial() );
+		stm_endereco.setString(2, this.getCidadeFilial() );
+		stm_endereco.setString(3, this.getBairroFilial() );
+		stm_endereco.setString(4, this.getEstado() );
+		stm_endereco.setInt(5, this.getNumeroEndereco() );
+		
+		db.runPreparedStatment(stm_endereco);
+		
+		System.out.println("Dados de endereço de filial inseridos");
+		
 		db.Desconectar();
+	}
+	
+	public void editFilial() {
+		db.Conectar();
+//		String sql = "update filial"
+		db.Desconectar();
+	}
+	
+	public void removeFilial() throws SQLException {
+		db.Conectar();
+		System.out.println("Digite o cnpj da filial que deseja remover: ");
+		String cnpj_filial = s.nextLine();
+		
+		String sql = "delete from filiais where cnpj_filial = ?";
+		PreparedStatement stm = db.preparedStament(sql);
+		stm.setString(1, cnpj_filial);
+		db.runPreparedStatment(stm);
+		
+		db.Desconectar();
+	}
+	
+	public static void main(String args[]) throws SQLException {
+//		Filiais f = new Filiais("Filial Teste","48 998548350","11234566","Extreitu",12,"Florianopolis","SC","88070150");
+//		f.cadastroFilial();
+//		Filiais f = new Filiais();
+//		f.removeFilial();
 	}
 }
