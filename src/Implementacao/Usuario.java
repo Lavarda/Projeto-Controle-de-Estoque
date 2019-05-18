@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.*;
 
+import Connections.ConnectionDB;
+
 public class Usuario extends Pessoa{
 	
 	private ArrayList<Produtos> produtos = new ArrayList<Produtos>();
