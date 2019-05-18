@@ -1,4 +1,4 @@
-package Implementacao;
+package Connections;
 
 import java.sql.*;
 
@@ -75,6 +75,17 @@ public class ConnectionDB {
 		}
 		
 		return stm;
+    }
+    
+    public ResultSet runPreparedSelect(PreparedStatement qr) throws SQLException {
+    	
+    	try {
+			this.result = qr.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+
     }
     
     public void runPreparedStatment(PreparedStatement qr) throws SQLException {
