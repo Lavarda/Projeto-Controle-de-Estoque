@@ -1,6 +1,7 @@
 package Implementacao;
 
 public class Funcionario extends Pessoa {
+	
 	private double salario;
 	private String cargo;
 	private String setor;
@@ -42,4 +43,5 @@ public class Funcionario extends Pessoa {
 	public void setDataAdmissao(String dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}	
+	
 }
