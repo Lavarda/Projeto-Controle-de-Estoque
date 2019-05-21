@@ -15,12 +15,28 @@ public class Fornecedor{
 	private String produtoFornecido;
 	private String dataEntrega;
 	private String cnpjForncedor;
+	private String emailFornecedor;
+	private String telefoneFornecedor;
+	private String cepFornecedor;
+	private String cidadeFornecedor;
+	private String bairroFornecedor;
+	private String estadoFornecedor;
+	private int numeroLoja;
 	
-	public Fornecedor(String nomeFornecedor, String produtoFornecido, String dataEntrega, String cnpjFornecedor) {
+	public Fornecedor(String nomeFornecedor, String produtoFornecido, String dataEntrega, String cnpjFornecedor, String emailFornecedor, String telefoneFornecedor,
+					  String cepFornecedor, String cidadeFornecedor,String bairroFornecedor, String estadoFornecedor, int numeroLoja) {
+		
 		this.nomeFornecedor = nomeFornecedor;
 		this.produtoFornecido = produtoFornecido;
 		this.dataEntrega = dataEntrega;
 		this.cnpjForncedor = cnpjFornecedor;
+		this.emailFornecedor = emailFornecedor;
+		this.telefoneFornecedor = telefoneFornecedor;
+		this.cepFornecedor = cepFornecedor;
+		this.cidadeFornecedor = cidadeFornecedor;
+		this.bairroFornecedor = bairroFornecedor;
+		this.estadoFornecedor = estadoFornecedor;
+		this.numeroLoja = numeroLoja;
 	}
 
 	public String getNomeFornecedor() {
@@ -55,10 +71,66 @@ public class Fornecedor{
 		this.cnpjForncedor = cnpjForncedor;
 	}
 	
+	public String getEmailFornecedor() {
+		return emailFornecedor;
+	}
+
+	public void setEmailFornecedor(String emailFornecedor) {
+		this.emailFornecedor = emailFornecedor;
+	}
+
+	public String getTelefoneFornecedor() {
+		return telefoneFornecedor;
+	}
+
+	public void setTelefoneFornecedor(String telefoneFornecedor) {
+		this.telefoneFornecedor = telefoneFornecedor;
+	}
+
+	public String getCepFornecedor() {
+		return cepFornecedor;
+	}
+
+	public void setCepFornecedor(String cepFornecedor) {
+		this.cepFornecedor = cepFornecedor;
+	}
+
+	public String getCidadeFornecedor() {
+		return cidadeFornecedor;
+	}
+
+	public void setCidadeFornecedor(String cidadeFornecedor) {
+		this.cidadeFornecedor = cidadeFornecedor;
+	}
+
+	public String getBairroFornecedor() {
+		return bairroFornecedor;
+	}
+
+	public void setBairroFornecedor(String bairroFornecedor) {
+		this.bairroFornecedor = bairroFornecedor;
+	}
+
+	public String getEstadoFornecedor() {
+		return estadoFornecedor;
+	}
+
+	public void setEstadoFornecedor(String estadoFornecedor) {
+		this.estadoFornecedor = estadoFornecedor;
+	}
+
+	public int getNumeroLoja() {
+		return numeroLoja;
+	}
+
+	public void setNumeroLoja(int numeroLoja) {
+		this.numeroLoja = numeroLoja;
+	}
+
 	public int cadastrarCategoria(String nmCat) throws SQLException {
 		
 		int count = 1;
-		String sql_verify = "select cod_categoria from categoria_produtos";
+		String sql_verify = "select cod_categoria from categoria";
 		ResultSet result = db.SelectQuery(sql_verify);
 		while ( result.next() ) {
 			count = count + 1;
@@ -66,7 +138,7 @@ public class Fornecedor{
 		
 		System.out.println("Nome da categoria a ser inserida: " + nmCat);
 		
-		String sql = "insert into categoria_produtos(cod_categoria , nome_categoria) values(?,?)";
+		String sql = "insert into categoria(cod_categoria , nome_categoria) values(?,?)";
 		PreparedStatement stm = db.preparedStament(sql);
 		stm.setInt(1, count + 1);
 		stm.setString(2, nmCat);
@@ -89,7 +161,7 @@ public class Fornecedor{
 		int codCategoria = 0;
 		System.out.println("Categoria : " + nomeCategoria);
 		
-		String sql = "select cod_categoria from categoria_produtos where nome_categoria = ?";
+		String sql = "select cod_categoria from categoria where nome_categoria = ?";
 		PreparedStatement stm = db.preparedStament(sql);
 		stm.setString(1, nomeCategoria);
 		ResultSet result = db.runPreparedSelect(stm);
@@ -147,10 +219,25 @@ public class Fornecedor{
 		db.Desconectar();
 	}	
 	
-	public void newFornecedor() {
+	public void newFornecedor() throws SQLException {
 		db.Conectar();
 		
-//		String sql = "insert into fornecedor(nome_fornecedor)"
+		String sql = "insert into fornecedor_table(nome_fornecedor,cnpj_fornecedor,email_fornecedor,telefone_fornecedor,"
+					+ "cep_fornecedor,cidade_fornecedor,bairro_fornecedor,estado_fornecedor,numero_loja_fornecedor) values(?,?,?,?,?,?,?,?,?)";
+		
+		PreparedStatement stm = db.preparedStament(sql);
+		
+		stm.setString(1, this.getNomeFornecedor() );
+		stm.setString(2, this.getCnpjForncedor() );
+		stm.setString(3, this.getEmailFornecedor() );
+		stm.setString(4, this.getTelefoneFornecedor() );
+		stm.setString(5, this.getCepFornecedor() );
+		stm.setString(6, this.getCidadeFornecedor() );
+		stm.setString(7, this.getBairroFornecedor() );
+		stm.setString(8, this.getEstadoFornecedor() );
+		stm.setInt(9, this.getNumeroLoja() );
+		
+		db.runPreparedStatment(stm);
 		
 		db.Desconectar();
 	}
@@ -159,13 +246,31 @@ public class Fornecedor{
 		
 	}
 	
-	public void removeFornecedor() {
+	public void removeFornecedor() throws SQLException {
 		
+		db.Conectar();
+		
+		String sql = "delete from fornecedor_table where nome_fornecedor = ?";
+		
+		PreparedStatement stm = db.preparedStament(sql);
+		
+		System.out.println("Digite o nome do fornecedor que deseja excluir : ");
+		String nome = s.nextLine();
+		
+		stm.setString(1, nome );
+		
+		db.runPreparedStatment(stm);
+
+		db.Desconectar();
 	}
 	
-//	public static void main(String args[]) throws SQLException {
-//		Fornecedor c = new Fornecedor("Nome Fornecedor","Produto Fornecido","Data entrega","Cnpj Fornecedor");
+	public static void main(String args[]) throws SQLException {
+
+		Fornecedor c = new Fornecedor("Nome Fornecedor","Produto Fornecido","Data entrega","Cnpj Fornecedor",
+					 "vitorlavarda@gmail.com","48 998548350","88070150","Florianopolis","Estreito","SC",120);
 //		c.envioProduto();
-//	}
+//		c.newFornecedor();
+		c.removeFornecedor();
+	}
 	
 }

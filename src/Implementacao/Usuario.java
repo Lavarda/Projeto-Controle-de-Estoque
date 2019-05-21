@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.*;
+import java.io.*;
 
 import Connections.ConnectionDB;
 
@@ -41,7 +42,7 @@ public class Usuario extends Pessoa{
 		db.runPreparedStatment(stm);
 		db.Desconectar();
 	}
-	
+		
 	public void modifyUser() throws SQLException {
 		db.Conectar();
 		
@@ -79,49 +80,51 @@ public class Usuario extends Pessoa{
 		db.Desconectar();
 	}
 	
-	public void produtosComprados() throws SQLException {		
+	public void produtosComprados(int codUsuario) throws SQLException {		
 		db.Conectar();
-		ResultSet result = db.SelectQuery("SELECT * FROM produtos");
-		produtos.clear();
-		while ( result.next() ) {
-			Produtos produto = new Produtos(result.getInt("cod_produto"), result.getString("nome_produto"), result.getFloat("preco_produto"), result.getInt("cod_categoria") );
-			produtos.add(produto);
-		}		
 		
-		for( Produtos i : produtos) {
-			System.out.println( i.getCodigoProduto() + " "  + i.getNomeProduto() + " " + i.getPreco() + " " + i.getCodigoCategoria());
+		String sql = "select * from venda where cod_usuario = ?";
+		PreparedStatement stm = db.preparedStament(sql);
+		
+		stm.setInt(1, codUsuario);
+		
+		ResultSet result = db.runPreparedSelect(stm);
+		
+		while( result.next() ) {
+			System.out.println(result.getInt("cod_produto") + " " + result.getString("dt_compra_produto"));
 		}
+		
 		
 		db.Desconectar();
 	}
 	
-	public String pesquisarProduto(){
+	public void pesquisarProduto() throws SQLException{
+		
+		db.Conectar();
         
         System.out.println("Digite o nome do produto que deseja pesquisar: ");
-        String nomeProduto = s.nextLine(); 
+        String nomeProduto = s.nextLine();
         
-        for(int i = 0; i < produtos.size(); i ++){
-        	if(produtos.get(i).getNomeProduto().equals(nomeProduto)){
-                return nomeProduto;
-            }else{	
-            }
+        String sql = "select * from produtos where nome_produto = ?";
+        PreparedStatement stm = db.preparedStament(sql);
+        
+        stm.setString(1, nomeProduto);
+        
+        ResultSet result = db.runPreparedSelect(stm);
+        
+        while( result.next() ) {
+        	System.out.println(result.getInt("cod_produto") + " " + result.getString("nome_produto") + " " + result.getFloat("preco_produto") + " " + result.getInt("cod_categoria"));
         }
         
-        return "false";
+        db.Desconectar();
         
     }
-    
 	
-//	public static void main(String args[]) throws SQLException {
+//	public static void main(String[] args) throws SQLException, IOException {
 //		Usuario c = new Usuario("Vitor Lavarda","vitorlavarda.souza@gmail.com","(48) 9854-8350","123.123.13","11123123","21/02/20","Rua tal","M","Solteiro");
 //		c.dadosPessoa();
-//		c.produtosComprados();
-//		String buscaProduto = c.pesquisarProduto();
-//		if(buscaProduto.equals("false")){
-//			System.out.println("O Produto não foi encontrado");
-//		}else {
-//			System.out.println("Produto encontrado" + " " + buscaProduto);
-//		}
+//		c.produtosComprados(2);
+//		c.pesquisarProduto();
 //		c.cadastrarUsuario();
 //		c.deleteUser();
 //		c.modifyUser();

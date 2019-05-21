@@ -81,14 +81,14 @@ public class Transferencia {
 	public void buscaTransferenciaFiliais(int codTransferencia) throws SQLException {
 		// Busca de transferencia para filiais
 		db.Conectar();
-		String qr = "select * from transferencia_saida_produtos where cod_transferencia = ?";
+		String qr = "select * from transferencia_filial where cod_transferencia = ?";
 		PreparedStatement stm = db.preparedStament(qr);
 		
 		stm.setInt(1, codTransferencia);
 		
 		ResultSet result = db.runPreparedSelect(stm);
 		while ( result.next() ) {
-			Transferencia transf = new Transferencia(result.getInt("cod_transferencia"),result.getInt("cod_produto"), result.getInt("cod_filial"), result.getString("dt_saida_transferencia"));
+			Transferencia transf = new Transferencia(result.getInt("cod_transferencia"),result.getInt("cod_produto"), result.getInt("cod_filial"), result.getString("dt_saida_produto_transferencia"));
 			transf.mostrarTransferencia();
 		}
 		
@@ -98,30 +98,29 @@ public class Transferencia {
 	public void buscaTransferenciasFornecedor(int codSaidaProduto) throws SQLException {
 		// Busca de transferencia para fornecedor
 		db.Conectar();
-		String qr = "select * from saida_produtos where cod_saida_produto = ?";
+		String qr = "select * from transferencia_fornecedor where cod_saida = ?";
 		PreparedStatement stm = db.preparedStament(qr);
 		
 		stm.setInt(1, codSaidaProduto);
 		
 		ResultSet result = db.runPreparedSelect(stm);
 		while ( result.next() ) {
-			Transferencia transf = new Transferencia(result.getInt("cod_saida_produto"),result.getInt("cod_produto"), result.getInt("cod_fornecedor"), result.getString("dt_saida_produto"));
+			Transferencia transf = new Transferencia(result.getInt("cod_saida"),result.getInt("cod_produto"), result.getInt("cod_fornecedor"), result.getString("dt_saida_produto"));
 			transf.mostrarTransferencia();
 		}
 		
 		db.Desconectar();
 	}
 	
-	public void transferirProdutoFornecedor(int codSaidaProduto, int codProduto, int codFornecedor, String dataSaida) throws SQLException {
+	public void transferirProdutoFornecedor(int codProduto, int codFornecedor, String dataSaida) throws SQLException {
 		// Transferencia de produto para um fornecedor utilizando a tabela saida_produto.
 		db.Conectar();
-		String qr = "insert into saida_produtos(cod_saida_produto,cod_produto,dt_saida_produto,cod_fornecedor) values(?,?,?,?)";
+		String qr = "insert into transferencia_fornecedor(cod_produto,dt_saida_produto,cod_fornecedor) values(?,?,?)";
 		PreparedStatement stm = db.preparedStament(qr);
 		
-		stm.setInt(1, codSaidaProduto);
-		stm.setInt(2, codProduto);
-		stm.setString(3, dataSaida);
-		stm.setInt(4, codFornecedor);
+		stm.setInt(1, codProduto);
+		stm.setString(2, dataSaida);
+		stm.setInt(3, codFornecedor);
 		
 		db.runPreparedStatment(stm);
 		
@@ -130,16 +129,15 @@ public class Transferencia {
 	
 	}
 	
-	public void transferirProdutoFilial(int codTransferencia, int codProduto, int codFilial, String dataSaida) throws SQLException {
+	public void transferirProdutoFilial(int codProduto, int codFilial, String dataSaida) throws SQLException {
 		// Transferencia de produtos para filiais transferencia_saida_produto usando o cod_filial
 		db.Conectar();
-		String qr = "insert into transferencia_saida_produtos(cod_transferencia,cod_produto,dt_saida_transferencia,cod_filial) values(?,?,?,?)";
+		String qr = "insert into transferencia_filial(cod_produto,dt_saida_produto_transferencia,cod_filial) values(?,?,?)";
 		PreparedStatement stm = db.preparedStament(qr);
 		
-		stm.setInt(1, codTransferencia);
-		stm.setInt(2, codProduto);
-		stm.setString(3, dataSaida);
-		stm.setInt(4, codFilial);
+		stm.setInt(1, codProduto);
+		stm.setString(2, dataSaida);
+		stm.setInt(3, codFilial);
 		
 		db.runPreparedStatment(stm);
 		
@@ -149,10 +147,10 @@ public class Transferencia {
 
 	public void historicoTransferenciasFornecedores() throws SQLException {
 		db.Conectar();
-		ResultSet result = db.SelectQuery("select * from saida_produtos");
+		ResultSet result = db.SelectQuery("select * from transferencia_fornecedor");
 		System.out.println("Historico de transferencias fornecedores:");
 		while (result.next() ) {
-			Transferencia transf = new Transferencia(result.getInt("cod_saida_produto"),result.getInt("cod_produto"), result.getInt("cod_fornecedor"), result.getString("dt_saida_produto"));
+			Transferencia transf = new Transferencia(result.getInt("cod_saida"),result.getInt("cod_produto"), result.getInt("cod_fornecedor"), result.getString("dt_saida_produto"));
 			transf.mostrarTransferencia();
 		}
 		
@@ -162,10 +160,10 @@ public class Transferencia {
 	
 	public void historicoTransferenciasFiliais() throws SQLException {
 		db.Conectar();
-		ResultSet result = db.SelectQuery("select * from transferencia_saida_produtos");
+		ResultSet result = db.SelectQuery("select * from transferencia_filial");
 		System.out.println("Historico de transferencias filiais:");
 		while (result.next() ) {
-			Transferencia transf = new Transferencia(result.getInt("cod_transferencia"),result.getInt("cod_produto"), result.getInt("cod_filial"), result.getString("dt_saida_transferencia"));
+			Transferencia transf = new Transferencia(result.getInt("cod_transferencia"),result.getInt("cod_produto"), result.getInt("cod_filial"), result.getString("dt_saida_produto_transferencia"));
 			transf.mostrarTransferencia();
 		}
 		
@@ -177,10 +175,10 @@ public class Transferencia {
 //		Transferencia c = new Transferencia();
 //		c.historicoTransferenciasFornecedores();
 //		c.historicoTransferenciasFiliais();
-//		c.transferirProdutoFilial(2,3,2,"10/02/2000");
-//		c.transferirProdutoFornecedor(2, 3, 3, "10/02/2000");
-//		c.buscaTransferenciasFornecedor(2);
-//		c.buscaTransferenciaFiliais(2);
+//		c.transferirProdutoFilial(5,5,"10/02/2000");
+//		c.transferirProdutoFornecedor( 5, 5, "10/02/2000");
+//		c.buscaTransferenciasFornecedor(4);
+//		c.buscaTransferenciaFiliais(4);
 //	}
 	
 }
