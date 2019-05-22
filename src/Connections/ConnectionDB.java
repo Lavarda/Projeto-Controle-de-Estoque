@@ -10,7 +10,8 @@ public class ConnectionDB {
     private Statement query; // Query
     private PreparedStatement stm = null; // Query modificavel
     private ResultSet result; // Resultado da query
-    // HOST PADRÃO USAR QUANDO ESTIVER SEM O DB "jdbc:postgresql://127.0.0.1:5432/"
+
+    // HOST PADRï¿½O USAR QUANDO ESTIVER SEM O DB "jdbc:postgresql://127.0.0.1:5432/"
     private String URL = "jdbc:postgresql://192.168.4.204:5432/"; // url do servidor 192.168.4.204:5432
     private String USER = "groupaps"; // usuario do db groupaps
     private String PASSWORD = "aps2019-1"; // senha do usuario aps2019-1
