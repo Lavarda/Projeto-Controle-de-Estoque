@@ -9,7 +9,6 @@ import Connections.ConnectionDB;
 
 public class Fornecedor{
 	
-	private Scanner s = new Scanner(System.in);
 	private ConnectionDB db = new ConnectionDB();
 	private String nomeFornecedor;
 	private String produtoFornecido;
