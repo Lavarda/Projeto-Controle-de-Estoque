@@ -1,6 +1,13 @@
 package Implementacao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+
 public class Funcionario extends Administrador{
+	private static ConnectionDB conexao = new ConnectionDB();
 	public Funcionario(String matricula, String nome, String senha, String cargo,int codCategoria) {
 		super(matricula, nome, senha, cargo, codCategoria);
 	}

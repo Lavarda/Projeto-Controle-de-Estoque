@@ -1,23 +1,10 @@
 package Implementacao;
-<<<<<<< HEAD
 
 public class Main {
-	 public static void main(String args[]) {
-		 Funcionario a = new Funcionario("aaa@aaaa.com","123456","111.222.333-44");
-		 System.out.println(a.getCpf()+ " | " + a.getEmail());
-		 System.out.println(a.getSenha());
-		 a.realizarAutenticacao("aaa@aaaa.com","123456");
-		 
-=======
-import java.text.ParseException;
-
-import Connections.ConnectionDB;
-import View.*;
-
-
-public class Main {
-	 public static void main(String args[]) {
->>>>>>> fe172ac1cf8761191f4625bbf0778eb63d531c56
+	 public static void main(String args[]) {	
+		 	Gerente julia = new Gerente("129876", "Julia Amaro", "123senha", 3);
+		 	Funcionario f =  new Funcionario("112344","Guilherme Steinert","40028922","",1);
+		 	julia.incluirFuncionario(f);
 	    }
 	
 }

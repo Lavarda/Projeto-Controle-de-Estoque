@@ -71,15 +71,6 @@ public class Fornecedor{
 		this.cnpjForncedor = cnpjForncedor;
 	}
 	
-<<<<<<< HEAD
-	public void envioProduto() {
-<<<<<<< HEAD
-		Produtos produtoEnviado = new Produtos(1,"Nome",2222, 0);
-=======
-		Produtos produtoEnviado = new Produtos(1,"Nome","Descrição", 0);
->>>>>>> fe172ac1cf8761191f4625bbf0778eb63d531c56
-		produtoEnviado.mostrarProduto();
-=======
 	public String getEmailFornecedor() {
 		return emailFornecedor;
 	}
@@ -262,7 +253,6 @@ public class Fornecedor{
 		String sql = "delete from fornecedor_table where nome_fornecedor = ?";
 		
 		PreparedStatement stm = db.preparedStament(sql);
->>>>>>> df58fbe1b80fd542ffc258b26860d9a098d4b88a
 		
 		System.out.println("Digite o nome do fornecedor que deseja excluir : ");
 		String nome = s.nextLine();
