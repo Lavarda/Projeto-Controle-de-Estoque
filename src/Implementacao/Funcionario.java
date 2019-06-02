@@ -11,7 +11,7 @@ import Connections.ConnectionDB;
 public class Funcionario extends Administrador{
 	
 	private static ConnectionDB conexao = new ConnectionDB();
-	public Funcionario(String matricula, String nome, String senha, Cargo cargo, Categoria categoria) {
+	public Funcionario(String matricula, String nome, String senha, Cargos cargo, Categoria categoria) {
 		super(matricula, nome, senha, cargo, categoria);
 	}
 	
@@ -47,7 +47,7 @@ public class Funcionario extends Administrador{
 	@Override
 	public String toString() {
 		return "Funcionario [getSenha()=" + getSenha() +"\n"+ "getMatricula()=" + getMatricula()+"\n" + "getCargo()="
-				+ getCargo() + "\n" +  "getCodCategoria()=" + getCategoria().getCodCategoria() +"\n" + " getNome()=" + getNome() + "]";
+				+ this.getCargo() + "\n" +  "getCodCategoria()=" + getCategoria().getCodCategoria() +"\n" + " getNome()=" + getNome() + "]";
 	}
 //--------------------- METODOS PRODUTOS ------------------------//
 	public void requisitarInclusaoProduto(Produtos p) {
