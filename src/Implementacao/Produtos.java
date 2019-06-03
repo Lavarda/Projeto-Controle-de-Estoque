@@ -50,7 +50,7 @@ public class Produtos {
     	System.out.println(getNomeProduto() + " " + getNomeProduto() +  " " + getCategoria());
     }
     
-    public void inserir(){
+    public void inserirProduto(){
     	ConnectionDB.Conectar();
        try {
     	 String sql = "INSERT INTO PRODUTOS (nome_produto, preco_produto, cod_categoria) VALUES (?, ?, ?)";
@@ -66,7 +66,7 @@ public class Produtos {
        ConnectionDB.Desconectar();
     }
     
-    public void alterar(){
+    public void alterarProduto(){
     	ConnectionDB.Conectar();
     	try{
     		String sql = "UPDATE PRODUTOS SET nome_produto=?, preco_produto=?,cod_categoria=? WHERE nome_produto=?";
@@ -83,7 +83,7 @@ public class Produtos {
     	ConnectionDB.Desconectar();
     }
     
-    public void excluir(){
+    public void excluirProduto(){
     	ConnectionDB.Conectar();
         try{
         	String sql = "DELETE FROM PRODUTOS WHERE nome_produto=?";
