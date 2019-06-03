@@ -13,13 +13,13 @@ import Connections.ConnectionDB;
 public class Produtos { 
     private String nomeProduto;
     private double preco;
-    private int codigoCategoria;
+    private Categoria categoria;
     static ConnectionDB db = new ConnectionDB();
 
-    public Produtos(String nomeProduto, double preco, int codigoCategoria) {
+    public Produtos(String nomeProduto, double preco, Categoria categoria) {
         this.nomeProduto = nomeProduto;
         this.preco = preco;
-        this.codigoCategoria = codigoCategoria;
+        this.categoria = categoria;
     }
 
     public String getNomeProduto() {
@@ -38,68 +38,68 @@ public class Produtos {
         this.preco = preco;
     }
 
-    public int getCodigoCategoria() {
-        return codigoCategoria;
+    public Categoria getCategoria() {
+        return this.categoria;
     }
 
-    public void setCodigoCategoria(int codigoCategoria) {
-        this.codigoCategoria = codigoCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
     
     public void mostrarProduto() {
-    	System.out.println(this.nomeProduto + " " + this.preco +  " " + this.codigoCategoria);
+    	System.out.println(getNomeProduto() + " " + getNomeProduto() +  " " + getCategoria());
     }
     
-    public void inserir() throws Exception {
-    	db.Conectar();
+    public void inserirProduto(){
+    	ConnectionDB.Conectar();
        try {
     	 String sql = "INSERT INTO PRODUTOS (nome_produto, preco_produto, cod_categoria) VALUES (?, ?, ?)";
-        PreparedStatement stm = db.preparedStament(sql);
+        PreparedStatement stm = ConnectionDB.preparedStament(sql);
         stm.setString(1, this.getNomeProduto());
         stm.setDouble(2, this.getPreco());
-        stm.setInt(3,this.getCodigoCategoria());
-        db.runPreparedStatment(stm);
+        stm.setInt(3,this.getCategoria().getCodCategoria());
+        ConnectionDB.runPreparedStatment(stm);
 		JOptionPane.showMessageDialog(null, "Produto cadastrado com exito.");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Erro ao inserir dados \nErro: "+ex);
 		}
-       db.Desconectar();
+       ConnectionDB.Desconectar();
     }
     
-    public void alterar(int codProduto) throws Exception {
-    	db.Conectar();
+    public void alterarProduto(){
+    	ConnectionDB.Conectar();
     	try{
-    		String sql = "UPDATE PRODUTOS SET nome_produto=?, preco_produto=?,cod_categoria=? WHERE cod_produto=?";
-    		PreparedStatement stm = db.preparedStament(sql);
+    		String sql = "UPDATE PRODUTOS SET nome_produto=?, preco_produto=?,cod_categoria=? WHERE nome_produto=?";
+    		PreparedStatement stm = ConnectionDB.preparedStament(sql);
     		stm.setString(1, this.getNomeProduto());
     		stm.setDouble(2, this.getPreco());
-    		stm.setInt(3, this.getCodigoCategoria());
-    		stm.setInt(4, codProduto );
-    		db.runPreparedStatment(stm);
+    		stm.setInt(3, this.getCategoria().getCodCategoria());
+    		stm.setString(4, this.nomeProduto);
+    		ConnectionDB.runPreparedStatment(stm);
     		JOptionPane.showMessageDialog(null, "Produto alterado com exito.");
     	} catch (SQLException ex) {
     		JOptionPane.showMessageDialog(null,"Erro ao alterar dados \nErro: "+ex);
     	}
-    	db.Desconectar();
+    	ConnectionDB.Desconectar();
     }
     
-    public void excluir( int codProduto ) throws Exception {
-    	db.Conectar();
+    public void excluirProduto(){
+    	ConnectionDB.Conectar();
         try{
-        	String sql = "DELETE FROM PRODUTOS WHERE cod_produto=?";
-        	PreparedStatement stm = db.preparedStament(sql);
-        	stm.setInt(1, codProduto);
-        	db.runPreparedStatment(stm);
+        	String sql = "DELETE FROM PRODUTOS WHERE nome_produto=?";
+        	PreparedStatement stm = ConnectionDB.preparedStament(sql);
+        	stm.setString(1, this.nomeProduto);
+        	ConnectionDB.runPreparedStatment(stm);
         	JOptionPane.showMessageDialog(null, "Produto excluido com exito.");
         } catch (SQLException ex) {
         	JOptionPane.showMessageDialog(null, "Erro ao excluir dados \nErro: "+ex);
         }
-        db.Desconectar();
+        ConnectionDB.Desconectar();
     }
     public static void listarTodos() throws Exception {
-    	db.Conectar();
+    	ConnectionDB.Conectar();
     		String sql = "SELECT * FROM PRODUTOS ORDER BY nome_produto";
-    		PreparedStatement stm = db.preparedStament(sql);
+    		PreparedStatement stm = ConnectionDB.preparedStament(sql);
     		try {
     		ResultSet result = stm.executeQuery();
     		String lista = "";
@@ -110,24 +110,5 @@ public class Produtos {
     		}catch(SQLException ex) {
     			JOptionPane.showMessageDialog(null, "Erro ao listar dados \nErro: "+ex);
     		}
-    }
-    
-    public static void main(String[]args) throws Exception {
-    	String selecao = JOptionPane.showInputDialog("Selecione:\n1 - Inserir produto\n2 - Alterar produto\n3- Excluir produto\n4 - Listar produtos\n0 - Sair");
-    	while(!selecao.equals("0")){
-    		if(selecao.equals("1"))	{
-    			Produtos p = new Produtos("Whiskey", 4.0, 2);
-    			p.inserir();
-    		} else if(selecao.equals("2")){
-    			Produtos p = new Produtos("Schin", 4.0, 2);
-    			p.alterar(4);
-    		} else if(selecao.equals("3")){
-    			Produtos p = new Produtos("Schin", 4.0, 2);
-    			p.excluir(8);
-    		} else if (selecao.equals("4")) {
-    			listarTodos();
-    		}
-    			System.exit(0);
-    	}
     }
 }
