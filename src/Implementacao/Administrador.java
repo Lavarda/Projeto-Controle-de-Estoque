@@ -11,11 +11,11 @@ import Connections.ConnectionDB;
 public abstract class Administrador extends Pessoa implements Autenticacao {
 	private String senha;
 	private String matricula;
-	private Cargo cargo;
+	private Cargos cargo;
 	private Categoria categoria;
 	private static ConnectionDB conexao = new ConnectionDB();
 
-	public Administrador(String matricula,String nome,String senha, Cargo cargo, Categoria categoria) {
+	public Administrador(String matricula,String nome,String senha, Cargos cargo, Categoria categoria) {
 		this.senha = senha;
 		this.matricula = matricula;
 		this.setNome(nome);
@@ -68,10 +68,10 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 		public void setMatricula(String matricula) {
 			this.matricula = matricula;
 		}
-		public Cargo getCargo() {
+		public Cargos getCargo() {
 			return cargo;
 		}
-		public void setCargo(Cargo cargo) {
+		public void setCargo(Cargos cargo) {
 			this.cargo = cargo;
 		}
 		public Categoria getCategoria() {

@@ -12,18 +12,7 @@ public enum Cargos {
 		this.codCargo = codCargo;
 	}
 	
-	public void incluirFuncionario(int codCargo) {
-		if (codCargo == 1) {
-		}else {
-			System.err.println("Este funcionário não tem permissão para incluir,editar,ou excluir um ou mais funcionários");
-		}	
-	}
-	
-	public void excluirFuncionario(int codCargo) {
-		if(codCargo == 1) {
-		}else {
-			System.err.println("Este funcionário não tem permissão para incluir,editar,ou excluir um ou mais funcionários");
-		}
-		
+	public int getcodCargo() {
+		return this.codCargo;
 	}
 }

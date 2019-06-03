@@ -12,10 +12,10 @@ public class ConnectionDB {
     private static ResultSet result; // Resultado da query
 
     // HOST PADR�O USAR QUANDO ESTIVER SEM O DB "jdbc:postgresql://127.0.0.1:5432/"
-    private static String URL = "jdbc:postgresql://localhost/"; // url do servidor 192.168.4.204:5432
-    private static String USER = "guilherme"; // usuario do db groupaps
-    private static String PASSWORD = "123456"; // senha do usuario aps2019-1
-    private static String DATABASE = "projeto_estoque"; // banco projeto_estoque
+    private static String URL = ""; // url do servidor 192.168.4.204:5432
+    private static String USER = ""; // usuario do db groupaps
+    private static String PASSWORD = ""; // senha do usuario aps2019-1
+    private static String DATABASE = ""; // banco projeto_estoque
     
     public static void Conectar() {
         
