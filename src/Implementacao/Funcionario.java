@@ -1,47 +1,75 @@
 package Implementacao;
 
-public class Funcionario extends Pessoa {
-	
-	private double salario;
-	private String cargo;
-	private String setor;
-	private String dataAdmissao;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-	public Funcionario(double salario, String setor, String dataAdmissao) {
-		this.salario = salario;
-		this.setor = setor;
-		this.dataAdmissao = dataAdmissao;
-	}
-	public Funcionario(double salario,String cargo,String setor,String dataAdmissao) {
-		this.salario = salario;
-		this.cargo = cargo;
-		this.setor = setor;
-		this.dataAdmissao = dataAdmissao;
+import javax.swing.JOptionPane;
+
+import Connections.ConnectionDB;
+
+public class Funcionario extends Administrador{
+	
+	private static ConnectionDB conexao = new ConnectionDB();
+	public Funcionario(String matricula, String nome, String senha, Cargo cargo, Categoria categoria) {
+		super(matricula, nome, senha, cargo, categoria);
 	}
 	
-	public double getSalario() {
-		return salario;
+	public void consultarfuncionario(){
+		try {
+			String nomeFuncionario = null;
+			String cargoFuncionario = null;
+			String matriculaFuncionario = null;
+			String salarioFuncionario = null;
+			String telefoneFuncionario = null;
+			String sql = "SELECT * FROM vw_funcionarios WHERE matricula_funcionario = ?";
+			conexao.Conectar();
+			PreparedStatement preparedStatement = conexao.preparedStament(sql);
+			preparedStatement.setString(1, this.getMatricula());
+			ResultSet result = conexao.runPreparedSelect(preparedStatement);
+			while(result.next()) {
+				nomeFuncionario = result.getString("nome_funcionario");
+				cargoFuncionario = result.getString("cargo_funcionario");
+				matriculaFuncionario = result.getString("matricula_funcionario");
+				salarioFuncionario = result.getString("salario_funcionario");
+				telefoneFuncionario = result.getString("telefone_funcionario");
+			}
+			System.out.println("Nome: "+ nomeFuncionario + "\n" + "Cargo: " + cargoFuncionario + "\n" +"Matricula: "
+					+ matriculaFuncionario + "\n" + "Salário: " + salarioFuncionario + "\n" + "Telefone: " + telefoneFuncionario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			e.getMessage();
+		}finally {
+			conexao.Desconectar();
+		}	
 	}
-	public void setSalario(double salario) {
-		this.salario = salario;
+	
+	@Override
+	public String toString() {
+		return "Funcionario [getSenha()=" + getSenha() +"\n"+ "getMatricula()=" + getMatricula()+"\n" + "getCargo()="
+				+ getCargo() + "\n" +  "getCodCategoria()=" + getCategoria().getCodCategoria() +"\n" + " getNome()=" + getNome() + "]";
 	}
-	public String getCargo() {
-		return cargo;
+//--------------------- METODOS PRODUTOS ------------------------//
+	public void requisitarInclusaoProduto(Produtos p) {
+		p.inserir();
 	}
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
+	public void requisitarAlteracaoProduto(Produtos p) {
+		// ainda n sei o q eu vou modificar
 	}
-	public String getSetor() {
-		return setor;
+	public void requisitarExclusaoProduto( Produtos p) {
+		p.excluir();
 	}
-	public void setSetor(String setor) {
-		this.setor = setor;
+//--------------------- METODOS USUÁRIO -------------------//
+	
+	public void requisitarInclusaoUsuario(Usuario u) {
+		u.cadastrarUsuario(this.getMatricula());
 	}
-	public String getDataAdmissao() {
-		return dataAdmissao;
+	public void requisitarAlteracaoUsuario(Usuario u) {
+		// ainda n sei o q eu vou modificar
 	}
-	public void setDataAdmissao(String dataAdmissao) {
-		this.dataAdmissao = dataAdmissao;
-	}	
+	public void requisitarExclusaoUsuario(Usuario u) {
+		u.deletarUsuario();
+	}
+	
 	
 }
