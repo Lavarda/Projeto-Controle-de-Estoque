@@ -8,7 +8,6 @@ import Connections.ConnectionDB;
 
 public class Transferencia {
 	
-	private ConnectionDB db = new ConnectionDB();
 	private int codTransferencia;
 	private int codProduto ;
 	private int codFornecedor;
@@ -80,94 +79,94 @@ public class Transferencia {
 	
 	public void buscaTransferenciaFiliais(int codTransferencia) throws SQLException {
 		// Busca de transferencia para filiais
-		db.Conectar();
+		ConnectionDB.Conectar();
 		String qr = "select * from transferencia_filial where cod_transferencia = ?";
-		PreparedStatement stm = db.preparedStament(qr);
+		PreparedStatement stm = ConnectionDB.preparedStament(qr);
 		
 		stm.setInt(1, codTransferencia);
 		
-		ResultSet result = db.runPreparedSelect(stm);
+		ResultSet result = ConnectionDB.runPreparedSelect(stm);
 		while ( result.next() ) {
 			Transferencia transf = new Transferencia(result.getInt("cod_transferencia"),result.getInt("cod_produto"), result.getInt("cod_filial"), result.getString("dt_saida_produto_transferencia"));
 			transf.mostrarTransferencia();
 		}
 		
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}
 	
 	public void buscaTransferenciasFornecedor(int codSaidaProduto) throws SQLException {
 		// Busca de transferencia para fornecedor
-		db.Conectar();
+		ConnectionDB.Conectar();
 		String qr = "select * from transferencia_fornecedor where cod_saida = ?";
-		PreparedStatement stm = db.preparedStament(qr);
+		PreparedStatement stm = ConnectionDB.preparedStament(qr);
 		
 		stm.setInt(1, codSaidaProduto);
 		
-		ResultSet result = db.runPreparedSelect(stm);
+		ResultSet result = ConnectionDB.runPreparedSelect(stm);
 		while ( result.next() ) {
 			Transferencia transf = new Transferencia(result.getInt("cod_saida"),result.getInt("cod_produto"), result.getInt("cod_fornecedor"), result.getString("dt_saida_produto"));
 			transf.mostrarTransferencia();
 		}
 		
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}
 	
 	public void transferirProdutoFornecedor(int codProduto, int codFornecedor, String dataSaida) throws SQLException {
 		// Transferencia de produto para um fornecedor utilizando a tabela saida_produto.
-		db.Conectar();
+		ConnectionDB.Conectar();
 		String qr = "insert into transferencia_fornecedor(cod_produto,dt_saida_produto,cod_fornecedor) values(?,?,?)";
-		PreparedStatement stm = db.preparedStament(qr);
+		PreparedStatement stm = ConnectionDB.preparedStament(qr);
 		
 		stm.setInt(1, codProduto);
 		stm.setString(2, dataSaida);
 		stm.setInt(3, codFornecedor);
 		
-		db.runPreparedStatment(stm);
+		ConnectionDB.runPreparedStatment(stm);
 		
 		System.out.println("Transferencia realizada com sucesso!");
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	
 	}
 	
 	public void transferirProdutoFilial(int codProduto, int codFilial, String dataSaida) throws SQLException {
 		// Transferencia de produtos para filiais transferencia_saida_produto usando o cod_filial
-		db.Conectar();
+		ConnectionDB.Conectar();
 		String qr = "insert into transferencia_filial(cod_produto,dt_saida_produto_transferencia,cod_filial) values(?,?,?)";
-		PreparedStatement stm = db.preparedStament(qr);
+		PreparedStatement stm = ConnectionDB.preparedStament(qr);
 		
 		stm.setInt(1, codProduto);
 		stm.setString(2, dataSaida);
 		stm.setInt(3, codFilial);
 		
-		db.runPreparedStatment(stm);
+		ConnectionDB.runPreparedStatment(stm);
 		
 		System.out.println("Transferencia realizada com sucesso!");
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}
 
 	public void historicoTransferenciasFornecedores() throws SQLException {
-		db.Conectar();
-		ResultSet result = db.SelectQuery("select * from transferencia_fornecedor");
+		ConnectionDB.Conectar();
+		ResultSet result = ConnectionDB.SelectQuery("select * from transferencia_fornecedor");
 		System.out.println("Historico de transferencias fornecedores:");
 		while (result.next() ) {
 			Transferencia transf = new Transferencia(result.getInt("cod_saida"),result.getInt("cod_produto"), result.getInt("cod_fornecedor"), result.getString("dt_saida_produto"));
 			transf.mostrarTransferencia();
 		}
 		
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 		
 	}
 	
 	public void historicoTransferenciasFiliais() throws SQLException {
-		db.Conectar();
-		ResultSet result = db.SelectQuery("select * from transferencia_filial");
+		ConnectionDB.Conectar();
+		ResultSet result = ConnectionDB.SelectQuery("select * from transferencia_filial");
 		System.out.println("Historico de transferencias filiais:");
 		while (result.next() ) {
 			Transferencia transf = new Transferencia(result.getInt("cod_transferencia"),result.getInt("cod_produto"), result.getInt("cod_filial"), result.getString("dt_saida_produto_transferencia"));
 			transf.mostrarTransferencia();
 		}
 		
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 		
 	}
 	

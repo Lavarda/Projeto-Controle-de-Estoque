@@ -1,7 +1,5 @@
 package Implementacao;
 
-import Connections.ConnectionDB;
-
 public enum Cargos {
 	
 	GERENTE(1),ANALISTA(2),ASSISTENTE(3),VENDEDOR(4);

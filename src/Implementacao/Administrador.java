@@ -13,8 +13,6 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 	private String matricula;
 	private Cargos cargo;
 	private Categoria categoria;
-	private static ConnectionDB conexao = new ConnectionDB();
-
 	public Administrador(String matricula,String nome,String senha, Cargos cargo, Categoria categoria) {
 		this.senha = senha;
 		this.matricula = matricula;
@@ -29,11 +27,11 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 			String senhaFuncionario = null;
 			String nome = JOptionPane.showInputDialog("Insira seu nome");
 			String senha = JOptionPane.showInputDialog("Insira sua senha");
-			conexao.Conectar();
+			ConnectionDB.Conectar();
 			String sql = "SELECT nome_funcionario,senha_funcionario from funcionarios where matricula_funcionario = ?";
-			PreparedStatement preparedStatement = conexao.preparedStament(sql);
+			PreparedStatement preparedStatement = ConnectionDB.preparedStament(sql);
 			preparedStatement.setString(1, this.getMatricula());
-			ResultSet result = conexao.runPreparedSelect(preparedStatement);
+			ResultSet result = ConnectionDB.runPreparedSelect(preparedStatement);
 			while(result.next()) {
 				nomeFuncionario = result.getString("nome_funcionario");
 				senhaFuncionario = result.getString("senha_funcionario");
@@ -51,7 +49,7 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 			e.getMessage();
 			return false;
 		}finally {
-			conexao.Desconectar();
+			ConnectionDB.Desconectar();
 		}
 	}
 //-------------- GETTERS E SETTERS ------------------//

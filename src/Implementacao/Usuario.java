@@ -11,7 +11,6 @@ import Connections.ConnectionDB;
 
 public class Usuario extends Pessoa{
 	
-	private ArrayList<Produtos> produtos = new ArrayList<Produtos>();
 	private Scanner s = new Scanner(System.in);
 	static ConnectionDB db = new ConnectionDB();
 	private java.util.Date dataAtual = new Date();
@@ -23,12 +22,12 @@ public class Usuario extends Pessoa{
 	}
 	
 	public void cadastrarUsuario() throws SQLException {
-		db.Conectar();
+		ConnectionDB.Conectar();
 		
 		String sql = "insert into cadastro_usuario(cod_usuario,nome_usuario,dt_nascimento_usuario,email_usuario,cpf_usuario"
 					  + ",rg_usuario,dt_cadastro_usuario,cod_funcionario) values(?,?,?,?,?,?,?,?)";
 		
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		
 		stm.setInt(1, 1);
 		stm.setString(2, this.getNome() );
@@ -39,16 +38,16 @@ public class Usuario extends Pessoa{
 		stm.setString(7, this.dataFormatada );
 		stm.setInt(8, 1);
 		
-		db.runPreparedStatment(stm);
-		db.Desconectar();
+		ConnectionDB.runPreparedStatment(stm);
+		ConnectionDB.Desconectar();
 	}
 		
 	public void modifyUser() throws SQLException {
-		db.Conectar();
+		ConnectionDB.Conectar();
 		
 		String sql = "update cadastro_usuario set ? = ? where ? = ?";
 		
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		
 		System.out.println("Digitar o nome da coluna que deseja modificar:");
 		String column = s.nextLine();
@@ -63,60 +62,60 @@ public class Usuario extends Pessoa{
 		stm.setString(4, condicion);
 		
 		System.out.println(stm);
-		db.runPreparedStatment(stm);
-		db.Desconectar();
+		ConnectionDB.runPreparedStatment(stm);
+		ConnectionDB.Desconectar();
 	}
 	
 	public void deleteUser() throws SQLException {
-		db.Conectar();
+		ConnectionDB.Conectar();
 		
 		String sql = "delete from cadastro_usuario where nome_usuario = ?";
 		
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		
 		stm.setString(1, this.getNome() );
 		
-		db.runPreparedStatment(stm);
-		db.Desconectar();
+		ConnectionDB.runPreparedStatment(stm);
+		ConnectionDB.Desconectar();
 	}
 	
 	public void produtosComprados(int codUsuario) throws SQLException {		
-		db.Conectar();
+		ConnectionDB.Conectar();
 		
 		String sql = "select * from venda where cod_usuario = ?";
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		
 		stm.setInt(1, codUsuario);
 		
-		ResultSet result = db.runPreparedSelect(stm);
+		ResultSet result = ConnectionDB.runPreparedSelect(stm);
 		
 		while( result.next() ) {
 			System.out.println(result.getInt("cod_produto") + " " + result.getString("dt_compra_produto"));
 		}
 		
 		
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}
 	
 	public void pesquisarProduto() throws SQLException{
 		
-		db.Conectar();
+		ConnectionDB.Conectar();
         
         System.out.println("Digite o nome do produto que deseja pesquisar: ");
         String nomeProduto = s.nextLine();
         
         String sql = "select * from produtos where nome_produto = ?";
-        PreparedStatement stm = db.preparedStament(sql);
+        PreparedStatement stm = ConnectionDB.preparedStament(sql);
         
         stm.setString(1, nomeProduto);
         
-        ResultSet result = db.runPreparedSelect(stm);
+        ResultSet result = ConnectionDB.runPreparedSelect(stm);
         
         while( result.next() ) {
         	System.out.println(result.getInt("cod_produto") + " " + result.getString("nome_produto") + " " + result.getFloat("preco_produto") + " " + result.getInt("cod_categoria"));
         }
         
-        db.Desconectar();
+        ConnectionDB.Desconectar();
         
     }
 	
