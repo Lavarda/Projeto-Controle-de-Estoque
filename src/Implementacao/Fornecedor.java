@@ -9,7 +9,7 @@ import Connections.ConnectionDB;
 
 public class Fornecedor{
 	
-	private ConnectionDB db = new ConnectionDB();
+	private Scanner s = new Scanner(System.in);
 	private String nomeFornecedor;
 	private String produtoFornecido;
 	private String dataEntrega;
@@ -130,7 +130,7 @@ public class Fornecedor{
 		
 		int count = 1;
 		String sql_verify = "select cod_categoria from categoria";
-		ResultSet result = db.SelectQuery(sql_verify);
+		ResultSet result = ConnectionDB.SelectQuery(sql_verify);
 		while ( result.next() ) {
 			count = count + 1;
 		}
@@ -138,19 +138,19 @@ public class Fornecedor{
 		System.out.println("Nome da categoria a ser inserida: " + nmCat);
 		
 		String sql = "insert into categoria(cod_categoria , nome_categoria) values(?,?)";
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		stm.setInt(1, count + 1);
 		stm.setString(2, nmCat);
-		db.runPreparedStatment(stm);
+		ConnectionDB.runPreparedStatment(stm);
 		
 		return (count + 1);
 	}
 	
 	public ResultSet verificarProduto(String nm) throws SQLException {
 		String sqlVerify = "select nome_produto from produtos where nome_produto = ?";
-		PreparedStatement stmVerify = db.preparedStament(sqlVerify);
+		PreparedStatement stmVerify = ConnectionDB.preparedStament(sqlVerify);
 		stmVerify.setString(1, nm);
-		ResultSet result = db.runPreparedSelect(stmVerify);
+		ResultSet result = ConnectionDB.runPreparedSelect(stmVerify);
 		
 		return result;
 	}
@@ -161,9 +161,9 @@ public class Fornecedor{
 		System.out.println("Categoria : " + nomeCategoria);
 		
 		String sql = "select cod_categoria from categoria where nome_categoria = ?";
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		stm.setString(1, nomeCategoria);
-		ResultSet result = db.runPreparedSelect(stm);
+		ResultSet result = ConnectionDB.runPreparedSelect(stm);
 		while( result.next() ) {
 			codCategoria = result.getInt("cod_categoria");
 		}
@@ -181,7 +181,7 @@ public class Fornecedor{
 		} else {
 			
 			String sql = "insert into produtos(nome_produto,preco_produto,cod_categoria) values(?,?,?)";
-			PreparedStatement stm = db.preparedStament(sql);
+			PreparedStatement stm = ConnectionDB.preparedStament(sql);
 			stm.setString(1, nm);
 			stm.setFloat(2, pc);
 			
@@ -193,7 +193,7 @@ public class Fornecedor{
 				stm.setInt(3, codC);
 			}
 			
-			db.runPreparedStatment(stm);
+			ConnectionDB.runPreparedStatment(stm);
 			
 			System.out.println("Produto cadastrado com sucesso");
 		}
@@ -201,7 +201,7 @@ public class Fornecedor{
 	}
 	
 	public void envioProduto() throws SQLException {
-		db.Conectar();
+		ConnectionDB.Conectar();
 		
 		System.out.println("Nome do produto a ser enviado: ");
 		String nomeProduto = s.nextLine();
@@ -215,16 +215,16 @@ public class Fornecedor{
 		
 		inserirProduto(nomeProduto,precoProduto,codCategoria,nomeCategoria);
 
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}	
 	
 	public void newFornecedor() throws SQLException {
-		db.Conectar();
+		ConnectionDB.Conectar();
 		
 		String sql = "insert into fornecedor_table(nome_fornecedor,cnpj_fornecedor,email_fornecedor,telefone_fornecedor,"
 					+ "cep_fornecedor,cidade_fornecedor,bairro_fornecedor,estado_fornecedor,numero_loja_fornecedor) values(?,?,?,?,?,?,?,?,?)";
 		
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		
 		stm.setString(1, this.getNomeFornecedor() );
 		stm.setString(2, this.getCnpjForncedor() );
@@ -236,9 +236,9 @@ public class Fornecedor{
 		stm.setString(8, this.getEstadoFornecedor() );
 		stm.setInt(9, this.getNumeroLoja() );
 		
-		db.runPreparedStatment(stm);
+		ConnectionDB.runPreparedStatment(stm);
 		
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}
 	
 	public void editFornecedor() {
@@ -247,20 +247,20 @@ public class Fornecedor{
 	
 	public void removeFornecedor() throws SQLException {
 		
-		db.Conectar();
+		ConnectionDB.Conectar();
 		
 		String sql = "delete from fornecedor_table where nome_fornecedor = ?";
 		
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		
 		System.out.println("Digite o nome do fornecedor que deseja excluir : ");
 		String nome = s.nextLine();
 		
 		stm.setString(1, nome );
 		
-		db.runPreparedStatment(stm);
+		ConnectionDB.runPreparedStatment(stm);
 
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}
 	
 	public static void main(String args[]) throws SQLException {

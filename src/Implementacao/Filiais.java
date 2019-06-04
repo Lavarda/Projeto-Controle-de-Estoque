@@ -8,7 +8,6 @@ import Connections.ConnectionDB;
 
 public class Filiais {
 	
-	private ConnectionDB db = new ConnectionDB();
 	private String nomeFilial;
 	private Scanner s = new Scanner(System.in);
 	private String telefoneFilial;
@@ -102,10 +101,10 @@ public class Filiais {
 	}
 	
 	public void cadastroFilial() throws SQLException {
-		db.Conectar();
+		ConnectionDB.Conectar();
 		String sql = "insert into filiais_table(nome_filial,cnpj_filial,telefone_filial,cep_filial,cidade_filial,bairro_filial,estado_filial,numero_loja_filial) values (?,?,?,?,?,?,?,?)";
 
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		
 		stm.setString(1, this.getNomeFilial() );
 		stm.setString(2, this.getCpnjFilial() );
@@ -116,11 +115,11 @@ public class Filiais {
 		stm.setString(7, this.getEstado() );
 		stm.setInt(8, this.getNumeroEndereco() );		
 		
-		db.runPreparedStatment(stm);
+		ConnectionDB.runPreparedStatment(stm);
 		
 		System.out.println("Dados de endereço de filial inseridos");
 		
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}
 	
 //	public void editFilial() {
@@ -131,16 +130,16 @@ public class Filiais {
 //	}
 	
 	public void removeFilial() throws SQLException {
-		db.Conectar();
+		ConnectionDB.Conectar();
 		System.out.println("Digite o cnpj da filial que deseja remover: ");
 		String cnpj_filial = s.nextLine();
 		
 		String sql = "delete from filiais_table where cnpj_filial = ?";
-		PreparedStatement stm = db.preparedStament(sql);
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
 		stm.setString(1, cnpj_filial);
-		db.runPreparedStatment(stm);
+		ConnectionDB.runPreparedStatment(stm);
 		
-		db.Desconectar();
+		ConnectionDB.Desconectar();
 	}
 	
 //	public static void main(String args[]) throws SQLException {
