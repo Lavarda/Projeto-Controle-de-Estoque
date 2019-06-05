@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import Connections.ConnectionDB;
 
 public class Gerente extends Administrador{
+	//Somente para realizar commit esse comentário
 	public Gerente(String matricula, String nome, String senha,Categoria categoria) {
 		super(matricula, nome, senha,Cargos.GERENTE, categoria);
 	}
@@ -32,17 +33,6 @@ public class Gerente extends Administrador{
 		}
 	}
 	
-	/*public void incluirFuncionario(Funcionario funcionario , File file) {
-		try {
-			
-			FileWriter arq = new FileWriter(file,true);
-			arq.write("Matricula: " + funcionario.getMatricula() + "|" + "Nome: " + funcionario.getNome() + "|" + "Senha: " + funcionario.getSenha() + "|" +
-			"Cargo: " + funcionario.getCargo().getcodCargo() + "|" + "Categoria: " + funcionario.getCategoria().getCodCategoria() + "\n");
-			arq.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 	public void excluirFuncionario(Funcionario funcionario) {
 		if(this.realizarAutenticacao() == true) {
 			try {
@@ -59,22 +49,6 @@ public class Gerente extends Administrador{
 		}
 			
 	}
-	/*public void excluirFuncionario(Funcionario funcionario, File file) {
-		try {
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			
-			FileWriter fileWriter = new FileWriter(file);
-			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-			
-			String linha = bufferedReader;
-			while (linha != null) {
-				
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 	public void editarSenhaFuncionario(Funcionario funcionario, String novaSenha) {
 		if(this.realizarAutenticacao() == true) {
 			try {
@@ -91,4 +65,33 @@ public class Gerente extends Administrador{
 			}			
 		}
 	}
+	
+	/*public void incluirFuncionario(Funcionario funcionario , File file) {
+	try {
+		
+		FileWriter arq = new FileWriter(file,true);
+		arq.write("Matricula: " + funcionario.getMatricula() + "|" + "Nome: " + funcionario.getNome() + "|" + "Senha: " + funcionario.getSenha() + "|" +
+		"Cargo: " + funcionario.getCargo().getcodCargo() + "|" + "Categoria: " + funcionario.getCategoria().getCodCategoria() + "\n");
+		arq.close();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+}*/
+	
+	/*public void excluirFuncionario(Funcionario funcionario, File file) {
+	try {
+		FileReader fileReader = new FileReader(file);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		
+		FileWriter fileWriter = new FileWriter(file);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+		
+		String linha = bufferedReader;
+		while (linha != null) {
+			
+		}
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+}*/
 }
