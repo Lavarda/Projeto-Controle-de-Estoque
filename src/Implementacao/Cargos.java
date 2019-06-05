@@ -2,7 +2,9 @@ package Implementacao;
 
 public enum Cargos {
 	
-	GERENTE(1),ANALISTA(2),ASSISTENTE(3),VENDEDOR(4);
+	VENDEDOR(1),
+	ASSISTENTE_ADMINISTRATIVO(2),
+	GERENTE(3);
 	
 	private int codCargo;
 	

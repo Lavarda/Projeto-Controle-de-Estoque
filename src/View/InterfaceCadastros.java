@@ -4,9 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Implementacao.Cargo;
-import Implementacao.Funcionario;
-
+import Implementacao.Cargos;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -115,13 +113,13 @@ public class InterfaceCadastros extends InterfacePrincipal {
 		lblSalario.setBounds(32, 167, 64, 23);
 		fieldFuncionario.add(lblSalario);
 		
-		JComboBox <Cargo> comboBoxCargo = new JComboBox<Cargo>();
-		comboBoxCargo.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
-		comboBoxCargo.setBounds(112, 135, 106, 20);
+		JComboBox <Cargos> comboBoxCargo = new JComboBox<Cargos>();
+		comboBoxCargo.setFont(new Font("Comic Sans MS", Font.BOLD, 10));
+		comboBoxCargo.setBounds(112, 135, 225, 20);
 		fieldFuncionario.add(comboBoxCargo);
-		comboBoxCargo.addItem(Cargo.ASSISTENTE);
-		comboBoxCargo.addItem(Cargo.GERENTE);
-		comboBoxCargo.addItem(Cargo.VENDEDOR);
+		comboBoxCargo.addItem(Cargos.ASSISTENTE_ADMINISTRATIVO);
+		comboBoxCargo.addItem(Cargos.GERENTE);
+		comboBoxCargo.addItem(Cargos.VENDEDOR);
 		
 		
 		JFormattedTextField fieldSalario = new JFormattedTextField();
