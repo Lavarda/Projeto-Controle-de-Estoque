@@ -1,6 +1,7 @@
 package Implementacao;
 
 public enum Categoria {
+	//Somente para realizar commit esse comentário
 	ACHOCOLATADOS(1),
 	AGUA_POTAVEL(2),
 	BEBIDAS_A_BASE_DE_ANIS(4),

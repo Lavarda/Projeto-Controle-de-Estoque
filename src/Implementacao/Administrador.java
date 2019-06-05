@@ -9,10 +9,12 @@ import javax.swing.JOptionPane;
 import Connections.ConnectionDB;
 
 public abstract class Administrador extends Pessoa implements Autenticacao {
+	//Somente para realizar commit esse comentário
 	private String senha;
 	private String matricula;
 	private Cargos cargo;
 	private Categoria categoria;
+
 	public Administrador(String matricula,String nome,String senha, Cargos cargo, Categoria categoria) {
 		this.senha = senha;
 		this.matricula = matricula;

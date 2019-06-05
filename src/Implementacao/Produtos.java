@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import Connections.ConnectionDB;
 
 public class Produtos { 
+	//Somente para realizar commit esse comentário
     private String nomeProduto;
     private double preco;
     private Categoria categoria;

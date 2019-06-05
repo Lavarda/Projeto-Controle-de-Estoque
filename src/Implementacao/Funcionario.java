@@ -9,19 +9,19 @@ import javax.swing.JOptionPane;
 import Connections.ConnectionDB;
 
 public class Funcionario extends Administrador{
-	
+	//Somente para realizar commit esse comentário
 	public Funcionario(String matricula, String nome, String senha, Cargos cargo, Categoria categoria) {
 		super(matricula, nome, senha, cargo, categoria);
 	}
 	
 	public void consultarfuncionario(){
+		String sql = "SELECT * FROM vw_funcionarios WHERE matricula_funcionario = ?";
+		String nomeFuncionario = null;
+		String cargoFuncionario = null;
+		String matriculaFuncionario = null;
+		String salarioFuncionario = null;
+		String telefoneFuncionario = null;
 		try {
-			String nomeFuncionario = null;
-			String cargoFuncionario = null;
-			String matriculaFuncionario = null;
-			String salarioFuncionario = null;
-			String telefoneFuncionario = null;
-			String sql = "SELECT * FROM vw_funcionarios WHERE matricula_funcionario = ?";
 			ConnectionDB.Conectar();
 			PreparedStatement preparedStatement = ConnectionDB.preparedStament(sql);
 			preparedStatement.setString(1, this.getMatricula());
@@ -48,12 +48,34 @@ public class Funcionario extends Administrador{
 		return "Funcionario [getSenha()=" + getSenha() +"\n"+ "getMatricula()=" + getMatricula()+"\n" + "getCargo()="
 				+ this.getCargo() + "\n" +  "getCodCategoria()=" + getCategoria().getCodCategoria() +"\n" + " getNome()=" + getNome() + "]";
 	}
+	
+	public int buscarCodFuncionario() {
+		int codFuncionario = 0;
+		try {
+		String sql = "Select cod_funcionario from funcionarios where matricula_funcionario = ?";
+		PreparedStatement stm = ConnectionDB.preparedStament(sql);
+		stm.setString(1, this.getMatricula());
+		ResultSet rs = ConnectionDB.runPreparedSelect(stm);
+		while(rs.next()) {
+			codFuncionario = rs.getInt("cod_funcionario");
+		}
+		return codFuncionario;
+		}catch(SQLException e){
+			e.printStackTrace();
+			System.err.println("Código do funcionario não foi encontrado!!!");
+			return 0;
+		}finally {
+			ConnectionDB.Desconectar();
+		}
+		
+		
+	}
 //--------------------- METODOS PRODUTOS ------------------------//
 	public void requisitarInclusaoProduto(Produtos p) {
 		p.inserirProduto();
 	}
 	public void requisitarAlteracaoProduto(Produtos p) {
-		// ainda n sei o q eu vou modificar
+		p.alterarProduto();
 	}
 	public void requisitarExclusaoProduto( Produtos p) {
 		p.excluirProduto();
@@ -61,19 +83,12 @@ public class Funcionario extends Administrador{
 //--------------------- METODOS USUï¿½RIO -------------------//
 	
 	public void requisitarInclusaoUsuario(Usuario u) {
-		u.cadastrarUsuario(this.getMatricula());
+		u.cadastrarUsuario(this);
 	}
 	public void requisitarAlteracaoUsuario(Usuario u) {
-		// ainda n sei o q eu vou modificar
+		u.modificaUsuario();
 	}
 	public void requisitarExclusaoUsuario(Usuario u) {
-		try {
-			u.deleteUser();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		u.deletarUsuario();;
 	}
-	
-	
 }
