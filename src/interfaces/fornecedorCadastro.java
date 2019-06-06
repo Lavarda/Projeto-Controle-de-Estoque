@@ -5,6 +5,11 @@
  */
 package interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+
 /**
  *
  * @author Dinopc
@@ -39,7 +44,7 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
         txtDataFornecedorCadastro = new javax.swing.JLabel();
         txtEmailFornecedorCadastro = new javax.swing.JLabel();
         txtNumeroLojaFornecedorCadastro = new javax.swing.JLabel();
-        txtRgFornecedorCadastro = new javax.swing.JLabel();
+        txtcnpjFornecedorCadastro = new javax.swing.JLabel();
         txtTelFornecedorCadastro = new javax.swing.JLabel();
         txtCidadeFornecedorCadastro = new javax.swing.JLabel();
         txtEstadoFornecedorCadastro = new javax.swing.JLabel();
@@ -56,7 +61,9 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
         inputNumeroFornecedorCadastro = new javax.swing.JFormattedTextField();
         inputTelefoneFornecedorCadastro = new javax.swing.JFormattedTextField();
         inputCepFornecedorCadastro = new javax.swing.JFormattedTextField();
-        inputRgFornecedorCadastro = new javax.swing.JFormattedTextField();
+        inputcnpjFornecedorCadastro = new javax.swing.JFormattedTextField();
+        numeroLoja = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,7 +98,7 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
 
         txtNumeroLojaFornecedorCadastro.setText("Numero da loja");
 
-        txtRgFornecedorCadastro.setText("RG");
+        txtcnpjFornecedorCadastro.setText("cnpj");
 
         txtTelFornecedorCadastro.setText("Telefone");
 
@@ -119,7 +126,7 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
             }
         });
 
-        inputEstadoFornecedorCadastro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre (AC)", "Alagoas (AL)", "Amapá (AP)", "Amazonas (AM)", "Bahia (BA)", "Ceará (CE)", "Distrito Federal (DF)", "Espírito Santo (ES)", "Goiás (GO)", "Maranhão (MA)", "Mato Grosso (MT)", "Mato Grosso do Sul (MS)", "Minas Gerais (MG)", "Pará (PA) ", "Paraíba (PB)", "Paraná (PR)", "Pernambuco (PE)", "Piauí (PI)", "Rio de Janeiro (RJ)", "Rio Grande do Norte (RN)", "Rio Grande do Sul (RS)", "Rondônia (RO)", "Roraima (RR)", "Santa Catarina (SC)", "São Paulo (SP)", "Sergipe (SE)", "Tocantins (TO)" }));
+        inputEstadoFornecedorCadastro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre (AC)", "Alagoas (AL)", "Amapá (AP)", "Amazonas (AM)", "Bahia (BA)", "Ceará (CE)", "Distrito Federal (DF)", "Espírito Santo (ES)", "Goiás (GO)", "Maranhão (MA)", "Mato Grosso (MT)", "Mato Grosso do Sul (MS)", "Minas Gerais (MG)", "Pará (PA) ", "Paraíba (PB)", "Paraná (PR)", "Pernambuco (PE)", "Piauí (PI)", "Rio de Janeiro (RJ)", "Rio Grande do Norte (RN)", "Rio Grande do Sul (RS)", "Rondônia (RO)", "Roraima (RR)", "Santa Catarina (SC)", "São Paulo (SP)", "Secnpjipe (SE)", "Tocantins (TO)" }));
 
         try {
             inputDataFornecedorCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -146,6 +153,8 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Numero Loja");
+
         javax.swing.GroupLayout painelPrincipalFornecedorCadastroLayout = new javax.swing.GroupLayout(painelPrincipalFornecedorCadastro);
         painelPrincipalFornecedorCadastro.setLayout(painelPrincipalFornecedorCadastroLayout);
         painelPrincipalFornecedorCadastroLayout.setHorizontalGroup(
@@ -153,7 +162,7 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
             .addGroup(painelPrincipalFornecedorCadastroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelPrincipalFornecedorCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtRgFornecedorCadastro)
+                    .addComponent(txtcnpjFornecedorCadastro)
                     .addComponent(txtEmailFornecedorCadastro)
                     .addComponent(txtNomeFornecedorCadastro)
                     .addComponent(txtDataFornecedorCadastro)
@@ -162,9 +171,15 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
                     .addComponent(txtNumeroLojaFornecedorCadastro)
                     .addComponent(inputNomeFornecedorCadastro)
                     .addComponent(inputNumeroFornecedorCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(inputRgFornecedorCadastro))
+                    .addComponent(inputcnpjFornecedorCadastro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painelPrincipalFornecedorCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(numeroLoja, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelPrincipalFornecedorCadastroLayout.createSequentialGroup()
+                        .addComponent(botaoLimparFornecedorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botaoSalvarFornecedorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelPrincipalFornecedorCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalFornecedorCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCidadeFornecedorCadastro)
@@ -177,11 +192,7 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
                         .addComponent(inputCepFornecedorCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelPrincipalFornecedorCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtTelFornecedorCadastro)
-                        .addComponent(inputTelefoneFornecedorCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalFornecedorCadastroLayout.createSequentialGroup()
-                        .addComponent(botaoLimparFornecedorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botaoSalvarFornecedorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(inputTelefoneFornecedorCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelPrincipalFornecedorCadastroLayout.setVerticalGroup(
@@ -211,9 +222,9 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputNumeroFornecedorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtRgFornecedorCadastro)
+                        .addComponent(txtcnpjFornecedorCadastro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputRgFornecedorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputcnpjFornecedorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelPrincipalFornecedorCadastroLayout.createSequentialGroup()
                         .addComponent(txtCidadeFornecedorCadastro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,11 +241,15 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
                         .addComponent(txtBairroFornecedorCadastro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputBairroFornecedorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addComponent(numeroLoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(painelPrincipalFornecedorCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvarFornecedorCadastro)
                     .addComponent(botaoLimparFornecedorCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(117, 117, 117))
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,23 +273,79 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
     }// </editor-fold>                        
 
     private void inputCepFornecedorCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-    }
-   
+        // TODO add your handling code here:
+    }                                                          
+
     private void botaoSalvarFornecedorCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                              
+    	String bairro;
+    	String cep;
+    	String preco;
+    	int nmFornecedor;
+    	String numero;
+    	String cidade;
+    	String data;
+    	String email;
+    	String nome;
+    	String cnpj;
+    	String telefone;
+    	String estado;
+    	
+    	try {
+    		bairro = inputBairroFornecedorCadastro.getText();
+
+    		cep = inputCepFornecedorCadastro.getText();    		
+
+    		numero = inputNumeroFornecedorCadastro.getText();
+    		nmFornecedor = Integer.parseInt(numero);
+    		
+    		cidade = inputCidadeFornecedorCadastro.getText();
+    		
+    		data = inputDataFornecedorCadastro.getText();
+    		
+    		email = inputEmailFornecedorCadastro.getText();
+    		
+    		nome  = inputNomeFornecedorCadastro.getText();
+    		
+    		cnpj = inputcnpjFornecedorCadastro.getText();
+    		
+    		telefone = inputTelefoneFornecedorCadastro.getText();
+    		
+            estado = (String) inputEstadoFornecedorCadastro.getSelectedItem();
+
+            ConnectionDB.Conectar();
+            String sql = "insert into usuario_table(nome_fornecedor, cnpj_fornecedor, email_fornecedor, telefone_fornecedor, cep_fornecedor, cidade_fornecedor, bairro_fornecedor, estado_fornecedor, numero_loja_fornecedor}) values(?,?,?,?,?,?,?,?,?);";
+            PreparedStatement stm = ConnectionDB.preparedStament(sql);
+            stm.setInt(1, nmFornecedor);
+            stm.setString(2, cnpj);
+            stm.setString(3, email);
+            stm.setString(4, telefone);
+            stm.setString(5, cep);
+            stm.setString(6, cidade);
+            stm.setString(7, bairro);
+            stm.setString(8, estado);
+            ConnectionDB.runPreparedStatment(stm);
+            ConnectionDB.Desconectar();
+
+        
+    	}catch(NumberFormatException e) {
+    		System.out.println(e);
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
     
-    }
+    }                                                             
 
     private void botaoLimparFornecedorCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                              
     	inputBairroFornecedorCadastro.setText("");
-    	inputCepFornecedorCadastro.setText("");
+    	inputCepFornecedorCadastro.setText(""); // string
     	inputCidadeFornecedorCadastro.setText("");
-    	inputDataFornecedorCadastro.setText("");
+    	inputDataFornecedorCadastro.setText(""); // string
     	inputEmailFornecedorCadastro.setText("");
     	inputNomeFornecedorCadastro.setText("");
-    	inputNumeroFornecedorCadastro.setText("");
-    	inputRgFornecedorCadastro.setText("");
-    	inputTelefoneFornecedorCadastro.setText("");
-    }                                                             
+    	inputNumeroFornecedorCadastro.setText(""); // integer
+    	inputcnpjFornecedorCadastro.setText(""); // string
+    	inputTelefoneFornecedorCadastro.setText(""); //string
+    	}                                                             
 
 
     // Variables declaration - do not modify                     
@@ -288,10 +359,12 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> inputEstadoFornecedorCadastro;
     private javax.swing.JTextField inputNomeFornecedorCadastro;
     private javax.swing.JFormattedTextField inputNumeroFornecedorCadastro;
-    private javax.swing.JFormattedTextField inputRgFornecedorCadastro;
+    private javax.swing.JFormattedTextField inputcnpjFornecedorCadastro;
     private javax.swing.JFormattedTextField inputTelefoneFornecedorCadastro;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField numeroLoja;
     private javax.swing.JPanel painelPrincipalFornecedorCadastro;
     private javax.swing.JLabel txtBairroFornecedorCadastro;
     private javax.swing.JLabel txtCepFornecedorCadastro;
@@ -301,7 +374,7 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtEstadoFornecedorCadastro;
     private javax.swing.JLabel txtNomeFornecedorCadastro;
     private javax.swing.JLabel txtNumeroLojaFornecedorCadastro;
-    private javax.swing.JLabel txtRgFornecedorCadastro;
+    private javax.swing.JLabel txtcnpjFornecedorCadastro;
     private javax.swing.JLabel txtTelFornecedorCadastro;
     // End of variables declaration                   
 }

@@ -4,21 +4,30 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import Connections.ConnectionDB;
+import interfaces.InterfacePrincipal;
+
 public class Main {
-	 public static void main(String args[]) throws SQLException {
+	
+	
+	 public static void main(String[] args) throws SQLException {
+		 
+		 // Inicializar interfaces
+		 new InterfacePrincipal().setVisible(true);		 
+		 
+		 // Metodos de exclusão e modificação estão via console abaixo o resto as interfaces fazem.
+		 Funcionario f = new Funcionario("1122330","Teste","123456",Cargos.GERENTE,Categoria.NENHUMA);
+		 f.requisitarExclusaoUsuario(new Usuario() );
+		 f.requisitarAlteracaoUsuario(new Usuario() );
+		 f.requisitarExclusaoProduto(new Produtos() );
+		 f.requisitarAlteracaoProduto(new Produtos() );
+		 
+		 // Relatorios do banco :
+		 Relatorios.estoqueInteiro();
+		 Relatorios.devolucoesFornecedor();
+		 Relatorios.numerosFornecedores("SC");
+		 Relatorios.recebidosFornecedor();
 		 Relatorios.usuariosCidade("Florianopolis");
 	 }
-//		 File fileFuncionarios = new File("C:\\Users\\Pichau\\Documents\\ArquivosTesteFileWritter\\Teste.txt");
-//		 try {
-//			fileFuncionarios.createNewFile();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		 	Funcionario f = new Funcionario("1122330","Gui","123456",Cargo.ASSISTENTE,Categoria.BEBIDA);
-//		 	Funcionario h = new Funcionario("111333", "Joana", "aaa111", Cargo.ASSISTENTE, Categoria.DESTILADOS);
-//		 	Gerente g = new Gerente(null, null, null, null);
-//		 	g.incluirFuncionario(f, fileFuncionarios);
-//		 	g.incluirFuncionario(h, fileFuncionarios);
-//	    }
-	
+
 }

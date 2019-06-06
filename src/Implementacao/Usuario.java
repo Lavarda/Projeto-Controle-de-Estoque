@@ -15,6 +15,10 @@ public class Usuario extends Pessoa{
 	private String dataFormatada = java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(dataAtual);
 	
 	
+	public Usuario() {
+		
+	}
+		
 	public Usuario(String nome,String dataNascimento,String email,String cpf,
 				   String rg,String numeroCelular,
 				   String endereco, String sexo, String estadoCivil) 
@@ -44,16 +48,16 @@ public class Usuario extends Pessoa{
 	}
 		
 	public void modificaUsuario(){
-		String sql = "UPDATE cadastro_usuario SET nome_usuario=?, dt_nascimento_usuario=?,email_usuario=?,cpf_usuario=?"
-				+ "rg_usuario=? WHERE cpf_usuario=?";		
+		String sql = "UPDATE usuario_table SET email_usuario=? WHERE cpf_usuario=?";		
 		try {
 			ConnectionDB.Conectar();
+			System.out.println("Cpf que deseja alterar o email:");
+			String cpf = s.nextLine(); 
+			System.out.println("Novo email:");
+			String email = s.nextLine(); 
 			PreparedStatement stm = ConnectionDB.preparedStament(sql);
-			stm.setString(1, this.getNome());
-			stm.setString(2,this.getDataNascimento());
-			stm.setString(3,this.getEmail());
-			stm.setString(4,this.getCpf());
-			stm.setString(5, this.getRg());
+			stm.setString(1, email);
+			stm.setString(2, cpf);
 			ConnectionDB.runPreparedStatment(stm);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,11 +67,14 @@ public class Usuario extends Pessoa{
 	}
 	
 	public void deletarUsuario(){		
-		String sql = "delete from cadastro_usuario where nome_usuario = ?";
+		String sql = "delete from usuario_table where nome_usuario = ?";
 		try {
 			ConnectionDB.Conectar();
+			System.out.println("Nome do usuario que deseja excluir:");
+			String nome = s.nextLine(); 
 			PreparedStatement stm = ConnectionDB.preparedStament(sql);
-			stm.setString(1, this.getNome());
+			stm.setString(1, nome);
+			ConnectionDB.runPreparedStatment(stm);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{

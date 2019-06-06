@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import Connections.ConnectionDB;
 
 public class Funcionario extends Administrador{
-	//Somente para realizar commit esse comentário
+	//Somente para realizar commit esse comentï¿½rio
 	public Funcionario(String matricula, String nome, String senha, Cargos cargo, Categoria categoria) {
 		super(matricula, nome, senha, cargo, categoria);
 	}
@@ -62,7 +62,7 @@ public class Funcionario extends Administrador{
 		return codFuncionario;
 		}catch(SQLException e){
 			e.printStackTrace();
-			System.err.println("Código do funcionario não foi encontrado!!!");
+			System.err.println("Cï¿½digo do funcionario nï¿½o foi encontrado!!!");
 			return 0;
 		}finally {
 			ConnectionDB.Desconectar();
