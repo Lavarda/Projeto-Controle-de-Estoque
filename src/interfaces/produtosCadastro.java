@@ -19,7 +19,7 @@ public class produtosCadastro extends javax.swing.JInternalFrame {
         this.setClosable(true);
         this.setResizable(true);
         this.setIconifiable(true);
-        this.setTitle("Cadastro de produtos");
+        this.setTitle("Cadastro de Clientes");
         this.setVisible(true);
     }
 
@@ -43,10 +43,8 @@ public class produtosCadastro extends javax.swing.JInternalFrame {
         inputNomeProduto = new javax.swing.JTextField();
         inputFornecedor = new javax.swing.JTextField();
         inputPreco = new javax.swing.JFormattedTextField();
-        painelAdicionarImagemProduto = new javax.swing.JPanel();
-        txtAdicionarImagemProduto = new javax.swing.JLabel();
-        inputCategoria = new javax.swing.JTextField();
         txtCategoria = new javax.swing.JLabel();
+        dropDown = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,89 +100,70 @@ public class produtosCadastro extends javax.swing.JInternalFrame {
             }
         });
 
-        painelAdicionarImagemProduto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txtAdicionarImagemProduto.setText("Adicionar Imagem Produto");
-
-        javax.swing.GroupLayout painelAdicionarImagemProdutoLayout = new javax.swing.GroupLayout(painelAdicionarImagemProduto);
-        painelAdicionarImagemProduto.setLayout(painelAdicionarImagemProdutoLayout);
-        painelAdicionarImagemProdutoLayout.setHorizontalGroup(
-            painelAdicionarImagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelAdicionarImagemProdutoLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(txtAdicionarImagemProduto)
-                .addContainerGap(61, Short.MAX_VALUE))
-        );
-        painelAdicionarImagemProdutoLayout.setVerticalGroup(
-            painelAdicionarImagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelAdicionarImagemProdutoLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(txtAdicionarImagemProduto)
-                .addContainerGap(121, Short.MAX_VALUE))
-        );
-
         txtCategoria.setText("Categoria");
+
+        dropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AGUA POTAVEL", "BEBIDAS A BASE DE ANIS", "BEBIDAS ALCOOLICAS", "BEBIDAS DE SOJA", "BEBIDAS ENERGETICAS", "BEBIDAS ESPORTIVAS", "CAFES", "CHAS" }));
 
         javax.swing.GroupLayout painelPrincipalProdutosCadastroLayout = new javax.swing.GroupLayout(painelPrincipalProdutosCadastro);
         painelPrincipalProdutosCadastro.setLayout(painelPrincipalProdutosCadastroLayout);
         painelPrincipalProdutosCadastroLayout.setHorizontalGroup(
             painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalProdutosCadastroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalProdutosCadastroLayout.createSequentialGroup()
-                        .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(inputCategoria)
-                            .addComponent(inputPreco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                            .addComponent(inputFornecedor, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFornecedor, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputNomeProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                            .addComponent(txtPreco, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(painelAdicionarImagemProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalProdutosCadastroLayout.createSequentialGroup()
-                                .addComponent(botaoLimparProdutosCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoSalvarProdutosCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)))
-                        .addGap(37, 37, 37))
+                .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
-                        .addComponent(txtCategoria)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botaoLimparProdutosCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoSalvarProdutosCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
+                        .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtNomeProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(inputNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPreco)
+                            .addComponent(inputPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputFornecedor)
+                            .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
+                                .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCategoria)
+                                    .addComponent(txtFornecedor))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(dropDown, 0, 1, Short.MAX_VALUE))))
+                .addGap(216, 216, 216))
         );
         painelPrincipalProdutosCadastroLayout.setVerticalGroup(
             painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(txtNomeProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(txtFornecedor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtPreco)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(painelAdicionarImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(txtCategoria)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
+                        .addComponent(txtNomeProduto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botaoLimparProdutosCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botaoSalvarProdutosCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(186, Short.MAX_VALUE))
+                            .addComponent(inputNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtFornecedor)))
+                .addGap(35, 35, 35)
+                .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
+                        .addComponent(txtPreco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(inputPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(painelPrincipalProdutosCadastroLayout.createSequentialGroup()
+                        .addComponent(txtCategoria)
+                        .addGap(34, 34, 34)))
+                .addGap(59, 59, 59)
+                .addGroup(painelPrincipalProdutosCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoLimparProdutosCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoSalvarProdutosCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,13 +186,8 @@ public class produtosCadastro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>                        
 
-    private void inputPrecoActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
     private void botaoLimparProdutosCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                            
     	botaoSalvarProdutosCadastro.setText("");
-    	inputCategoria.setText("");
     	inputFornecedor.setText("");
     	inputNomeProduto.setText("");
     	inputPreco.setText("");
@@ -225,8 +199,8 @@ public class produtosCadastro extends javax.swing.JInternalFrame {
     	String nomeProduto;
     	String preco;
 
-    	try {
-    		categoria = inputCategoria.getText();
+    	
+            categoria = (String) dropDown.getSelectedItem();
     		System.out.println(categoria);
 
     		fornecedor = inputFornecedor.getText();
@@ -237,27 +211,22 @@ public class produtosCadastro extends javax.swing.JInternalFrame {
 
     		preco = inputPreco.getText();
     		System.out.println(preco);
-
-            
-    	}catch(NumberFormatException e) {
-    		
+           
     	}
-    	
-    }                                                           
-
+    private void inputPrecoActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                                                                                  
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton botaoLimparProdutosCadastro;
     private javax.swing.JButton botaoSalvarProdutosCadastro;
-    private javax.swing.JTextField inputCategoria;
+    private javax.swing.JComboBox<String> dropDown;
     private javax.swing.JTextField inputFornecedor;
     private javax.swing.JTextField inputNomeProduto;
     private javax.swing.JFormattedTextField inputPreco;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JPanel painelAdicionarImagemProduto;
     private javax.swing.JPanel painelPrincipalProdutosCadastro;
-    private javax.swing.JLabel txtAdicionarImagemProduto;
     private javax.swing.JLabel txtCategoria;
     private javax.swing.JLabel txtFornecedor;
     private javax.swing.JLabel txtNomeProduto;

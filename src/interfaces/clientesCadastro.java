@@ -63,6 +63,10 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
         inputTelClientesCadastro = new javax.swing.JFormattedTextField();
         inputCepClientesCadastro = new javax.swing.JFormattedTextField();
         inputRgClientesCadastro = new javax.swing.JFormattedTextField();
+        inputBairroClientesCadastro = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        inputNumeroResidencialClienteCadastro = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,6 +148,11 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
         txtEstadoCivilClientesCadastro.setText("Estado Civil");
 
         comboBoxEstadoClientesCadastro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre (AC)", "Alagoas (AL)", "Amapá (AP)", "Amazonas (AM)", "Bahia (BA)", "Ceará (CE)", "Distrito Federal (DF)", "Espírito Santo (ES)", "Goiás (GO)", "Maranhão (MA)", "Mato Grosso (MT)", "Mato Grosso do Sul (MS)", "Minas Gerais (MG)", "Pará (PA) ", "Paraíba (PB)", "Paraná (PR)", "Pernambuco (PE)", "Piauí (PI)", "Rio de Janeiro (RJ)", "Rio Grande do Norte (RN)", "Rio Grande do Sul (RS)", "Rondônia (RO)", "Roraima (RR)", "Santa Catarina (SC)", "São Paulo (SP)", "Sergipe (SE)", "Tocantins (TO)" }));
+        comboBoxEstadoClientesCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxEstadoClientesCadastroActionPerformed(evt);
+            }
+        });
 
         try {
             inputDataClientes.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -174,48 +183,61 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Bairro");
+
+        jLabel2.setText("Numero residencial");
+
         javax.swing.GroupLayout painelPrincipalClientesCadastroLayout = new javax.swing.GroupLayout(painelPrincipalClientesCadastro);
         painelPrincipalClientesCadastro.setLayout(painelPrincipalClientesCadastroLayout);
         painelPrincipalClientesCadastroLayout.setHorizontalGroup(
             painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPrincipalClientesCadastroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelPrincipalClientesCadastroLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoLimparClientesCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botaoSalvarClientesCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputBairroClientesCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(painelPrincipalClientesCadastroLayout.createSequentialGroup()
-                        .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtRgClientesCadastro)
-                            .addComponent(txtEmailClientesCadastro)
-                            .addComponent(txtClientesCadastro)
-                            .addComponent(txtDataClientesCadastro)
-                            .addComponent(inputDataClientes)
-                            .addComponent(inputEmailClienteCadastro)
-                            .addComponent(txtCpfClientesCadastro)
-                            .addComponent(inputNomeClienteCadastro)
-                            .addComponent(txtTelClientesCadastro)
-                            .addComponent(inputCpfClientesCadastro)
-                            .addComponent(inputTelClientesCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(inputRgClientesCadastro))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCidadeClientesCadastro)
-                                .addComponent(txtEstadoClientesCadastro)
-                                .addComponent(txtCepClientesCadastro)
-                                .addComponent(txtRuaClientesCadastro)
-                                .addComponent(txtSexoClientesCadastro)
-                                .addComponent(inputRuaClientesCadastro)
-                                .addComponent(comboBoxEstadoClientesCadastro, 0, 1, Short.MAX_VALUE)
-                                .addComponent(inputCidadeClientesCadastro)
-                                .addComponent(comboBoxSexoClientesCadastro, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtEstadoCivilClientesCadastro)
-                                .addComponent(comboBoxEstadoCivilClientesCadastro, 0, 200, Short.MAX_VALUE))
-                            .addComponent(inputCepClientesCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(painelPrincipalClientesCadastroLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(botaoLimparClientesCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(botaoSalvarClientesCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelPrincipalClientesCadastroLayout.createSequentialGroup()
+                                .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtRgClientesCadastro)
+                                    .addComponent(txtEmailClientesCadastro)
+                                    .addComponent(txtClientesCadastro)
+                                    .addComponent(txtDataClientesCadastro)
+                                    .addComponent(inputDataClientes)
+                                    .addComponent(inputEmailClienteCadastro)
+                                    .addComponent(txtCpfClientesCadastro)
+                                    .addComponent(inputNomeClienteCadastro)
+                                    .addComponent(txtTelClientesCadastro)
+                                    .addComponent(inputCpfClientesCadastro)
+                                    .addComponent(inputTelClientesCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(inputRgClientesCadastro))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCidadeClientesCadastro)
+                                    .addComponent(txtEstadoClientesCadastro)
+                                    .addComponent(txtCepClientesCadastro)
+                                    .addComponent(txtRuaClientesCadastro)
+                                    .addComponent(txtSexoClientesCadastro)
+                                    .addComponent(inputRuaClientesCadastro)
+                                    .addComponent(comboBoxEstadoClientesCadastro, 0, 1, Short.MAX_VALUE)
+                                    .addComponent(inputCidadeClientesCadastro)
+                                    .addComponent(comboBoxSexoClientesCadastro, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtEstadoCivilClientesCadastro)
+                                    .addComponent(comboBoxEstadoCivilClientesCadastro, 0, 200, Short.MAX_VALUE)
+                                    .addComponent(inputCepClientesCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(inputNumeroResidencialClienteCadastro))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(painelPrincipalClientesCadastroLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         painelPrincipalClientesCadastroLayout.setVerticalGroup(
             painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,11 +292,19 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
                 .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxEstadoCivilClientesCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputTelClientesCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
+                .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputBairroClientesCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputNumeroResidencialClienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(painelPrincipalClientesCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvarClientesCadastro)
                     .addComponent(botaoLimparClientesCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(25, 25, 25))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -290,7 +320,7 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelPrincipalClientesCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(painelPrincipalClientesCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -306,15 +336,16 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
     }                                                        
 
     private void botaoLimparClientesCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        inputCepClientesCadastro.setText("");
-        inputCidadeClientesCadastro.setText("");
-        inputCpfClientesCadastro.setText("");
-        inputDataClientes.setText("");
-        inputEmailClienteCadastro.setText("");
-        inputNomeClienteCadastro.setText("");
-        inputRgClientesCadastro.setText("");
-        inputRuaClientesCadastro.setText("");
-        inputTelClientesCadastro.setText("");        
+    inputCepClientesCadastro.setText("");
+    inputCidadeClientesCadastro.setText("");
+    inputCpfClientesCadastro.setText("");
+    inputDataClientes.setText("");
+    inputEmailClienteCadastro.setText("");
+    inputNomeClienteCadastro.setText("");
+    inputRgClientesCadastro.setText("");
+    inputRuaClientesCadastro.setText("");
+    inputTelClientesCadastro.setText("");
+        
     }                                                           
 
     private void botaoSalvarClientesCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                            
@@ -323,14 +354,6 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
     	String email;
     	String cpfString;
     	String sexo;
-    	String rgString;
-    	String cidade;
-    	String estado;
-    	String cepString;
-    	String rua;
-    	String estadoCivil;
-    	String telefone;
-    	int cpf;
     	
     	try {
     		nome = inputNomeClienteCadastro.getText();
@@ -344,37 +367,9 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
     		
     		cpfString = inputCpfClientesCadastro.getText();
     		System.out.println(cpfString);
-    		
-    		rgString = inputRgClientesCadastro.getText();
-    		System.out.println(rgString);
-
-    		cidade = inputCidadeClientesCadastro.getText();
-    		System.out.println(cidade);
-    		
-            estado = (String) comboBoxEstadoClientesCadastro.getSelectedItem();
-    		System.out.println(estado);
-    		
-    		cepString = inputCepClientesCadastro.getText();
-    		System.out.println(cepString);
-    		
-    		rua = inputRuaClientesCadastro.getText();
-    		System.out.println(rua);
-    		
-    		telefone = inputTelClientesCadastro.getText();
-    		System.out.println(telefone);
-    		
-            estadoCivil = (String) comboBoxEstadoCivilClientesCadastro.getSelectedItem();
-    		System.out.println(estadoCivil);
-    		
-    		/*
-    		cpfString = inputCpfClientesCadastro.getText();
-    		cpf = Integer.parseInt(cpfString);
-    		System.out.println(cpf);
-    		*/
-            
-            sexo = (String) comboBoxSexoClientesCadastro.getSelectedItem();
-            System.out.println(sexo);
-            
+                
+                sexo = (String) comboBoxSexoClientesCadastro.getSelectedItem();
+                System.out.println(sexo);
     	}catch(NumberFormatException e) {
     		
     	}
@@ -385,6 +380,10 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
 
     }                                                            
 
+    private void comboBoxEstadoClientesCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                               
+        // TODO add your handling code here:
+    }                                                              
+
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton botaoLimparClientesCadastro;
@@ -392,15 +391,19 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> comboBoxEstadoCivilClientesCadastro;
     private javax.swing.JComboBox<String> comboBoxEstadoClientesCadastro;
     private javax.swing.JComboBox<String> comboBoxSexoClientesCadastro;
+    private javax.swing.JTextField inputBairroClientesCadastro;
     private javax.swing.JFormattedTextField inputCepClientesCadastro;
     private javax.swing.JTextField inputCidadeClientesCadastro;
     private javax.swing.JFormattedTextField inputCpfClientesCadastro;
     private javax.swing.JFormattedTextField inputDataClientes;
     private javax.swing.JTextField inputEmailClienteCadastro;
     private javax.swing.JTextField inputNomeClienteCadastro;
+    private javax.swing.JTextField inputNumeroResidencialClienteCadastro;
     private javax.swing.JFormattedTextField inputRgClientesCadastro;
     private javax.swing.JTextField inputRuaClientesCadastro;
     private javax.swing.JFormattedTextField inputTelClientesCadastro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel painelPrincipalClientesCadastro;

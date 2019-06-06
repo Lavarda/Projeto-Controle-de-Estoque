@@ -5,6 +5,8 @@
  */
 package interfaces;
 
+import Implementacao.Produtos;
+
 /**
  *
  * @author Dinopc
@@ -260,20 +262,66 @@ public class fornecedorCadastro extends javax.swing.JInternalFrame {
     private void inputCepFornecedorCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                           
     }
    
-    private void botaoSalvarFornecedorCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                              
+    private void botaoSalvarFornecedorCadastroActionPerformed(java.awt.event.ActionEvent evt) {   
+    	String bairro;
+    	String cep;
+    	String preco;
+    	int nmFornecedor;
+    	String numero;
+    	String cidade;
+    	String data;
+    	String email;
+    	String nome;
+    	String rg;
+    	String telefone;
+    	
+    	try {
+    		bairro = inputBairroFornecedorCadastro.getText();
+    		System.out.println(bairro);
+            
+
+    		cep = inputCepFornecedorCadastro.getText();
+    		System.out.println(cep); 
+    		
+
+    		numero = inputNumeroFornecedorCadastro.getText();
+    		nmFornecedor = Integer.parseInt(numero);
+    	
+    		
+    		cidade = inputCidadeFornecedorCadastro.getText();
+    		System.out.println(cidade);
+    		
+    		data = inputDataFornecedorCadastro.getText();
+    		System.out.println(data);
+    		
+    		email = inputEmailFornecedorCadastro.getText();
+    		System.out.println(email);
+    		
+    		nome  = inputNomeFornecedorCadastro.getText();
+    		System.out.println(nome);
+    		
+    		rg = inputRgFornecedorCadastro.getText();
+    		System.out.println(rg);
+    		
+    		telefone = inputTelefoneFornecedorCadastro.getText();
+    		System.out.println(telefone);
+
+    	}catch(NumberFormatException e) {
+    		
+    	}
     
     }
 
     private void botaoLimparFornecedorCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                              
     	inputBairroFornecedorCadastro.setText("");
-    	inputCepFornecedorCadastro.setText("");
+    	inputCepFornecedorCadastro.setText(""); // string
     	inputCidadeFornecedorCadastro.setText("");
-    	inputDataFornecedorCadastro.setText("");
+    	inputDataFornecedorCadastro.setText(""); // string
     	inputEmailFornecedorCadastro.setText("");
     	inputNomeFornecedorCadastro.setText("");
-    	inputNumeroFornecedorCadastro.setText("");
-    	inputRgFornecedorCadastro.setText("");
-    	inputTelefoneFornecedorCadastro.setText("");
+    	inputNumeroFornecedorCadastro.setText(""); // integer
+    	inputRgFornecedorCadastro.setText(""); // string
+    	inputTelefoneFornecedorCadastro.setText(""); //string
     }                                                             
 
 
