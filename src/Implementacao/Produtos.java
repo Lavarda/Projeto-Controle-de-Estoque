@@ -14,10 +14,14 @@ public class Produtos {
 	
     private String nomeProduto;
     private double preco;
-    private Categoria categoria;
+    private String categoria;
     static ConnectionDB db = new ConnectionDB();
+    
+    public Produtos() {
+    	
+    }
 
-    public Produtos(String nomeProduto, double preco, Categoria categoria) {
+    public Produtos(String nomeProduto, double preco, String categoria) {
         this.nomeProduto = nomeProduto;
         this.preco = preco;
         this.categoria = categoria;
@@ -39,11 +43,11 @@ public class Produtos {
         this.preco = preco;
     }
 
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return this.categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
     
@@ -58,8 +62,8 @@ public class Produtos {
         PreparedStatement stm = ConnectionDB.preparedStament(sql);
         stm.setString(1, this.getNomeProduto());
         stm.setDouble(2, this.getPreco());
-        stm.setInt(3,this.getCategoria().getCodCategoria());
-        ConnectionDB.runPreparedStatment(stm);
+        stm.setString(3,this.getCategoria());
+        ConnectionDB.runPreparedStatment(stm); 
 		JOptionPane.showMessageDialog(null, "Produto cadastrado com exito.");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Erro ao inserir dados \nErro: "+ex);
@@ -74,7 +78,7 @@ public class Produtos {
     		PreparedStatement stm = ConnectionDB.preparedStament(sql);
     		stm.setString(1, this.getNomeProduto());
     		stm.setDouble(2, this.getPreco());
-    		stm.setInt(3, this.getCategoria().getCodCategoria());
+    		stm.setString(3, this.getCategoria());
     		stm.setString(4, this.nomeProduto);
     		ConnectionDB.runPreparedStatment(stm);
     		JOptionPane.showMessageDialog(null, "Produto alterado com exito.");
@@ -111,5 +115,17 @@ public class Produtos {
     		}catch(SQLException ex) {
     			JOptionPane.showMessageDialog(null, "Erro ao listar dados \nErro: "+ex);
     		}
+    }
+    
+    public void teste(String nome,String categoria,Double preco,String descricao) throws SQLException {
+    	ConnectionDB.Conectar();
+    	String sql = "insert into produtos(nome_produto,categoria_produto) values (?,?)";
+    	PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    	stm.setString(1, nome);
+    	//stm.setDouble(2, preco);
+    	stm.setString(3, categoria);
+    	ConnectionDB.runPreparedStatment(stm);
+    	System.out.println("Testes" + nome + " " + categoria + " " + preco + " " + descricao);
+    	ConnectionDB.Desconectar();
     }
 }

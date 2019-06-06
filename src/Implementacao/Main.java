@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import Connections.ConnectionDB;
+
 public class Main {
-	 public static void main(String args[]) throws SQLException {
+	 public static void main(String[] args) throws SQLException {
 		 Relatorios.usuariosCidade("Florianopolis");
 	 }
 //		 File fileFuncionarios = new File("C:\\Users\\Pichau\\Documents\\ArquivosTesteFileWritter\\Teste.txt");

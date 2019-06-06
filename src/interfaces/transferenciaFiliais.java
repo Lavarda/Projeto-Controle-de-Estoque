@@ -74,7 +74,7 @@ public class transferenciaFiliais extends javax.swing.JInternalFrame {
         painelPrincipalCadastroCliente.setMinimumSize(new java.awt.Dimension(620, 500));
         painelPrincipalCadastroCliente.setPreferredSize(new java.awt.Dimension(620, 500));
 
-        txtProdutoCadastroCliente.setText("Nome produto");
+        txtProdutoCadastroCliente.setText("Cod produto");
 
         txtQuantiaCadastroCliente.setText("Quantia");
 
@@ -113,7 +113,7 @@ public class transferenciaFiliais extends javax.swing.JInternalFrame {
             }
         });
 
-        txtFilialCadastroCliente.setText("Filial");
+        txtFilialCadastroCliente.setText("Cod Filial");
 
         javax.swing.GroupLayout painelPrincipalCadastroClienteLayout = new javax.swing.GroupLayout(painelPrincipalCadastroCliente);
         painelPrincipalCadastroCliente.setLayout(painelPrincipalCadastroClienteLayout);

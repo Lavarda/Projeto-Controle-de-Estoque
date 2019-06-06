@@ -5,6 +5,8 @@
  */
 package interfaces;
 
+import Implementacao.Produtos;
+
 /**
  *
  * @author Dinopc
@@ -200,22 +202,29 @@ public class adicionarProdutoEstoque extends javax.swing.JInternalFrame {
     private void botaoSalvarAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                                            
     	String nomeProduto;
     	String categoria;
-    	String quantidade;
+    	String preco;
+    	double precoDouble;
     	String descricao;
     	try {
     		nomeProduto = inputNomeProduto.getText();
-    		System.out.println(nomeProduto);
+    		//System.out.println(nomeProduto);
             
 
     		categoria = inputCategoria.getText();
-    		System.out.println(categoria);
+    		//System.out.println(categoria);
     		
 
-    		quantidade= inputQuantidadeProduto.getText();
-    		System.out.println(quantidade);
+    		preco= inputQuantidadeProduto.getText();
+    		precoDouble = Double.parseDouble(preco);
+    	
     		
     		descricao = jTextArea1.getText();
-    		System.out.println(descricao);
+    		//System.out.println(descricao);
+    		
+    		Produtos p = new Produtos(nomeProduto,precoDouble,categoria);
+    		System.out.println("Inserindo produto...");
+    		p.inserirProduto();
+    		
     		
     	}catch(NumberFormatException e) {
     		
