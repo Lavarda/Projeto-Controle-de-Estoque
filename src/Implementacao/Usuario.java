@@ -9,7 +9,8 @@ import java.util.*;
 import Connections.ConnectionDB;
 
 public class Usuario extends Pessoa{
-	//Somente para realizar commit esse comentário
+	
+	private Scanner s = new Scanner(System.in);
 	private java.util.Date dataAtual = new Date();
 	private String dataFormatada = java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(dataAtual);
 	
@@ -93,10 +94,8 @@ public class Usuario extends Pessoa{
 			ConnectionDB.Desconectar();
 		}	
 	}
-	
-//VERIFICAR ESTE METODO POIS NÃO CONDIZ COM A PROPOSTA DESTA CLASSE
-	
-	/*public void pesquisarProduto() throws SQLException{
+		
+	public void pesquisarProduto() throws SQLException{
 		ConnectionDB.Conectar();
         
         System.out.println("Digite o nome do produto que deseja pesquisar: ");
@@ -115,5 +114,5 @@ public class Usuario extends Pessoa{
         
         ConnectionDB.Desconectar();
         
-	}*/	
+	}	
 }

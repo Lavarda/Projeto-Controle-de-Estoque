@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import Connections.ConnectionDB;
 
 public class Gerente extends Administrador{
-	//Somente para realizar commit esse comentário
+	
 	public Gerente(String matricula, String nome, String senha,Categoria categoria) {
 		super(matricula, nome, senha,Cargos.GERENTE, categoria);
 	}
