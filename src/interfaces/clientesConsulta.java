@@ -1,5 +1,11 @@
 package interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+
 public class clientesConsulta extends javax.swing.JInternalFrame {
 
     public clientesConsulta() {
@@ -39,7 +45,7 @@ public class clientesConsulta extends javax.swing.JInternalFrame {
         setTitle("Consulta Clientes");
         setMaximumSize(new java.awt.Dimension(620, 550));
         setMinimumSize(new java.awt.Dimension(620, 550));
-        setName(""); // NOI18N
+        setName(""); 
         setPreferredSize(new java.awt.Dimension(620, 550));
         setVisible(false);
 
@@ -132,10 +138,31 @@ public class clientesConsulta extends javax.swing.JInternalFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }
 
     private void botaoPesquisaClientesConsultaActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-        //defaultTableModel tabelaCliente  = (defaultTableModel) tabelaClientesConsulta.getModel();        
+        //defaultTableModel tabelaCliente  = (defaultTableModel) tabelaClientesConsulta.getModel();
+    	String busca;
+    	try {
+    		busca = inputPesquisaClientesConsulta.getText();
+    		
+    		ConnectionDB.Conectar();
+    		String sql = "select nome_usuario,email_usuario,cpf_usuario,dt_nascimento,rg_usuario from usuarios_table where nome_usuario = ?";
+    		PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    		stm.setString(1, busca);
+    		ResultSet result = ConnectionDB.runPreparedSelect(stm);
+    		
+    		while ( result.next() ) {
+    			System.out.println(result.getString("nome_usuario") + " " + result.getString("email_usuario") + " " + result.getString("cpf_usuario") + " " + result.getString("dt_nascimento") + " " + result.getString("rg_usuario"));
+    		}
+    		
+    		ConnectionDB.Desconectar();
+    	} catch (NumberFormatException e){
+    		System.out.println(e);
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }                                                             
 
                   

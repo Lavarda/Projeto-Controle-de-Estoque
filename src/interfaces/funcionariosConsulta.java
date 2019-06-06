@@ -1,5 +1,11 @@
 package interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+
 public class funcionariosConsulta extends javax.swing.JInternalFrame {
 
     public funcionariosConsulta() {
@@ -135,7 +141,28 @@ public class funcionariosConsulta extends javax.swing.JInternalFrame {
     }                 
 
     private void botaoPesquisaClientesConsultaActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-        //defaultTableModel tabelaCliente  = (defaultTableModel) tabelaClientesConsulta.getModel();        
+        //defaultTableModel tabelaCliente  = (defaultTableModel) tabelaClientesConsulta.getModel();   
+       	String busca;
+    	try {
+    		busca = inputPesquisaClientesConsulta.getText();
+    		
+    		ConnectionDB.Conectar();
+    		String sql = "select cod_categoria,nome_funcionario,matricula_funcionario from funcionarios where nome_funcionario = ?";
+    		PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    		stm.setString(1, busca);
+    		ResultSet result = ConnectionDB.runPreparedSelect(stm);
+    		
+    		while ( result.next() ) {
+    			System.out.println(result.getString("cod_categoria") + " " + result.getString("nome_funcionario") + " " + result.getString("matricula_funcionario"));
+    		}
+    		
+    		ConnectionDB.Desconectar();
+    	} catch (NumberFormatException e){
+    		System.out.println(e);
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }                                                             
 
     private javax.swing.JButton botaoPesquisaClientesConsulta;

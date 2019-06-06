@@ -195,7 +195,7 @@ public class adicionarProdutoEstoque extends javax.swing.JInternalFrame {
     	try {
     		nomeProduto = inputNomeProduto.getText();
     		categoria = inputCategoria.getText();
-    		
+    		 
 			switch ( categoria ) {
     			case "ACHOCOLATADOS":
     				new_categoria = Categoria.ACHOCOLATADOS;

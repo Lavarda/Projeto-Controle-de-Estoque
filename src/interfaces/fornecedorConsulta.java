@@ -1,5 +1,11 @@
 package interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+
 public class fornecedorConsulta extends javax.swing.JInternalFrame {
 
     public fornecedorConsulta() {
@@ -135,7 +141,28 @@ public class fornecedorConsulta extends javax.swing.JInternalFrame {
     }
 
     private void botaoPesquisaFornecedorConsultaActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-        //defaultTableModel tabelaCliente  = (defaultTableModel) tabelaClientesConsulta.getModel();        
+        //defaultTableModel tabelaCliente  = (defaultTableModel) tabelaClientesConsulta.getModel(); 
+    	String busca;
+    	try {
+    		busca = inputPesquisaFornecedorConsulta.getText();
+    		
+    		ConnectionDB.Conectar();
+    		String sql = "select nome_fornecedor,cnpj_fornecedor,email_fornecedor from fornecedor where nome_fornecedor = ?";
+    		PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    		stm.setString(1, busca);
+    		ResultSet result = ConnectionDB.runPreparedSelect(stm);
+    		
+    		while ( result.next() ) {
+    			System.out.println(result.getString("nome_fornecedor") + " " + result.getString("cnpj_fornecedor") + " " + result.getString("email_fornecedor"));
+    		}
+    		
+    		ConnectionDB.Desconectar();
+    	} catch (NumberFormatException e){
+    		System.out.println(e);
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }                                                               
 
     private javax.swing.JButton botaoPesquisaFornecedorConsulta;

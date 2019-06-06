@@ -1,5 +1,11 @@
 package interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+import Implementacao.Transferencia;
+
 public class transferenciaFiliais extends javax.swing.JInternalFrame {
 
     public transferenciaFiliais() {
@@ -200,33 +206,31 @@ public class transferenciaFiliais extends javax.swing.JInternalFrame {
     }                                                        
 
     private void botaoSalvarAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        String quantia;
-    	String comentario;
+//        String quantia;
+//    	String comentario;
         String data;
-        String nomeFilial;
-        String nomeProduto;
+        String codFilial;
+        String codProduto;
 
     	try {
-    		
-    		quantia = inputQuantia.getText();
-    		System.out.println(quantia);
-        		
-    		comentario = inputAdicionarComentarioCadastroCliente.getText();
-    		System.out.println(comentario);
-    		
+   		
     		data = inputDataCadastroCliente.getText();
-    		System.out.println(data);
     		
-    		nomeFilial = inputFilialCadastroCliente.getText();
-    		System.out.println(nomeFilial);
+    		codFilial = inputFilialCadastroCliente.getText();
+    		int new_cod_filial = Integer.parseInt(codFilial);
+
+    		codProduto = inputNomeProdutoCadastroCliente.getText();
+    		int new_cod_produto = Integer.parseInt(codProduto);
     		
-    		nomeProduto = inputNomeProdutoCadastroCliente.getText();
-    		System.out.println(nomeProduto);
-    		
+    		Transferencia t = new Transferencia();
+    		t.transferirProdutoFilial(new_cod_produto, new_cod_filial, data);
     		
     	}catch(NumberFormatException e) {
     		
-    	}
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }                                                           
 
     private javax.swing.JButton botaoLimparAdicionarProduto;

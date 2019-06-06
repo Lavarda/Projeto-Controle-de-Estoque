@@ -1,5 +1,11 @@
 package interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+
 public class gerenciamentoFornecedor extends javax.swing.JInternalFrame {
   
     public gerenciamentoFornecedor() {
@@ -62,7 +68,7 @@ public class gerenciamentoFornecedor extends javax.swing.JInternalFrame {
 
         txtHorarioChegada.setText("Horario Chegada");
 
-        txtFornecedor.setText("Fornecedor");
+        txtFornecedor.setText("Cod Fornecedor");
 
         botaoLimparGerenciamentoFornecedor.setBackground(new java.awt.Color(254, 59, 55));
         botaoLimparGerenciamentoFornecedor.setText("Limpar");
@@ -86,9 +92,9 @@ public class gerenciamentoFornecedor extends javax.swing.JInternalFrame {
         inputComentario.setRows(5);
         scrollAdicionarProduto.setViewportView(inputComentario);
 
-        txtProduto.setText("Produto");
+        txtProduto.setText("Cod Produto");
 
-        txtQuantiaProduto.setText("Quantia Produtos");
+        txtQuantiaProduto.setText("Cod Usuario");
 
         try {
             inputHoraChegada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -210,31 +216,46 @@ public class gerenciamentoFornecedor extends javax.swing.JInternalFrame {
     	String horaChegada;
     	String horaSaida;
     	String produto;
-    	String quantia;
+    	String usuario;
     	
     	try {
     		comentario = inputComentario.getText();
-    		System.out.println(comentario);
+    		fornecedor = inputFornecedor.getText();	
+    		int codFornecedor = Integer.parseInt(fornecedor);
+    		horaChegada = inputHoraChegada.getText();		
+    		horaSaida = inputHoraSaida.getText();   		
+    		produto = inputProduto.getText(); 		
+    		int codProduto = Integer.parseInt(produto);
+    		usuario = inputQuantia.getText();
+    		int codUsuario = Integer.parseInt(usuario);
     		
-    		fornecedor = inputFornecedor.getText();
-    		System.out.println(fornecedor);
+    		ConnectionDB.Conectar();
+    		if ( horaChegada != null && horaChegada != "" ) {
+    			String sql = "insert into entrada(cod_produto,dt_entrada_produto,cod_fornecedor) values (?,?,?)";   			
+    			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    			stm.setInt(1, codProduto);
+    			stm.setString(2, horaChegada);
+    			stm.setInt(3, codFornecedor);
+    			ConnectionDB.runPreparedStatment(stm);
+    		} 
     		
-    		horaChegada = inputHoraChegada.getText();
-    		System.out.println(horaChegada);
+    		if ( horaSaida != null && horaSaida != "" ) {
+    			String sql = "insert into venda(cod_produto,cod_usuario,dt_compra_produto) values (?,?,?)";
+    			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    			stm.setInt(1, codProduto);
+    			stm.setInt(2, codUsuario);
+    			stm.setString(3, horaSaida);
+    			ConnectionDB.runPreparedStatment(stm);
+    		}
     		
-    		horaSaida = inputHoraSaida.getText();
-    		System.out.println(horaSaida);
-    		
-    		produto = inputProduto.getText();
-    		System.out.println(produto);
-    		
-    		quantia = inputQuantia.getText();
-    		System.out.println(quantia);
-    		
+    		ConnectionDB.Desconectar();
     		
     	}catch(NumberFormatException e) {
     		
-    	}
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }                                                                  
                  
     private javax.swing.JButton botaoLimparGerenciamentoFornecedor;
