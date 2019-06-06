@@ -126,83 +126,104 @@ public class Fornecedor{
 		this.numeroLoja = numeroLoja;
 	}
 
-	public int cadastrarCategoria(String nmCat) throws SQLException {
+	public int cadastrarCategoria(String nmCat){
 		
 		int count = 1;
-		String sql_verify = "select cod_categoria from categoria";
-		ResultSet result = ConnectionDB.SelectQuery(sql_verify);
-		while ( result.next() ) {
-			count = count + 1;
-		}
-		
-		System.out.println("Nome da categoria a ser inserida: " + nmCat);
-		
+		String sql_verify = "select cod_categoria from categoria";		
 		String sql = "insert into categoria(cod_categoria , nome_categoria) values(?,?)";
-		PreparedStatement stm = ConnectionDB.preparedStament(sql);
-		stm.setInt(1, count + 1);
-		stm.setString(2, nmCat);
-		ConnectionDB.runPreparedStatment(stm);
-		
-		return (count + 1);
+		try {
+			ConnectionDB.Conectar();
+			System.out.println("Nome da categoria a ser inserida: " + nmCat);
+			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+			ResultSet result = ConnectionDB.SelectQuery(sql_verify);
+			while ( result.next() ) {
+				count = count + 1;
+			}
+			stm.setInt(1, count + 1);
+			stm.setString(2, nmCat);
+			ConnectionDB.runPreparedStatment(stm);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionDB.Desconectar();
+			
+		}
+		return (count + 1);		
 	}
 	
-	public ResultSet verificarProduto(String nm) throws SQLException {
+	public ResultSet verificarProduto(String nm){
+		ResultSet result = null;
 		String sqlVerify = "select nome_produto from produtos where nome_produto = ?";
 		PreparedStatement stmVerify = ConnectionDB.preparedStament(sqlVerify);
-		stmVerify.setString(1, nm);
-		ResultSet result = ConnectionDB.runPreparedSelect(stmVerify);
-		
-		return result;
+		try {
+			ConnectionDB.Conectar();
+			stmVerify.setString(1, nm);
+			result = ConnectionDB.runPreparedSelect(stmVerify);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			ConnectionDB.Desconectar();
+		}
+		return result;		
 	}
 	
-	public int categoriaProduto(String nomeCategoria) throws SQLException {
-		
+	public int categoriaProduto(String nomeCategoria){
+		ResultSet result = null;
 		int codCategoria = 0;
-		System.out.println("Categoria : " + nomeCategoria);
-		
 		String sql = "select cod_categoria from categoria where nome_categoria = ?";
-		PreparedStatement stm = ConnectionDB.preparedStament(sql);
-		stm.setString(1, nomeCategoria);
-		ResultSet result = ConnectionDB.runPreparedSelect(stm);
-		while( result.next() ) {
-			codCategoria = result.getInt("cod_categoria");
-		}
-		
+		try {
+			ConnectionDB.Conectar();
+			System.out.println("Categoria : " + nomeCategoria);
+			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+			stm.setString(1, nomeCategoria);
+			result = ConnectionDB.runPreparedSelect(stm);
+			while( result.next() ) {
+				codCategoria = result.getInt("cod_categoria");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionDB.Desconectar();
+		}		
 		return codCategoria;
 		
 	}
 	
-	public void inserirProduto(String nm, Float pc, int codC, String nmCat) throws SQLException {
-		ResultSet result = verificarProduto(nm);
-		
-		if ( result.next() ) {
-			System.out.println("Produto já está cadastrado");
-			return;
-		} else {
-			
-			String sql = "insert into produtos(nome_produto,preco_produto,cod_categoria) values(?,?,?)";
-			PreparedStatement stm = ConnectionDB.preparedStament(sql);
-			stm.setString(1, nm);
-			stm.setFloat(2, pc);
-			
-			if ( codC == 0 ) {
-				int newCod = cadastrarCategoria(nmCat);
-				System.out.println("new codigo" + newCod);
-				stm.setInt(3, newCod);
-			} else { 				
-				stm.setInt(3, codC);
+	public void inserirProduto(String nm, Float pc, int codC, String nmCat){
+		ResultSet result = null;
+		try {
+			ConnectionDB.Conectar();
+			result = verificarProduto(nm);
+			if ( result.next() ) {
+				System.out.println("Produto já está cadastrado");
+				return;
+			} else {
+				
+				String sql = "insert into produtos(nome_produto,preco_produto,cod_categoria) values(?,?,?)";
+				PreparedStatement stm = ConnectionDB.preparedStament(sql);
+				stm.setString(1, nm);
+				stm.setFloat(2, pc);
+				
+				if ( codC == 0 ) {
+					int newCod = cadastrarCategoria(nmCat);
+					System.out.println("new codigo" + newCod);
+					stm.setInt(3, newCod);
+				} else { 				
+					stm.setInt(3, codC);
+				}
+				ConnectionDB.runPreparedStatment(stm);
+				System.out.println("Produto cadastrado com sucesso");
 			}
-			
-			ConnectionDB.runPreparedStatment(stm);
-			
-			System.out.println("Produto cadastrado com sucesso");
-		}
-	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionDB.Desconectar();
+		}	
 	}
 	
-	public void envioProduto() throws SQLException {
-		ConnectionDB.Conectar();
-		
+	public void envioProduto(){
 		System.out.println("Nome do produto a ser enviado: ");
 		String nomeProduto = s.nextLine();
 		System.out.println("Preço do produto: ");
@@ -210,57 +231,53 @@ public class Fornecedor{
 		System.out.println("Nome da categoria:");
 		String nomeCategoria = s.nextLine();
 		nomeCategoria = s.nextLine();
-
 		int codCategoria = categoriaProduto(nomeCategoria);
-		
 		inserirProduto(nomeProduto,precoProduto,codCategoria,nomeCategoria);
-
-		ConnectionDB.Desconectar();
 	}	
 	
-	public void newFornecedor() throws SQLException {
-		ConnectionDB.Conectar();
-		
+	public void newFornecedor(){
 		String sql = "insert into fornecedor_table(nome_fornecedor,cnpj_fornecedor,email_fornecedor,telefone_fornecedor,"
 					+ "cep_fornecedor,cidade_fornecedor,bairro_fornecedor,estado_fornecedor,numero_loja_fornecedor) values(?,?,?,?,?,?,?,?,?)";
-		
-		PreparedStatement stm = ConnectionDB.preparedStament(sql);
-		
-		stm.setString(1, this.getNomeFornecedor() );
-		stm.setString(2, this.getCnpjForncedor() );
-		stm.setString(3, this.getEmailFornecedor() );
-		stm.setString(4, this.getTelefoneFornecedor() );
-		stm.setString(5, this.getCepFornecedor() );
-		stm.setString(6, this.getCidadeFornecedor() );
-		stm.setString(7, this.getBairroFornecedor() );
-		stm.setString(8, this.getEstadoFornecedor() );
-		stm.setInt(9, this.getNumeroLoja() );
-		
-		ConnectionDB.runPreparedStatment(stm);
-		
-		ConnectionDB.Desconectar();
+		try {
+			ConnectionDB.Conectar();
+			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+			stm.setString(1, this.getNomeFornecedor() );
+			stm.setString(2, this.getCnpjForncedor() );
+			stm.setString(3, this.getEmailFornecedor() );
+			stm.setString(4, this.getTelefoneFornecedor() );
+			stm.setString(5, this.getCepFornecedor() );
+			stm.setString(6, this.getCidadeFornecedor() );
+			stm.setString(7, this.getBairroFornecedor() );
+			stm.setString(8, this.getEstadoFornecedor() );
+			stm.setInt(9, this.getNumeroLoja() );
+			ConnectionDB.runPreparedStatment(stm);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionDB.Desconectar();
+		}
 	}
 	
 	public void editFornecedor() {
 		
 	}
 	
-	public void removeFornecedor() throws SQLException {
-		
-		ConnectionDB.Conectar();
-		
+	public void removeFornecedor() {
 		String sql = "delete from fornecedor_table where nome_fornecedor = ?";
-		
-		PreparedStatement stm = ConnectionDB.preparedStament(sql);
-		
-		System.out.println("Digite o nome do fornecedor que deseja excluir : ");
-		String nome = s.nextLine();
-		
-		stm.setString(1, nome );
-		
-		ConnectionDB.runPreparedStatment(stm);
+		try {
+			ConnectionDB.Conectar();
+			System.out.println("Digite o nome do fornecedor que deseja excluir : ");
+			String nome = s.nextLine();
+			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+			stm.setString(1, nome);
+			ConnectionDB.runPreparedStatment(stm);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			ConnectionDB.Desconectar();
 
-		ConnectionDB.Desconectar();
+		}
 	}
 	
 	public static void main(String args[]) throws SQLException {
