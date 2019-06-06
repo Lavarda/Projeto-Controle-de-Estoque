@@ -14,14 +14,14 @@ public class Produtos {
 	
     private String nomeProduto;
     private double preco;
-    private String categoria;
+    private Categoria categoria;
     static ConnectionDB db = new ConnectionDB();
     
     public Produtos() {
     	
     }
 
-    public Produtos(String nomeProduto, double preco, String categoria) {
+    public Produtos(String nomeProduto, double preco, Categoria categoria) {
         this.nomeProduto = nomeProduto;
         this.preco = preco;
         this.categoria = categoria;
@@ -43,11 +43,11 @@ public class Produtos {
         this.preco = preco;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return this.categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
     
@@ -62,7 +62,7 @@ public class Produtos {
         PreparedStatement stm = ConnectionDB.preparedStament(sql);
         stm.setString(1, this.getNomeProduto());
         stm.setDouble(2, this.getPreco());
-        stm.setString(3,this.getCategoria());
+        stm.setInt(3,this.getCategoria().getCodCategoria());
         ConnectionDB.runPreparedStatment(stm); 
 		JOptionPane.showMessageDialog(null, "Produto cadastrado com exito.");
 		} catch (SQLException ex) {
@@ -78,7 +78,7 @@ public class Produtos {
     		PreparedStatement stm = ConnectionDB.preparedStament(sql);
     		stm.setString(1, this.getNomeProduto());
     		stm.setDouble(2, this.getPreco());
-    		stm.setString(3, this.getCategoria());
+    		stm.setFloat(3, this.getCategoria().getCodCategoria());
     		stm.setString(4, this.nomeProduto);
     		ConnectionDB.runPreparedStatment(stm);
     		JOptionPane.showMessageDialog(null, "Produto alterado com exito.");

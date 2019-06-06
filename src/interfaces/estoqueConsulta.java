@@ -5,6 +5,12 @@
  */
 package interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+
 /**
  *
  * @author Dinopc
@@ -159,11 +165,33 @@ public class estoqueConsulta extends javax.swing.JInternalFrame {
     }// </editor-fold>                        
 
     private void botaoPesquisaEstoqueConsultaActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-        //defaultTableModel tabelaCliente  = (defaultTableModel) tabelaClientesConsulta.getModel();        
+        //defaultTableModel tabelaCliente  = (defaultTableModel) tabelaClientesConsulta.getModel();   
+    	// Rodar o evento do input abaixo
     }                                                            
 
     private void inputPesquisaEstoqueConsultaActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         // TODO add your handling code here:
+    	String busca;
+    	try {
+    		busca = inputPesquisaEstoqueConsulta.getText();
+    		
+    		ConnectionDB.Conectar();
+    		String sql = "select nome_produto,preco_produto,cod_categoria from produtos where nome_produto = ?";
+    		PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    		stm.setString(1, busca);
+    		ResultSet result = ConnectionDB.runPreparedSelect(stm);
+    		
+    		while ( result.next() ) {
+    			System.out.println(result.getString("nome_produto") + " " + result.getFloat("preco_produto") + " " + result.getInt("cod_categoria"));
+    		}
+    		
+    		ConnectionDB.Desconectar();
+    	} catch (NumberFormatException e){
+    		System.out.println(e);
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }                                                            
 
 
