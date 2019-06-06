@@ -15,10 +15,9 @@ public class Usuario extends Pessoa{
 	private String dataFormatada = java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(dataAtual);
 	
 	
-	public Usuario() {
-		
+	public Usuario() {	
 	}
-		
+	
 	public Usuario(String nome,String dataNascimento,String email,String cpf,
 				   String rg,String numeroCelular,
 				   String endereco, String sexo, String estadoCivil) 

@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import Connections.ConnectionDB;
 
 public abstract class Administrador extends Pessoa implements Autenticacao {
-	//Somente para realizar commit esse comentário
 	private String senha;
 	private String matricula;
 	private Cargos cargo;

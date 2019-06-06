@@ -100,26 +100,28 @@ public class Filiais {
 		this.cepFilial = cepFilial;
 	}
 	
-	public void cadastroFilial() throws SQLException {
-		ConnectionDB.Conectar();
-		String sql = "insert into filiais_table(nome_filial,cnpj_filial,telefone_filial,cep_filial,cidade_filial,bairro_filial,estado_filial,numero_loja_filial) values (?,?,?,?,?,?,?,?)";
-
-		PreparedStatement stm = ConnectionDB.preparedStament(sql);
-		
-		stm.setString(1, this.getNomeFilial() );
-		stm.setString(2, this.getCpnjFilial() );
-		stm.setString(3, this.getTelefoneFilial() );
-		stm.setString(4, this.getCepFilial() );
-		stm.setString(5, this.getCidadeFilial() );
-		stm.setString(6, this.getBairroFilial() );
-		stm.setString(7, this.getEstado() );
-		stm.setInt(8, this.getNumeroEndereco() );		
-		
-		ConnectionDB.runPreparedStatment(stm);
-		
-		System.out.println("Dados de endereço de filial inseridos");
-		
-		ConnectionDB.Desconectar();
+	public void cadastroFilial(){
+		String sql = "insert into filiais_table(nome_filial,cnpj_filial,telefone_filial,cep_filial,cidade_filial,"
+				+ "bairro_filial,estado_filial,numero_loja_filial) "
+				+ "values (?,?,?,?,?,?,?,?)";		
+		try {
+			ConnectionDB.Conectar();
+			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+			stm.setString(1, this.getNomeFilial() );
+			stm.setString(2, this.getCpnjFilial() );
+			stm.setString(3, this.getTelefoneFilial() );
+			stm.setString(4, this.getCepFilial() );
+			stm.setString(5, this.getCidadeFilial() );
+			stm.setString(6, this.getBairroFilial() );
+			stm.setString(7, this.getEstado() );
+			stm.setInt(8, this.getNumeroEndereco() );
+			ConnectionDB.runPreparedStatment(stm);
+			System.out.println("Dados de endereço de filial inseridos");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionDB.Desconectar();
+		}		
 	}
 	
 //	public void editFilial() {
@@ -129,17 +131,21 @@ public class Filiais {
 //		db.Desconectar();
 //	}
 	
-	public void removeFilial() throws SQLException {
-		ConnectionDB.Conectar();
-		System.out.println("Digite o cnpj da filial que deseja remover: ");
-		String cnpj_filial = s.nextLine();
+	public void removeFilial(){
 		
 		String sql = "delete from filiais_table where cnpj_filial = ?";
-		PreparedStatement stm = ConnectionDB.preparedStament(sql);
-		stm.setString(1, cnpj_filial);
-		ConnectionDB.runPreparedStatment(stm);
-		
-		ConnectionDB.Desconectar();
+		try {
+			ConnectionDB.Conectar();
+			System.out.println("Digite o cnpj da filial que deseja remover: ");
+			String cnpj_filial = s.nextLine();
+			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+			stm.setString(1, cnpj_filial);
+			ConnectionDB.runPreparedStatment(stm);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			ConnectionDB.Desconectar();
+		}
 	}
 	
 //	public static void main(String args[]) throws SQLException {
