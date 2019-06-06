@@ -317,11 +317,9 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
     }                     
 
     private void comboBoxEstadoCivilClientesCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
-        // TODO add your handling code here:
     }                                                                   
 
     private void inputCepClientesCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
     }                                                        
 
     private void botaoLimparClientesCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                            
@@ -405,7 +403,6 @@ public class clientesCadastro extends javax.swing.JInternalFrame {
     }                                                            
 
     private void comboBoxEstadoClientesCadastroActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
     }                                                              
 
                

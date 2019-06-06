@@ -1,5 +1,10 @@
 package interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import Connections.ConnectionDB;
+
 public class filiaisCadastro extends javax.swing.JInternalFrame {
 
     public filiaisCadastro() {
@@ -26,11 +31,11 @@ public class filiaisCadastro extends javax.swing.JInternalFrame {
         txtCidadeCadastroFiliais = new javax.swing.JLabel();
         txtEstadoCadastroFiliais = new javax.swing.JLabel();
         txtCepCadastroFiliais = new javax.swing.JLabel();
-        txtRuaCadastroFiliais = new javax.swing.JLabel();
+        txtBairroCadastroFiliais = new javax.swing.JLabel();
         inputNomeCadastroFiliais = new javax.swing.JTextField();
         inputEmailCadastroFiliais = new javax.swing.JTextField();
         inputCidadeCadastroFiliais = new javax.swing.JTextField();
-        inputRuaCadastroFiliais = new javax.swing.JTextField();
+        inputBairroCadastroFiliais = new javax.swing.JTextField();
         botaoLimparCadastroFiliais = new javax.swing.JButton();
         botaoSalvarCadastroFiliais = new javax.swing.JButton();
         checkboxCadastroFiliais = new javax.swing.JComboBox<>();
@@ -83,7 +88,7 @@ public class filiaisCadastro extends javax.swing.JInternalFrame {
 
         txtCepCadastroFiliais.setText("CEP");
 
-        txtRuaCadastroFiliais.setText("Rua");
+        txtBairroCadastroFiliais.setText("Bairro");
 
         botaoLimparCadastroFiliais.setBackground(new java.awt.Color(254, 59, 55));
         botaoLimparCadastroFiliais.setText("Limpar");
@@ -160,8 +165,8 @@ public class filiaisCadastro extends javax.swing.JInternalFrame {
                             .addComponent(txtCidadeCadastroFiliais)
                             .addComponent(txtEstadoCadastroFiliais)
                             .addComponent(txtCepCadastroFiliais)
-                            .addComponent(txtRuaCadastroFiliais)
-                            .addComponent(inputRuaCadastroFiliais)
+                            .addComponent(txtBairroCadastroFiliais)
+                            .addComponent(inputBairroCadastroFiliais)
                             .addComponent(checkboxCadastroFiliais, 0, 200, Short.MAX_VALUE)
                             .addComponent(inputCidadeCadastroFiliais)
                             .addComponent(inputCepCadastroFiliais, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -191,9 +196,9 @@ public class filiaisCadastro extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputCepCadastroFiliais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtRuaCadastroFiliais)
+                        .addComponent(txtBairroCadastroFiliais)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputRuaCadastroFiliais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputBairroCadastroFiliais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelPrincipalCadastroFiliaisLayout.createSequentialGroup()
                         .addComponent(txtCadastroFiliais)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,53 +247,57 @@ public class filiaisCadastro extends javax.swing.JInternalFrame {
     }                    
 
     private void inputCepCadastroFiliaisActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
     }                                                       
 
     private void botaoSalvarCadastroFiliaisActionPerformed(java.awt.event.ActionEvent evt) {                                                           
     	String nomeFilial;
-    	String dataCadastro;
-    	String email;
     	String cnpjString;
     	String telefoneString;
     	String nmLoja;
     	String cidade;
     	String estado;
     	String cepString;
-    	String rua;
+    	String Bairro;
     	
-        estado = (String) checkboxCadastroFiliais.getSelectedItem();
-		System.out.println(estado);
+    	try {
+    	
+	        estado = (String) checkboxCadastroFiliais.getSelectedItem();
+			
+			nomeFilial = inputNomeCadastroFiliais.getText();
+			
+			cnpjString = inputCnpjCadastroFiliais.getText();			
+	
+			telefoneString = inputTelCadastroFiliais.getText();
+			
+			nmLoja = inputNumeroLojaCadastroFiliais.getText();
+			
+			cidade = inputCidadeCadastroFiliais.getText();
+			
+			cepString = inputCepCadastroFiliais.getText();
 		
-		nomeFilial = inputNomeCadastroFiliais.getText();
-		System.out.println(nomeFilial);
-		
-		dataCadastro = inputDataCadastroFiliais.getText();
-		System.out.println(dataCadastro);
-		
-		email = inputEmailCadastroFiliais.getText();
-		System.out.println(email);
-		
-		cnpjString = inputCnpjCadastroFiliais.getText();
-		System.out.println(cnpjString);
-		
-
-		telefoneString = inputTelCadastroFiliais.getText();
-		System.out.println(telefoneString);
-		
-		nmLoja = inputNumeroLojaCadastroFiliais.getText();
-		System.out.println(nmLoja);
-		
-		cidade = inputCidadeCadastroFiliais.getText();
-		System.out.println(cidade);
-		
-		cepString = inputCepCadastroFiliais.getText();
-		System.out.println(cepString);
-		
-		rua = inputRuaCadastroFiliais.getText();
-		System.out.println(rua);
-    }                                                          
-
+			Bairro = inputBairroCadastroFiliais.getText();
+			
+			ConnectionDB.Conectar();
+	        String sql = "insert into filiais_table(nome_filial,cnpj_filial,telefone_filial,cep_filial,cidade_filial,bairro_filial,estado_filial,numero_loja_filial) values(?,?,?,?,?,?,?,?);";
+	        PreparedStatement stm = ConnectionDB.preparedStament(sql);
+	        stm.setString(1, nomeFilial);
+	        stm.setString(2, cnpjString);
+	        stm.setString(3, telefoneString);
+	        stm.setString(4, cepString);
+	        stm.setString(5, cidade);
+	        stm.setString(6, Bairro);
+	        stm.setString(7, estado);
+	        stm.setString(8, nmLoja);
+	        ConnectionDB.runPreparedStatment(stm);
+	        ConnectionDB.Desconectar();
+   
+	}catch(NumberFormatException e) {
+		System.out.println(e);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
+ 
     private void botaoLimparCadastroFiliaisActionPerformed(java.awt.event.ActionEvent evt) {                                                           
         checkboxCadastroFiliais.getSelectedItem();
 		inputNomeCadastroFiliais.setText("");
@@ -299,7 +308,7 @@ public class filiaisCadastro extends javax.swing.JInternalFrame {
 		inputNumeroLojaCadastroFiliais.setText("");
 		inputCidadeCadastroFiliais.setText("");
 		inputCepCadastroFiliais.setText("");
-		inputRuaCadastroFiliais.setText("");
+		inputBairroCadastroFiliais.setText("");
     }                                                          
           
     private javax.swing.JButton botaoLimparCadastroFiliais;
@@ -312,7 +321,7 @@ public class filiaisCadastro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField inputEmailCadastroFiliais;
     private javax.swing.JTextField inputNomeCadastroFiliais;
     private javax.swing.JFormattedTextField inputNumeroLojaCadastroFiliais;
-    private javax.swing.JTextField inputRuaCadastroFiliais;
+    private javax.swing.JTextField inputBairroCadastroFiliais;
     private javax.swing.JFormattedTextField inputTelCadastroFiliais;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -325,6 +334,6 @@ public class filiaisCadastro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtEmailCadastroFiliais;
     private javax.swing.JLabel txtEstadoCadastroFiliais;
     private javax.swing.JLabel txtNumeroLojaCadastroFiliais;
-    private javax.swing.JLabel txtRuaCadastroFiliais;
+    private javax.swing.JLabel txtBairroCadastroFiliais;
     private javax.swing.JLabel txtTelClientesCadastro;               
 }
