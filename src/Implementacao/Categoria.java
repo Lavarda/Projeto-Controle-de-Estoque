@@ -10,7 +10,8 @@ public enum Categoria {
 	BEBIDAS_ENERGETICAS(7),
 	BEBIDAS_ESPORTIVAS(8),
 	CAFES(9),
-	CHAS(10);
+	CHAS(10),
+	TODAS(11);
 	private final int codCategoria;
 	
 	private Categoria(int codCategoria) {
