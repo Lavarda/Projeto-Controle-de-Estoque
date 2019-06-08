@@ -3,12 +3,23 @@ package Implementacao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
 import Connections.ConnectionDB;
+import interfaces.adicionarProdutoEstoque;
 
 public class Funcionario extends Administrador{
+	
+	private Scanner s = new Scanner(System.in);
+	private String login;
+	private String senha;
+	
+	public Funcionario() {
+		
+	}
+	
 	public Funcionario(String matricula, String nome, String senha, Cargos cargo, Categoria categoria) {
 		super(matricula, nome, senha, cargo, categoria);
 	}
@@ -33,7 +44,7 @@ public class Funcionario extends Administrador{
 				telefoneFuncionario = result.getString("telefone_funcionario");
 			}
 			System.out.println("Nome: "+ nomeFuncionario + "\n" + "Cargo: " + cargoFuncionario + "\n" +"Matricula: "
-					+ matriculaFuncionario + "\n" + "Salário: " + salarioFuncionario + "\n" + "Telefone: " + telefoneFuncionario);
+					+ matriculaFuncionario + "\n" + "Salï¿½rio: " + salarioFuncionario + "\n" + "Telefone: " + telefoneFuncionario);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			e.getMessage();
@@ -61,11 +72,22 @@ public class Funcionario extends Administrador{
 		return codFuncionario;
 		}catch(SQLException e){
 			e.printStackTrace();
-			System.err.println("Código do funcionario não foi encontrado!!!");
+			System.err.println("Cï¿½digo do funcionario nï¿½o foi encontrado!!!");
 			return 0;
 		}finally {
 			ConnectionDB.Desconectar();
 		}		
+	}
+	
+	public void autenticacaoFuncionarios() {
+		
+//		System.out.println("Digite seu login: ");
+//		login = s.nextLine();
+//		
+//		System.out.println("Digite sua senha: ");
+//		senha = s.nextLine();
+		
+		this.realizarAutenticacao();
 	}
 //--------------------- METODOS PRODUTOS ------------------------//
 	public void requisitarInclusaoProduto(Produtos p) {
@@ -77,7 +99,7 @@ public class Funcionario extends Administrador{
 	public void requisitarExclusaoProduto( Produtos p) {
 		p.excluirProduto();
 	}
-//--------------------- METODOS USUÁRIO -------------------//
+//--------------------- METODOS USUï¿½RIO -------------------//
 	
 	public void requisitarInclusaoUsuario(Usuario u) {
 		u.cadastrarUsuario(this);

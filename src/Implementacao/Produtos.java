@@ -63,10 +63,21 @@ public class Produtos {
        try {
     	 String sql = "INSERT INTO PRODUTOS (nome_produto, preco_produto, cod_categoria) VALUES (?, ?, ?)";
         PreparedStatement stm = ConnectionDB.preparedStament(sql);
-        stm.setString(1, this.getNomeProduto());
-        stm.setDouble(2, this.getPreco());
-        stm.setInt(3,this.getCategoria().getCodCategoria());
+        
+        System.out.println("Digite o nome do produto que deseja cadastrar: ");
+        String nomeProduto = s.nextLine();
+        System.out.println("Digite o preço do produto que deseja cadastrar: ");
+        String preco = s.nextLine();
+        double precoProduto = Double.parseDouble(preco);
+        System.out.println("Digite o código da categoria do produto: ");
+        int codCategoria = s.nextInt();
+        
+        stm.setString(1, nomeProduto);
+        stm.setDouble(2, precoProduto);
+        stm.setInt(3, codCategoria);
+        
         ConnectionDB.runPreparedStatment(stm); 
+        
 		JOptionPane.showMessageDialog(null, "Produto cadastrado com exito.");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Erro ao inserir dados \nErro: "+ex);
@@ -79,12 +90,12 @@ public class Produtos {
     	try{
     		String sql = "UPDATE PRODUTOS SET preco_produto = ? WHERE nome_produto=?";
 			System.out.println("Nome do produto que deseja alterar o preço:");
-			String nome_produto = s.nextLine();
+			String nomeProduto = s.nextLine();
 			System.out.println("Novo preço:");
 			Double preco = s.nextDouble(); 
     		PreparedStatement stm = ConnectionDB.preparedStament(sql);
     		stm.setDouble(1, preco);
-    		stm.setString(2, nome_produto);
+    		stm.setString(2, nomeProduto);
     		ConnectionDB.runPreparedStatment(stm);
     		JOptionPane.showMessageDialog(null, "Produto alterado com exito.");
     	} catch (SQLException ex) {
@@ -97,10 +108,10 @@ public class Produtos {
     	ConnectionDB.Conectar();
         try{
 			System.out.println("Codigo do produto que deseja excluir:");
-			int cod_produto = s.nextInt(); 
+			int codProduto = s.nextInt(); 
         	String sql = "DELETE FROM estoque WHERE cod_produto=?";
         	PreparedStatement stm = ConnectionDB.preparedStament(sql);
-        	stm.setInt(1, cod_produto );
+        	stm.setInt(1, codProduto );
         	ConnectionDB.runPreparedStatment(stm);
         	JOptionPane.showMessageDialog(null, "Produto excluido com exito.");
         } catch (SQLException ex) {

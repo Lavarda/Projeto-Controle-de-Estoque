@@ -3,16 +3,23 @@ package Implementacao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
 import Connections.ConnectionDB;
 
 public abstract class Administrador extends Pessoa implements Autenticacao {
+	
+	private static Scanner s = new Scanner(System.in);
 	private String senha;
 	private String matricula;
 	private Cargos cargo;
 	private Categoria categoria;
+	
+	public Administrador() {
+		
+	}
 
 	public Administrador(String matricula,String nome,String senha, Cargos cargo, Categoria categoria) {
 		this.senha = senha;
@@ -24,21 +31,23 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 	@Override
 	public boolean realizarAutenticacao() {
 		try {
-			String nomeFuncionario = null;
+			String matriculaFuncionario = null;
 			String senhaFuncionario = null;
-			String nome = JOptionPane.showInputDialog("Insira seu nome");
-			String senha = JOptionPane.showInputDialog("Insira sua senha");
+			System.out.println("Digite matricula: ");
+			String matricula = s.nextLine();
+			System.out.println("Digite sua senha: ");
+			String senha = s.nextLine();
 			ConnectionDB.Conectar();
-			String sql = "SELECT nome_funcionario,senha_funcionario from funcionarios where matricula_funcionario = ?";
+			String sql = "SELECT matricula_funcionario,senha_funcionario from funcionarios where matricula_funcionario = ?";
 			PreparedStatement preparedStatement = ConnectionDB.preparedStament(sql);
-			preparedStatement.setString(1, this.getMatricula());
+			preparedStatement.setString(1, matricula);
 			ResultSet result = ConnectionDB.runPreparedSelect(preparedStatement);
 			while(result.next()) {
-				nomeFuncionario = result.getString("nome_funcionario");
+				matriculaFuncionario = result.getString("matricula_funcionario");
 				senhaFuncionario = result.getString("senha_funcionario");
 			}
-			System.out.println(nomeFuncionario + " | " + senhaFuncionario);			
-			if(nome.equals(nomeFuncionario) && senha.equals(senhaFuncionario)) {
+			System.out.println(matriculaFuncionario + " | " + senhaFuncionario);			
+			if(matricula.equals(matriculaFuncionario) && senha.equals(senhaFuncionario)) {
 				System.out.println("Login realizado com sucesso!!!");
 				return true;
 			}else{

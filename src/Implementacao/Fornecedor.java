@@ -22,6 +22,10 @@ public class Fornecedor{
 	private String estadoFornecedor;
 	private int numeroLoja;
 	
+	public Fornecedor() {
+		
+	}
+	
 	public Fornecedor(String nomeFornecedor, String produtoFornecido, String dataEntrega, String cnpjFornecedor, String emailFornecedor, String telefoneFornecedor,
 					  String cepFornecedor, String cidadeFornecedor,String bairroFornecedor, String estadoFornecedor, int numeroLoja) {
 		
