@@ -19,13 +19,13 @@ public enum Cargos {
 	}
 	
 	public static int returnUserValueCodCargos() {
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Selecione a opção desejada de Cargos: ");
 		for (Cargos cargos : EnumSet.allOf(Cargos.class)) {
 			System.out.println(cargos.name() + " " + "("+ cargos.getcodCargo() +")");
 		}
 		int result = scanner.nextInt();
-		scanner.close();
 		return result;
 	}
 }

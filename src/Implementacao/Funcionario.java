@@ -3,18 +3,9 @@ package Implementacao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
-
-import javax.swing.JOptionPane;
-
 import Connections.ConnectionDB;
-import interfaces.adicionarProdutoEstoque;
 
 public class Funcionario extends Administrador{
-	
-	private Scanner s = new Scanner(System.in);
-	private String login;
-	private String senha;
 	
 	public Funcionario() {
 		
@@ -82,13 +73,6 @@ public class Funcionario extends Administrador{
 	}
 	
 	public void autenticacaoFuncionarios() {
-		
-//		System.out.println("Digite seu login: ");
-//		login = s.nextLine();
-//		
-//		System.out.println("Digite sua senha: ");
-//		senha = s.nextLine();
-		
 		this.realizarAutenticacao();
 	}
 //--------------------- METODOS PRODUTOS ------------------------//
@@ -176,6 +160,27 @@ public class Funcionario extends Administrador{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+// -------------------------- METODOS TRANSFERENCIAS -------------------//
+	public void requisitarBuscaTransferenciasFiliais(TransferenciaFiliais transf) {
+		transf.buscaTransferencia();
+	}
+	public void requisitarTransferenciaFiliais(TransferenciaFiliais transf) {
+		transf.TransferirProduto();
+	}
+	public void requisitarhistoricoTransferenciasFiliais(TransferenciaFiliais transf) {
+		transf.historicoTransferencias();
+	}
+	
+	
+	public void requisitarbuscaTransferenciasFornecedor(TransferenciaFornecedor transf) {
+		transf.buscaTransferencia();
+	}
+	public void requisitarTransferenciaFornececedor(TransferenciaFornecedor transf) {
+		transf.TransferirProduto();
+	}
+	public void requisitarhistoricoTransferenciasFornecedores(TransferenciaFornecedor transf) {
+		transf.historicoTransferencias();
 	}
 	
 }

@@ -25,13 +25,14 @@ public enum Categoria {
 		return codCategoria;
 	}
 	public static int returnUserValueCodCategoria() {
+		int result;
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Selecione a opção desejada de Categorias: ");
 		for (Categoria categorias : EnumSet.allOf(Categoria.class)) {
 			System.out.println(categorias.name() + " " + "("+ categorias.getCodCategoria() +")");
 		}
-		int result = scanner.nextInt();
-		scanner.close();
+		 result = scanner.nextInt();
 		return result;
 	}
 	

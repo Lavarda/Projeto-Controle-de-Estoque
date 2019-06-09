@@ -1,12 +1,7 @@
 package Implementacao;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
-
-import Connections.ConnectionDB;
-import interfaces.InterfacePrincipal;
 
 public class Main {
 	
@@ -20,9 +15,11 @@ public class Main {
 		 
 		 
 		 do {
-			 System.out.println("Você deseja logar como : \n1 - Funcionario \n2 - Gerente \n3 - Sair");
+			 System.out.println("Você deseja logar como : \n "
+			 		+ "1 - Funcionario \n "
+			 		+ "2 - Gerente \n "
+			 		+ "3 - Sair");
 			 opcao = s.nextInt();
-			 
 			 switch (opcao) {
 			 	case 1 : 
 			 		
@@ -32,14 +29,24 @@ public class Main {
 			 		if ( autenticacao == true ) {
 			 			do {
 			 				
-			 				System.out.println("Digite a area que deseja modificar : \n 1 - Produtos \n 2 - Fornecedores \n 3 - Filiais \n 4 - Usuários \n 5 - Relátorios \n 6 - Transferências \n 7 - Sair");
+			 				System.out.println("Digite a area que deseja modificar : \n "
+			 						+ "1 - Produtos \n "
+			 						+ "2 - Fornecedores \n "
+			 						+ "3 - Filiais \n "
+			 						+ "4 - Usuários \n "
+			 						+ "5 - Relátorios \n "
+			 						+ "6 - Transferências \n "
+			 						+ "7 - Sair");
 			 				opcao = s.nextInt();
 			 				switch ( opcao ) {
 				 				case 1:
 				 					
 				 					do {
 				 						Produtos produto = new Produtos();
-				 						System.out.println("Digite a opção desejada: \n 1 - Adicionar um novo Produto \n 2 - Excluir um produto \n 3 - Editar um Produto \n 4 - Voltar");
+				 						System.out.println("Digite a opção desejada: \n "
+				 								+ "1 - Adicionar um novo Produto \n "
+				 								+ "2 - Excluir um produto \n "
+				 								+ "3 - Editar um Produto \n 4 - Voltar");
 				 						opcaoSecundaria = s.nextInt();
 				 						switch (opcaoSecundaria) {
 					 						case 1:
@@ -66,7 +73,10 @@ public class Main {
 				 					
 				 					do {
 				 						Fornecedor fornecedor = new Fornecedor();
-				 						System.out.println("Digite a opção desejada: \n 1 - Adicionar um novo Fornecedor \n 2 - Excluir um Fornecedor \n 3 - Voltar");
+				 						System.out.println("Digite a opção desejada: \n "
+				 								+ "1 - Adicionar um novo Fornecedor \n "
+				 								+ "2 - Excluir um Fornecedor \n "
+				 								+ "3 - Voltar");
 				 						opcaoSecundaria = s.nextInt();
 				 						switch (opcaoSecundaria) {
 					 						case 1:
@@ -89,7 +99,10 @@ public class Main {
 				 					
 				 					do {
 				 						Filiais filial = new Filiais();
-				 						System.out.println("Digite a opção desejada: \n 1 - Adicionar uma nova Filial \n 2 - Excluir uma Filial \n 3 - Voltar");
+				 						System.out.println("Digite a opção desejada: \n "
+				 								+ "1 - Adicionar uma nova Filial \n "
+				 								+ "2 - Excluir uma Filial \n "
+				 								+ "3 - Voltar");
 				 						opcaoSecundaria = s.nextInt();
 				 						switch ( opcaoSecundaria ) {
 					 						case 1:
@@ -113,7 +126,12 @@ public class Main {
 				 					
 				 					do {
 				 						Usuario usuario = new Usuario();
-				 						System.out.println("Digite a opção desejada: \n 1 - Adicionar um novo usuário \n 2 - Modificar um usuário \n 3 - Excluir um usuario \n 4 - Verificar todos produtos comprados \n 5 - Voltar");
+				 						System.out.println("Digite a opção desejada: \n "
+				 								+ "1 - Adicionar um novo usuário \n "
+				 								+ "2 - Modificar um usuário \n "
+				 								+ "3 - Excluir um usuario \n "
+				 								+ "4 - Verificar todos produtos comprados \n "
+				 								+ "5 - Voltar");
 				 						opcaoSecundaria = s.nextInt();
 				 						switch ( opcaoSecundaria ) {
 					 						case 1:
@@ -140,7 +158,13 @@ public class Main {
 				 					
 				 				case 5:
 				 					do {
-					 					System.out.println("Digite a opção desejada: \n 1 - Relátorio de devoluções aos fornecedores \n 2 - Relátorio de itens recebidos pelo fornecedor \n 3 - Relátorio do estoque \n 4 - Número de fornecedores de determinado estado \n 5 - Usuários cadastrados de determinada cidade \n 6 - Voltar");
+					 					System.out.println("Digite a opção desejada: \n "
+					 							+ "1 - Relátorio de devoluções aos fornecedores \n "
+					 							+ "2 - Relátorio de itens recebidos pelo fornecedor \n "
+					 							+ "3 - Relátorio do estoque \n "
+					 							+ "4 - Número de fornecedores de determinado estado \n"
+					 							+ "5 - Usuários cadastrados de determinada cidade \n "
+					 							+ "6 - Voltar");
 					 					opcaoSecundaria = s.nextInt();
 					 					switch ( opcaoSecundaria ) {
 					 						case 1:
@@ -168,16 +192,78 @@ public class Main {
 				 					} while ( sistemaSecundario );
 				 					break;
 				 				case 6:
-				 					System.out.println("Digite a opção desejada: \n 1 - ");
-				 					System.out.println("Transfêrencias");
+				 					System.out.println("Tranferencias \n");
+				 					System.out.println("Digite a op��o desejada: \n "+
+				 					"1 - Trasferencias � filiais \n" +
+				 					"2 - Transferencias � fornecedores \n");
+				 					 opcaoSecundaria = s.nextInt();
+				 					 switch(opcaoSecundaria) {
+				 					 case 1:
+					 					 TransferenciaFiliais transferenciaFil = new TransferenciaFiliais();
+				 						 System.out.println("1 - Busca de Transferencia \n "
+				 						 		+ "2 - Nova Transferencia \n "
+				 						 		+ "3 - Hist�rico de Transferencias \n "
+				 						 		+ "4 - Voltar");
+				 						 opcaoSecundaria = s.nextInt();
+				 						 switch(opcaoSecundaria) {
+				 						 case 1:
+				 							 funcionario.requisitarBuscaTransferenciasFiliais(transferenciaFil);
+				 							 break;
+				 						 case 2:
+				 							 if(funcionario.realizarAutenticacao() == true) {
+				 								 funcionario.requisitarTransferenciaFiliais(transferenciaFil);
+				 							 }
+				 							 break;
+				 						 case 3: 
+				 							 funcionario.requisitarhistoricoTransferenciasFiliais(transferenciaFil);
+				 							break;
+				 						 case 4:
+				 							 sistema = false;
+				 							 break;
+				 						 default:
+							 				System.out.println("Opção invalida!!");
+							 				sistema = false;
+							 				 break;
+				 						 }
+				 					break;
+				 					 case 2:
+				 						TransferenciaFornecedor transferenciaForn = new TransferenciaFornecedor();
+				 						 System.out.println("1 - Busca de Transferencia \n "
+				 						 		+ "2 - Nova Transferencia \n "
+				 						 		+ "3 - Hist�rico de Transferencias \n ");
+				 						 opcaoSecundaria = s.nextInt();
+				 						 switch(opcaoSecundaria) {
+				 						case 1:
+				 							 funcionario.requisitarbuscaTransferenciasFornecedor(transferenciaForn);
+				 							 break;
+				 						 case 2:
+				 							 if(funcionario.realizarAutenticacao() == true) {
+				 								 funcionario.requisitarTransferenciaFornececedor(transferenciaForn);
+				 							 }
+				 							 break;
+				 						 case 3: 
+				 							 funcionario.requisitarhistoricoTransferenciasFornecedores(transferenciaForn);
+				 							 break;
+				 						default:
+							 				System.out.println("Opção invalida!!");
+							 				sistema = false;
+							 				 break;
+				 						 }
+				 						 break;
+				 					 default:
+						 				System.out.println("Opção invalida!!");
+						 				sistema = false;
+						 				 break;
+				 					 }
 				 					break;
 				 				case 7:
 				 					sistema = false;
 				 					System.out.println("Saiu do sistema");
 				 					break;
 				 				default:
-				 					System.out.println("Opção invalida!!");
-				 					break;
+					 				System.out.println("Opção invalida!!");
+					 				sistema = false;
+					 				 break;
 			 				}
 			 			} while ( sistema );
 			 		}
@@ -187,8 +273,11 @@ public class Main {
 			 		boolean autenticacaoGerente = gerente.realizarAutenticacao();
 			 		if ( autenticacaoGerente == true ) {
 			 			do {
-		 		 			System.out.println("Digite a opção desejada: \n" + "1 - Adcionar um novo Funcionario \n" + 
-		 		 					"2 - excluir um Funcionario \n" + "3 - Alterar Senha Funcionario \n" + "4 - Voltar");
+		 		 			System.out.println("Digite a opção desejada: \n "
+		 		 					+ "1 - Adcionar um novo Funcionario \n "
+		 		 					+ "2 - excluir um Funcionario \n "
+		 		 					+ "3 - Alterar Senha Funcionario \n "
+		 		 					+ "4 - Voltar");
 		 		 			opcao = s.nextInt();
 		 		 			switch(opcao) {
 			 		 			case 1:
@@ -204,17 +293,15 @@ public class Main {
 			 		 				sistema = false;
 			 		 				break;
 			 		 			default:
-			 		 				System.out.println("Opção invalida");
-			 		 				break;
+					 				System.out.println("Opção invalida!!");
+					 				sistema = false;
+					 				 break;
 			 		 			}		 		 			
 			 			} while(sistema);
-			 		} else {
-			 			autenticacaoGerente = gerente.realizarAutenticacao();
 			 		}
-		 			break;
 			 	case 3 :
-			 		sistema = false;
-			 		System.out.println("Saiu do sistema");
+			 		System.out.println("Finalizando Programa...");
+			 		System.exit(0);
 			 }
 		 } while ( sistema );
 		 

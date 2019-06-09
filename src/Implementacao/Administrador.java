@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
-
 import Connections.ConnectionDB;
 
 public abstract class Administrador extends Pessoa implements Autenticacao {
@@ -33,9 +31,10 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 		try {
 			String matriculaFuncionario = null;
 			String senhaFuncionario = null;
-			System.out.println("Digite matricula: ");
+			System.out.println("========= Realizando Auntenticação ==========");
+			System.out.println("Digite matricula para acesso: ");
 			String matricula = s.nextLine();
-			System.out.println("Digite sua senha: ");
+			System.out.println("Digite sua senha para acesso: ");
 			String senha = s.nextLine();
 			ConnectionDB.Conectar();
 			String sql = "SELECT matricula_funcionario,senha_funcionario from funcionarios where matricula_funcionario = ?";
@@ -46,7 +45,6 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 				matriculaFuncionario = result.getString("matricula_funcionario");
 				senhaFuncionario = result.getString("senha_funcionario");
 			}
-//			System.out.println(matriculaFuncionario + " | " + senhaFuncionario);			
 			if(matricula.equals(matriculaFuncionario) && senha.equals(senhaFuncionario)) {
 				System.out.println("Login realizado com sucesso!!!");
 				return true;
