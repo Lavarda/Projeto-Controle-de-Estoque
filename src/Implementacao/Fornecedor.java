@@ -245,15 +245,36 @@ public class Fornecedor{
 		try {
 			ConnectionDB.Conectar();
 			PreparedStatement stm = ConnectionDB.preparedStament(sql);
-			stm.setString(1, this.getNomeFornecedor() );
-			stm.setString(2, this.getCnpjForncedor() );
-			stm.setString(3, this.getEmailFornecedor() );
-			stm.setString(4, this.getTelefoneFornecedor() );
-			stm.setString(5, this.getCepFornecedor() );
-			stm.setString(6, this.getCidadeFornecedor() );
-			stm.setString(7, this.getBairroFornecedor() );
-			stm.setString(8, this.getEstadoFornecedor() );
-			stm.setInt(9, this.getNumeroLoja() );
+			
+			System.out.println("Digite o nome do fornecedor que deseja cadastrar: ");
+			String nomeFornecedor = s.nextLine();
+			System.out.println("Digite o cnpj do fornecedor que deseja cadastrar: ");
+			String cnpjFornecedor = s.nextLine();
+			System.out.println("Digite o email do fornecedor que deseja cadastrar: ");
+			String emailFornecedor = s.nextLine();
+			System.out.println("Digite o telefone do fornecedor que deseja cadastrar: ");
+			String telefoneFornecedor = s.nextLine();
+			System.out.println("Digite o cep do fornecedor que deseja cadastrar: ");
+			String cepFornecedor = s.nextLine();
+			System.out.println("Digite a cidade do fornecedor que deseja cadastrar: ");
+			String cidadeFornecedor = s.nextLine();
+			System.out.println("Digite o bairro do fornecedor que deseja cadastrar: ");
+			String bairroFornecedor = s.nextLine();
+			System.out.println("Digite o estado do fornecedor que deseja cadastrar: ");
+			String estadoFornecedor = s.nextLine();
+			System.out.println("Digite o numero da loja do fornecedor que deseja cadastrar: ");
+			int numeroLoja = s.nextInt();
+			
+			stm.setString(1, nomeFornecedor );
+			stm.setString(2, cnpjFornecedor );
+			stm.setString(3, emailFornecedor );
+			stm.setString(4, telefoneFornecedor );
+			stm.setString(5, cepFornecedor );
+			stm.setString(6, cidadeFornecedor );
+			stm.setString(7, bairroFornecedor );
+			stm.setString(8, estadoFornecedor );
+			stm.setInt(9, numeroLoja );
+			
 			ConnectionDB.runPreparedStatment(stm);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -262,9 +283,9 @@ public class Fornecedor{
 		}
 	}
 	
-	public void editFornecedor() {
-		
-	}
+//	public void editFornecedor() {
+//		
+//	}
 	
 	public void removeFornecedor() {
 		String sql = "delete from fornecedor_table where nome_fornecedor = ?";
@@ -284,13 +305,13 @@ public class Fornecedor{
 		}
 	}
 	
-	public static void main(String args[]) throws SQLException {
-
-		Fornecedor c = new Fornecedor("Nome Fornecedor","Produto Fornecido","Data entrega","Cnpj Fornecedor",
-					 "vitorlavarda@gmail.com","48 998548350","88070150","Florianopolis","Estreito","SC",120);
+//	public static void main(String args[]) throws SQLException {
+//
+//		Fornecedor c = new Fornecedor("Nome Fornecedor","Produto Fornecido","Data entrega","Cnpj Fornecedor",
+//					 "vitorlavarda@gmail.com","48 998548350","88070150","Florianopolis","Estreito","SC",120);
 //		c.envioProduto();
 //		c.newFornecedor();
-		c.removeFornecedor();
-	}
+//		c.removeFornecedor();
+//	}
 	
 }
