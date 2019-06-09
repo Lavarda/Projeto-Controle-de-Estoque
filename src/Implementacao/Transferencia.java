@@ -1,13 +1,7 @@
 package Implementacao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.sun.tools.jdeprscan.scan.Scan;
-
-import Connections.ConnectionDB;
 
 public class Transferencia implements TransferenciaInterface {
 	

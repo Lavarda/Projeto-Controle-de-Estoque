@@ -85,7 +85,10 @@ public class Funcionario extends Administrador{
 	public void requisitarExclusaoProduto( Produtos p) {
 		p.excluirProduto();
 	}
-//--------------------- METODOS USUï¿½RIO -------------------//
+	public void requistarListagemProdutos(Produtos p) {
+		p.listarTodos();
+	}
+//--------------------- METODOS USUÁRIO -------------------//
 	
 	public void requisitarInclusaoUsuario(Usuario u) {
 		u.cadastrarUsuario();
@@ -96,7 +99,6 @@ public class Funcionario extends Administrador{
 	public void requisitarExclusaoUsuario(Usuario u) {
 		u.deletarUsuario();;
 	}
-	
 	public void requisitarHistorioCompras(Usuario u) {
 		u.produtosComprados();
 	}

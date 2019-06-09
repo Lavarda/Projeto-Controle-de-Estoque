@@ -25,7 +25,7 @@ public class MainPrincipal {
 		return opcao;
 	}
 	public static void setOpcao(int opcao) {
-		MainPrincipal.opcao = opcao;
+			MainPrincipal.opcao = opcao;
 	}
 	public static int getOpcaoSecundaria() {
 		return opcaoSecundaria;
@@ -37,24 +37,29 @@ public class MainPrincipal {
 	public static void main(String[] args) {
 		
 		do {
-			System.out.println("Você deseja logar como : \n "
+			System.out.println("Voc� deseja logar como : \n "
 			 		+ "1 - Funcionario \n "
 			 		+ "2 - Gerente \n "
 			 		+ "3 - Sair");
-			 opcao = s.nextInt();
-			 switch(opcao) {
-				 case 1:
-					 MainFuncionario.main(args);
-					 break;
-				 case 2:
-					 MainGerente.main(args);
-					 break;
-				 case 3:
-					 sistema = false;
-				 default:
-					 System.out.println("Opção Invalida!!");
-					 sistema = false; 
-			 }
+			try {
+				opcao = Integer.parseInt(s.nextLine());
+				 switch(opcao) {
+					 case 1:
+						 MainFuncionario.main(args);
+						 break;
+					 case 2:
+						 MainGerente.main(args);
+						 break;
+					 case 3:
+						 sistema = false;
+					 default:
+						 System.out.println("Opção Invalida!!");
+						 sistema = false; 
+				 }
+			}catch(NumberFormatException e){
+				System.out.println("Valor Inv�lido !!");
+			}
+			 
 		}while(sistema);
 	}
 }

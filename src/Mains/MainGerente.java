@@ -14,23 +14,27 @@ public class MainGerente extends MainPrincipal {
 		 					+ "2 - Excluir um Funcionario \n "
 		 					+ "3 - Alterar Senha Funcionario \n "
 		 					+ "4 - Voltar");
-				MainPrincipal.setOpcao(s.nextInt());
-				switch(MainPrincipal.getOpcao()) {case 1:
-		 				gerente.incluirFuncionario();
-		 				break;
-		 			case 2:
-		 				gerente.excluirFuncionario();
-		 				break;
-		 			case 3:
-		 				gerente.editarSenhaFuncionario();
-		 				break;
-		 			case 4:
+				try {
+					MainPrincipal.setOpcao(Integer.parseInt(s.nextLine()));
+					switch(MainPrincipal.getOpcao()) {case 1:
+			 				gerente.incluirFuncionario();
+			 				break;
+			 			case 2:
+			 				gerente.excluirFuncionario();
+			 				break;
+			 			case 3:
+			 				gerente.editarSenhaFuncionario();
+			 				break;
+			 			case 4:
+			 				MainPrincipal.main(args);
+			 				break;
+			 			default:
+		 				System.out.println("Opção invalida!!");
 		 				MainPrincipal.setSistema(false);
-		 				break;
-		 			default:
-	 				System.out.println("OpÃ§Ã£o invalida!!");
-	 				MainPrincipal.setSistema(false);
-	 				 break;
+		 				 break;
+					}
+				}catch(NumberFormatException e) {
+					System.out.println("Valor Inválido!!");
 				}
 			}while(MainPrincipal.isSistema());
 		}

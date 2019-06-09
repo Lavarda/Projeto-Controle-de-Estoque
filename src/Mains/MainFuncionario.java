@@ -17,34 +17,38 @@ public class MainFuncionario extends MainPrincipal{
  						+ "5 - RelatÃ³rios \n "
  						+ "6 - TransferÃªncias \n "
  						+ "7 - Sair");
- 				MainPrincipal.setOpcao(s.nextInt());
- 				switch(MainPrincipal.getOpcao()) {
-	 				case 1:
-	 					MainProdutos.main(args);
-	 					break;
-	 				case 2:
-	 					MainFornecedor.main(args);
-	 					break;
-	 				case 3:
-	 					MainFilial.main(args);
-	 					break;
-	 				case 4:
-	 					MainUsuarios.main(args);
-	 					break;
-	 				case 5:
-	 					MainRelatorios.main(args);
-	 					break;
-	 				case 6:
-	 					MainTransferencias.main(args);
-	 					break;
-	 				case 7:
-	 					MainPrincipal.setSistema(false);
-	 					break;
-	 				default:
-	 					System.out.println("OpÃ§Ã£o invalida!!");
-	 					MainPrincipal.setSistema(false);
-	 					break;
- 				}
+ 				try {
+ 					MainPrincipal.setOpcao(Integer.parseInt(s.nextLine()));
+ 	 				switch(MainPrincipal.getOpcao()) {
+ 		 				case 1:
+ 		 					MainProdutos.main(args);
+ 		 					break;
+ 		 				case 2:
+ 		 					MainFornecedor.main(args);
+ 		 					break;
+ 		 				case 3:
+ 		 					MainFilial.main(args);
+ 		 					break;
+ 		 				case 4:
+ 		 					MainUsuarios.main(args);
+ 		 					break;
+ 		 				case 5:
+ 		 					MainRelatorios.main(args);
+ 		 					break;
+ 		 				case 6:
+ 		 					MainTransferencias.main(args);
+ 		 					break;
+ 		 				case 7:
+ 		 					MainPrincipal.main(args);
+ 		 					break;
+ 		 				default:
+ 		 					System.out.println("Opção invalida!!");
+ 		 					MainPrincipal.setSistema(false);
+ 		 					break;
+ 	 				}
+ 				}catch(NumberFormatException e){
+ 					System.out.println("Valor inválido!!");
+ 				} 				 
 			}while(MainPrincipal.isSistema());
 		}
 	}

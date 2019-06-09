@@ -9,7 +9,6 @@ package Implementacao;
 import java.sql.*;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
 import Connections.ConnectionDB;
 
 public class Produtos { 
@@ -66,10 +65,10 @@ public class Produtos {
         
         System.out.println("Digite o nome do produto que deseja cadastrar: ");
         String nomeProduto = s.nextLine();
-        System.out.println("Digite o preÃ§o do produto que deseja cadastrar: ");
+        System.out.println("Digite o preço do produto que deseja cadastrar: ");
         String preco = s.nextLine();
         double precoProduto = Double.parseDouble(preco);
-        System.out.println("Digite o cÃ³digo da categoria do produto: ");
+        System.out.println("Digite o código da categoria do produto: ");
         int codCategoria = s.nextInt();
         
         stm.setString(1, nomeProduto);
@@ -99,7 +98,7 @@ public class Produtos {
     		ConnectionDB.runPreparedStatment(stm);
     		System.out.println("Produto alterado com exito.");
     	} catch (SQLException ex) {
-    		System.out.println("Erro ao alterar dados \nErro: "+ex);
+    		System.out.println("Erro ao alterar dados");
     	}
     	ConnectionDB.Desconectar();
     }
@@ -109,9 +108,9 @@ public class Produtos {
         try{
 			System.out.println("Codigo do produto que deseja excluir:");
 			int codProduto = s.nextInt(); 
-        	String sql = "DELETE FROM estoque WHERE cod_produto=?";
+        	String sql = "DELETE FROM produtos WHERE cod_produto=?";
         	PreparedStatement stm = ConnectionDB.preparedStament(sql);
-        	stm.setInt(1, codProduto );
+        	stm.setInt(1, codProduto);
         	ConnectionDB.runPreparedStatment(stm);
         	System.out.println("Produto excluido com exito.");
         } catch (SQLException ex) {
@@ -119,19 +118,25 @@ public class Produtos {
         }
         ConnectionDB.Desconectar();
     }
-    public static void listarTodos() throws Exception {
-    	ConnectionDB.Conectar();
+    public  void listarTodos(){
     		String sql = "SELECT * FROM PRODUTOS ORDER BY nome_produto";
-    		PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    		int codProduto;
+    		String nomeProduto;
+    		double precoProduto;
+    		int codCategoriaProduto;
     		try {
-    		ResultSet result = stm.executeQuery();
-    		String lista = "";
+    			ConnectionDB.Conectar();
+    			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    			ResultSet result = stm.executeQuery();
     		while(result.next()) {
-    			lista= lista + result.getInt("cod_produto") + " - " + result.getString("nome_produto") + " - " + result.getDouble("preco_produto") + " - " + result.getInt("cod_categoria") + " - " + result.getInt("qntd_produto") + "\n";
+    				codProduto = result.getInt("cod_produto");
+    				nomeProduto = result.getString("nome_produto");
+    				precoProduto = result.getDouble("preco_produto");
+    				codCategoriaProduto = result.getInt("cod_categoria");
+    				System.out.println(codProduto + "|" + nomeProduto + "|" + precoProduto + "|" + codCategoriaProduto);
     		}
-    		JOptionPane.showMessageDialog(null, lista);
     		}catch(SQLException ex) {
-    			JOptionPane.showMessageDialog(null, "Erro ao listar dados \nErro: "+ex);
+    			System.out.println("Erro ao listar dados \n");
     		}
     }
 }

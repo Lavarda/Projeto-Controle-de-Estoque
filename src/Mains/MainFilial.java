@@ -6,25 +6,29 @@ public class MainFilial extends MainFuncionario{
 	public static void main(String[] args) {
 		do {
 			Filiais filial = new Filiais();
-			System.out.println("Digite a opÃ§Ã£o desejada: \n "
+			System.out.println("Digite a opção desejada: \n "
 						+ "1 - Adicionar uma nova Filial \n "
 						+ "2 - Excluir uma Filial \n "
 						+ "3 - Voltar");
-			MainPrincipal.setOpcaoSecundaria(s.nextInt());
-			switch (MainPrincipal.getOpcaoSecundaria()) {
-				case 1:
-					funcionario.requisitarInclusaoFilial(filial);			 								
-					break;
-				case 2:
-					funcionario.requisitarExclusaoFilial(filial);
-					break;
-				case 3:
-					MainPrincipal.setSistemaSecundario(false);
-					break;
-				default:
-					System.out.println("OpÃ§Ã£o invalida!!");
-					break;
-			}
+			try {
+				MainPrincipal.setOpcao(Integer.parseInt(s.nextLine()));
+				switch (MainPrincipal.getOpcaoSecundaria()) {
+					case 1:
+						funcionario.requisitarInclusaoFilial(filial);			 								
+						break;
+					case 2:
+						funcionario.requisitarExclusaoFilial(filial);
+						break;
+					case 3:
+						MainFuncionario.main(args);
+						break;
+					default:
+						System.out.println("Opção invalida!!");
+						break;
+				}
+				}catch(NumberFormatException e) {
+					System.out.println("Valor inválido!!");
+				}
 		}while(MainPrincipal.isSistemaSecundario());
 		
 	}
