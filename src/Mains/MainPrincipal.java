@@ -37,7 +37,7 @@ public class MainPrincipal {
 	public static void main(String[] args) {
 		
 		do {
-			System.out.println("VocÃª deseja logar como : \n "
+			System.out.println("Você deseja logar como : \n "
 			 		+ "1 - Funcionario \n "
 			 		+ "2 - Gerente \n "
 			 		+ "3 - Sair");
