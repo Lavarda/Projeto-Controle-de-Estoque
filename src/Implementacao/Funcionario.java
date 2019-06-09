@@ -3,12 +3,14 @@ package Implementacao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
-
 import Connections.ConnectionDB;
 
 public class Funcionario extends Administrador{
+	
+	public Funcionario() {
+		
+	}
+	
 	public Funcionario(String matricula, String nome, String senha, Cargos cargo, Categoria categoria) {
 		super(matricula, nome, senha, cargo, categoria);
 	}
@@ -33,7 +35,7 @@ public class Funcionario extends Administrador{
 				telefoneFuncionario = result.getString("telefone_funcionario");
 			}
 			System.out.println("Nome: "+ nomeFuncionario + "\n" + "Cargo: " + cargoFuncionario + "\n" +"Matricula: "
-					+ matriculaFuncionario + "\n" + "Salário: " + salarioFuncionario + "\n" + "Telefone: " + telefoneFuncionario);
+					+ matriculaFuncionario + "\n" + "Salï¿½rio: " + salarioFuncionario + "\n" + "Telefone: " + telefoneFuncionario);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			e.getMessage();
@@ -53,7 +55,9 @@ public class Funcionario extends Administrador{
 		try {
 		String sql = "Select cod_funcionario from funcionarios where matricula_funcionario = ?";
 		PreparedStatement stm = ConnectionDB.preparedStament(sql);
-		stm.setString(1, this.getMatricula());
+		System.out.println("Sua matricula: ");
+		String matricula = s.nextLine();
+		stm.setString(1, matricula);
 		ResultSet rs = ConnectionDB.runPreparedSelect(stm);
 		while(rs.next()) {
 			codFuncionario = rs.getInt("cod_funcionario");
@@ -61,11 +65,15 @@ public class Funcionario extends Administrador{
 		return codFuncionario;
 		}catch(SQLException e){
 			e.printStackTrace();
-			System.err.println("Código do funcionario não foi encontrado!!!");
+			System.err.println("CÃ³digo do funcionario nÃ£o foi encontrado!!!");
 			return 0;
 		}finally {
 			ConnectionDB.Desconectar();
 		}		
+	}
+	
+	public void autenticacaoFuncionarios() {
+		this.realizarAutenticacao();
 	}
 //--------------------- METODOS PRODUTOS ------------------------//
 	public void requisitarInclusaoProduto(Produtos p) {
@@ -77,16 +85,22 @@ public class Funcionario extends Administrador{
 	public void requisitarExclusaoProduto( Produtos p) {
 		p.excluirProduto();
 	}
+	public void requistarListagemProdutos(Produtos p) {
+		p.listarTodos();
+	}
 //--------------------- METODOS USUÁRIO -------------------//
 	
 	public void requisitarInclusaoUsuario(Usuario u) {
-		u.cadastrarUsuario(this);
+		u.cadastrarUsuario();
 	}
 	public void requisitarAlteracaoUsuario(Usuario u) {
 		u.modificaUsuario();
 	}
 	public void requisitarExclusaoUsuario(Usuario u) {
 		u.deletarUsuario();;
+	}
+	public void requisitarHistorioCompras(Usuario u) {
+		u.produtosComprados();
 	}
 
 //--------------------- METODOS FILIAIS ---------------------//
@@ -112,6 +126,63 @@ public class Funcionario extends Administrador{
 	}
 	public void requisitarExclusaoFornecedor(Fornecedor forn){
 		forn.removeFornecedor();
+	}
+	
+// ------------------- METODOS RELATORIOS --------------------//
+	
+	public void requisitarRelatorioDevolucoes() {
+		Relatorios.devolucoesFornecedor();
+	}
+	
+	public void requisitarRelatoriosRecebiveis() {
+		Relatorios.recebidosFornecedor();
+	}
+	
+	public void requisitarRelatorioEstoque() {
+		Relatorios.estoqueInteiro();
+	}
+	
+	public void requisitarRelatoriosUsuarios() {
+		System.out.println("Digite a cidade na qual deseja verificar os usuÃ¡rios: ");
+		String cidade = s.nextLine();
+		try {
+			Relatorios.usuariosCidade(cidade);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void requisitarRelatoriosFornecedores() {
+		System.out.println("Digite o estado na qual deseja verificar os fornecedores: ");
+		String estado = s.nextLine();
+		try {
+			Relatorios.numerosFornecedores(estado);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+// -------------------------- METODOS TRANSFERENCIAS -------------------//
+	public void requisitarBuscaTransferenciasFiliais(TransferenciaFiliais transf) {
+		transf.buscaTransferencia();
+	}
+	public void requisitarTransferenciaFiliais(TransferenciaFiliais transf) {
+		transf.TransferirProduto();
+	}
+	public void requisitarhistoricoTransferenciasFiliais(TransferenciaFiliais transf) {
+		transf.historicoTransferencias();
+	}
+	
+	
+	public void requisitarbuscaTransferenciasFornecedor(TransferenciaFornecedor transf) {
+		transf.buscaTransferencia();
+	}
+	public void requisitarTransferenciaFornececedor(TransferenciaFornecedor transf) {
+		transf.TransferirProduto();
+	}
+	public void requisitarhistoricoTransferenciasFornecedores(TransferenciaFornecedor transf) {
+		transf.historicoTransferencias();
 	}
 	
 }

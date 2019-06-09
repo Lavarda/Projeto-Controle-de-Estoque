@@ -8,7 +8,7 @@ public  abstract class Pessoa {
 	private String cpf;
 	private String rg;
 	private String dataNascimento;
-	private String endereco; // Digitar CPF fazer busca automatizca do endereço
+	private String endereco;
 	private String sexo;
 	private String estadoCivil;
 	

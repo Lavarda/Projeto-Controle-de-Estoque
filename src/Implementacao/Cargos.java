@@ -1,5 +1,8 @@
 package Implementacao;
 
+import java.util.EnumSet;
+import java.util.Scanner;
+
 public enum Cargos {
 	VENDEDOR(1),
 	ASSISTENTE_ADMINISTRATIVO(2),
@@ -13,5 +16,16 @@ public enum Cargos {
 	
 	public int getcodCargo() {
 		return this.codCargo;
+	}
+	
+	public static int returnUserValueCodCargos() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Selecione a opção desejada de Cargos: ");
+		for (Cargos cargos : EnumSet.allOf(Cargos.class)) {
+			System.out.println(cargos.name() + " " + "("+ cargos.getcodCargo() +")");
+		}
+		int result = scanner.nextInt();
+		return result;
 	}
 }

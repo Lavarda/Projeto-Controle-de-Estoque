@@ -107,14 +107,32 @@ public class Filiais {
 		try {
 			ConnectionDB.Conectar();
 			PreparedStatement stm = ConnectionDB.preparedStament(sql);
-			stm.setString(1, this.getNomeFilial() );
-			stm.setString(2, this.getCpnjFilial() );
-			stm.setString(3, this.getTelefoneFilial() );
-			stm.setString(4, this.getCepFilial() );
-			stm.setString(5, this.getCidadeFilial() );
-			stm.setString(6, this.getBairroFilial() );
-			stm.setString(7, this.getEstado() );
-			stm.setInt(8, this.getNumeroEndereco() );
+			
+			System.out.println("Digite o nome da filial que deseja cadastrar: ");
+			String nomeFilial = s.nextLine();
+			System.out.println("Digite o cnpj da filial que deseja cadastrar: ");
+			String cnpjFilial = s.nextLine();
+			System.out.println("Digite o telefone da filial que deseja cadastrar: ");
+			String telefoneFilial = s.nextLine();
+			System.out.println("Digite o cep da filial que deseja cadastrar: ");
+			String cepFilial = s.nextLine();
+			System.out.println("Digite o cidade da filial que deseja cadastrar: ");
+			String cidadeFilial = s.nextLine();
+			System.out.println("Digite o bairro da filial que deseja cadastrar: ");
+			String bairroFilial = s.nextLine();
+			System.out.println("Digite o estado da filial que deseja cadastrar: ");
+			String estadoFilial = s.nextLine();
+			System.out.println("Digite o numero da loja da filial que deseja cadastrar: ");
+			int numeroFilial = s.nextInt();	
+			
+			stm.setString(1, nomeFilial );
+			stm.setString(2, cnpjFilial );
+			stm.setString(3, telefoneFilial );
+			stm.setString(4, cepFilial );
+			stm.setString(5, cidadeFilial );
+			stm.setString(6, bairroFilial );
+			stm.setString(7, estadoFilial );
+			stm.setInt(8, numeroFilial );
 			ConnectionDB.runPreparedStatment(stm);
 			System.out.println("Dados de endereço de filial inseridos");
 		} catch (SQLException e) {

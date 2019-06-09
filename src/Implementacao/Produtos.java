@@ -9,7 +9,6 @@ package Implementacao;
 import java.sql.*;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
 import Connections.ConnectionDB;
 
 public class Produtos { 
@@ -63,13 +62,24 @@ public class Produtos {
        try {
     	 String sql = "INSERT INTO PRODUTOS (nome_produto, preco_produto, cod_categoria) VALUES (?, ?, ?)";
         PreparedStatement stm = ConnectionDB.preparedStament(sql);
-        stm.setString(1, this.getNomeProduto());
-        stm.setDouble(2, this.getPreco());
-        stm.setInt(3,this.getCategoria().getCodCategoria());
+        
+        System.out.println("Digite o nome do produto que deseja cadastrar: ");
+        String nomeProduto = s.nextLine();
+        System.out.println("Digite o preço do produto que deseja cadastrar: ");
+        String preco = s.nextLine();
+        double precoProduto = Double.parseDouble(preco);
+        System.out.println("Digite o código da categoria do produto: ");
+        int codCategoria = s.nextInt();
+        
+        stm.setString(1, nomeProduto);
+        stm.setDouble(2, precoProduto);
+        stm.setInt(3, codCategoria);
+        
         ConnectionDB.runPreparedStatment(stm); 
-		JOptionPane.showMessageDialog(null, "Produto cadastrado com exito.");
+        
+		System.out.println("Produto cadastrado com exito.");
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Erro ao inserir dados \nErro: "+ex);
+			System.out.println("Erro ao inserir dados \nErro: "+ex);
 		}
        ConnectionDB.Desconectar();
     }
@@ -79,16 +89,16 @@ public class Produtos {
     	try{
     		String sql = "UPDATE PRODUTOS SET preco_produto = ? WHERE nome_produto=?";
 			System.out.println("Nome do produto que deseja alterar o preÃ§o:");
-			String nome_produto = s.nextLine();
+			String nomeProduto = s.nextLine();
 			System.out.println("Novo preÃ§o:");
 			Double preco = s.nextDouble(); 
     		PreparedStatement stm = ConnectionDB.preparedStament(sql);
     		stm.setDouble(1, preco);
-    		stm.setString(2, nome_produto);
+    		stm.setString(2, nomeProduto);
     		ConnectionDB.runPreparedStatment(stm);
-    		JOptionPane.showMessageDialog(null, "Produto alterado com exito.");
+    		System.out.println("Produto alterado com exito.");
     	} catch (SQLException ex) {
-    		JOptionPane.showMessageDialog(null,"Erro ao alterar dados \nErro: "+ex);
+    		System.out.println("Erro ao alterar dados");
     	}
     	ConnectionDB.Desconectar();
     }
@@ -97,30 +107,36 @@ public class Produtos {
     	ConnectionDB.Conectar();
         try{
 			System.out.println("Codigo do produto que deseja excluir:");
-			int cod_produto = s.nextInt(); 
-        	String sql = "DELETE FROM estoque WHERE cod_produto=?";
+			int codProduto = s.nextInt(); 
+        	String sql = "DELETE FROM produtos WHERE cod_produto=?";
         	PreparedStatement stm = ConnectionDB.preparedStament(sql);
-        	stm.setInt(1, cod_produto );
+        	stm.setInt(1, codProduto);
         	ConnectionDB.runPreparedStatment(stm);
-        	JOptionPane.showMessageDialog(null, "Produto excluido com exito.");
+        	System.out.println("Produto excluido com exito.");
         } catch (SQLException ex) {
-        	JOptionPane.showMessageDialog(null, "Erro ao excluir dados \nErro: "+ex);
+        	System.out.println("Erro ao excluir dados \nErro: "+ex);
         }
         ConnectionDB.Desconectar();
     }
-    public static void listarTodos() throws Exception {
-    	ConnectionDB.Conectar();
+    public  void listarTodos(){
     		String sql = "SELECT * FROM PRODUTOS ORDER BY nome_produto";
-    		PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    		int codProduto;
+    		String nomeProduto;
+    		double precoProduto;
+    		int codCategoriaProduto;
     		try {
-    		ResultSet result = stm.executeQuery();
-    		String lista = "";
+    			ConnectionDB.Conectar();
+    			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+    			ResultSet result = stm.executeQuery();
     		while(result.next()) {
-    			lista= lista + result.getInt("cod_produto") + " - " + result.getString("nome_produto") + " - " + result.getDouble("preco_produto") + " - " + result.getInt("cod_categoria") + " - " + result.getInt("qntd_produto") + "\n";
+    				codProduto = result.getInt("cod_produto");
+    				nomeProduto = result.getString("nome_produto");
+    				precoProduto = result.getDouble("preco_produto");
+    				codCategoriaProduto = result.getInt("cod_categoria");
+    				System.out.println(codProduto + "|" + nomeProduto + "|" + precoProduto + "|" + codCategoriaProduto);
     		}
-    		JOptionPane.showMessageDialog(null, lista);
     		}catch(SQLException ex) {
-    			JOptionPane.showMessageDialog(null, "Erro ao listar dados \nErro: "+ex);
+    			System.out.println("Erro ao listar dados \n");
     		}
     }
 }

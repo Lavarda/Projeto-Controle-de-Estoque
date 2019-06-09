@@ -1,5 +1,8 @@
 package Implementacao;
 
+import java.util.EnumSet;
+import java.util.Scanner;
+
 public enum Categoria {
 	NENHUMA(0),
 	ACHOCOLATADOS(1),
@@ -10,15 +13,27 @@ public enum Categoria {
 	BEBIDAS_ENERGETICAS(7),
 	BEBIDAS_ESPORTIVAS(8),
 	CAFES(9),
-	CHAS(10);
+	CHAS(10),
+	TODAS(11);
 	private final int codCategoria;
 	
 	private Categoria(int codCategoria) {
 		this.codCategoria = codCategoria;		
 	}
-
+	
 	public int getCodCategoria() {
-		return this.codCategoria;
+		return codCategoria;
+	}
+	public static int returnUserValueCodCategoria() {
+		int result;
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Selecione a opção desejada de Categorias: ");
+		for (Categoria categorias : EnumSet.allOf(Categoria.class)) {
+			System.out.println(categorias.name() + " " + "("+ categorias.getCodCategoria() +")");
+		}
+		 result = scanner.nextInt();
+		return result;
 	}
 	
 }
