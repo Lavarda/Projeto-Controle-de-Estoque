@@ -78,9 +78,9 @@ public class Produtos {
         
         ConnectionDB.runPreparedStatment(stm); 
         
-		JOptionPane.showMessageDialog(null, "Produto cadastrado com exito.");
+		System.out.println("Produto cadastrado com exito.");
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Erro ao inserir dados \nErro: "+ex);
+			System.out.println("Erro ao inserir dados \nErro: "+ex);
 		}
        ConnectionDB.Desconectar();
     }
@@ -97,9 +97,9 @@ public class Produtos {
     		stm.setDouble(1, preco);
     		stm.setString(2, nomeProduto);
     		ConnectionDB.runPreparedStatment(stm);
-    		JOptionPane.showMessageDialog(null, "Produto alterado com exito.");
+    		System.out.println("Produto alterado com exito.");
     	} catch (SQLException ex) {
-    		JOptionPane.showMessageDialog(null,"Erro ao alterar dados \nErro: "+ex);
+    		System.out.println("Erro ao alterar dados \nErro: "+ex);
     	}
     	ConnectionDB.Desconectar();
     }
@@ -113,9 +113,9 @@ public class Produtos {
         	PreparedStatement stm = ConnectionDB.preparedStament(sql);
         	stm.setInt(1, codProduto );
         	ConnectionDB.runPreparedStatment(stm);
-        	JOptionPane.showMessageDialog(null, "Produto excluido com exito.");
+        	System.out.println("Produto excluido com exito.");
         } catch (SQLException ex) {
-        	JOptionPane.showMessageDialog(null, "Erro ao excluir dados \nErro: "+ex);
+        	System.out.println("Erro ao excluir dados \nErro: "+ex);
         }
         ConnectionDB.Desconectar();
     }
