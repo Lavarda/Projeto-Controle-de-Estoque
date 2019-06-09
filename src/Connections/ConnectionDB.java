@@ -12,7 +12,7 @@ public class ConnectionDB {
     private static ResultSet result; // Resultado da query
 
     // HOST PADR�O USAR QUANDO ESTIVER SEM O DB "jdbc:postgresql://127.0.0.1:5432/"
-    private static String URL = "jdbc:postgresql://192.168.25.49:5432/"; // url do servidor 192.168.4.204:5432
+    private static String URL = "jdbc:postgresql://127.0.0.1:5432/"; // url do servidor 192.168.4.204:5432
     private static String USER = "projeto-estoque"; // usuario do db groupaps
     private static String PASSWORD = "projeto-estoque123"; // senha do usuario aps2019-1
     private static String DATABASE = "projeto-estoque"; // banco projeto_estoque
@@ -23,9 +23,6 @@ public class ConnectionDB {
             Class.forName("org.postgresql.Driver");
             db = DriverManager.getConnection(URL + DATABASE, USER, PASSWORD);
             db.setAutoCommit(false);
-            if( db != null ) {
-            	System.out.println("Conexão realizada com sucesso!");
-            }
         } catch (ClassNotFoundException cnfe) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar o driver");
             cnfe.printStackTrace();
@@ -102,7 +99,6 @@ public class ConnectionDB {
     public static void Desconectar() {
         try {
 			db.close();
-        	System.out.println("Conexão cancelada com sucesso!");
         } catch (SQLException onConClose) {
             JOptionPane.showMessageDialog(null, "Erro ao desconectar o banco");
             onConClose.printStackTrace();

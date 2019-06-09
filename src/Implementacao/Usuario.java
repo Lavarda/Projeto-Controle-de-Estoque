@@ -25,19 +25,54 @@ public class Usuario extends Pessoa{
 		super(nome,email,numeroCelular,cpf,rg,dataNascimento,endereco,sexo,estadoCivil);
 	}
 		
-	public void cadastrarUsuario(Funcionario f){
-		String sql = "insert into cadastro_usuario(nome_usuario,dt_nascimento_usuario,email_usuario,cpf_usuario"
-				   + ",rg_usuario,dt_cadastro_usuario,cod_funcionario) values(?,?,?,?,?,?,?,?)";
+	public void cadastrarUsuario(){
+		String sql = "insert into usuario_table(nome_usuario,dt_nascimento,email_usuario,sexo_usuario"
+				   + ",estado_civil,cpf_usuario,rg_usuario,dt_cadastro,telefone_usuario,cep_usuario,cidade_usuario,bairro_usuario,estado_usuario,numero_residencia_usuario) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			ConnectionDB.Conectar();
 			PreparedStatement stm = ConnectionDB.preparedStament(sql);
-			stm.setString(2, this.getNome() );
-			stm.setString(3, this.getDataNascimento());
-			stm.setString(4, this.getEmail());
-			stm.setString(5, this.getCpf());
-			stm.setString(6, this.getRg() );
-			stm.setString(7, this.dataFormatada);
-			stm.setInt(8,f.buscarCodFuncionario());
+			System.out.println("Digite o nome do usuário que deseja cadastrar: ");
+			String nomeUsuario = s.nextLine();
+			System.out.println("Digite a data de nascimento do usuário que deseja cadastrar: ");
+			String dataNascimento = s.nextLine();
+			System.out.println("Digite o email do usuário que deseja cadastrar: ");
+			String emailUsuario = s.nextLine();
+			System.out.println("Digite o sexo do usuário que deseja cadastrar: ");
+			String sexoUsuario = s.nextLine();
+			System.out.println("Digite o estado civil do usuário que deseja cadastrar: ");
+			String estadoCivilUsuario = s.nextLine();
+			System.out.println("Digite o cpf do usuário que deseja cadastrar: ");
+			String cpfUsuario = s.nextLine();
+			System.out.println("Digite o rg do usuário que deseja cadastrar: ");
+			String rgUsuario = s.nextLine();
+			String dataCadastro = this.dataFormatada;
+			System.out.println("Digite o telefone do usuário que deseja cadastrar: ");
+			String telefoneUsuario = s.nextLine();
+			System.out.println("Digite o cep do usuário que deseja cadastrar: ");
+			String cepUsuario = s.nextLine();
+			System.out.println("Digite o cidade do usuário que deseja cadastrar: ");
+			String cidadeUsuario = s.nextLine();
+			System.out.println("Digite o bairro do usuário que deseja cadastrar: ");
+			String bairroUsuario = s.nextLine();
+			System.out.println("Digite o estado do usuário que deseja cadastrar: ");
+			String estadoUsuario = s.nextLine();
+			System.out.println("Digite o numero da residencia do usuário que deseja cadastrar: ");
+			int numeroResidenciaUsuario = s.nextInt();
+			
+			stm.setString(1, nomeUsuario);
+			stm.setString(2, dataNascimento);
+			stm.setString(3, emailUsuario);
+			stm.setString(4, sexoUsuario);
+			stm.setString(5, estadoCivilUsuario);
+			stm.setString(6, cpfUsuario);
+			stm.setString(7, rgUsuario);
+			stm.setString(8, dataCadastro);
+			stm.setString(9, telefoneUsuario);
+			stm.setString(10, cepUsuario);
+			stm.setString(11,cidadeUsuario);
+			stm.setString(12, bairroUsuario);
+			stm.setString(13, estadoUsuario);
+			stm.setInt(14, numeroResidenciaUsuario);
 			ConnectionDB.runPreparedStatment(stm);
 		} catch (SQLException e) {
 			e.printStackTrace();

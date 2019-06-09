@@ -64,7 +64,9 @@ public class Funcionario extends Administrador{
 		try {
 		String sql = "Select cod_funcionario from funcionarios where matricula_funcionario = ?";
 		PreparedStatement stm = ConnectionDB.preparedStament(sql);
-		stm.setString(1, this.getMatricula());
+		System.out.println("Sua matricula: ");
+		String matricula = s.nextLine();
+		stm.setString(1, matricula);
 		ResultSet rs = ConnectionDB.runPreparedSelect(stm);
 		while(rs.next()) {
 			codFuncionario = rs.getInt("cod_funcionario");
@@ -102,13 +104,17 @@ public class Funcionario extends Administrador{
 //--------------------- METODOS USU�RIO -------------------//
 	
 	public void requisitarInclusaoUsuario(Usuario u) {
-		u.cadastrarUsuario(this);
+		u.cadastrarUsuario();
 	}
 	public void requisitarAlteracaoUsuario(Usuario u) {
 		u.modificaUsuario();
 	}
 	public void requisitarExclusaoUsuario(Usuario u) {
 		u.deletarUsuario();;
+	}
+	
+	public void requisitarHistorioCompras(Usuario u) {
+		u.produtosComprados();
 	}
 
 //--------------------- METODOS FILIAIS ---------------------//
@@ -134,6 +140,42 @@ public class Funcionario extends Administrador{
 	}
 	public void requisitarExclusaoFornecedor(Fornecedor forn){
 		forn.removeFornecedor();
+	}
+	
+// ------------------- METODOS RELATORIOS --------------------//
+	
+	public void requisitarRelatorioDevolucoes() {
+		Relatorios.devolucoesFornecedor();
+	}
+	
+	public void requisitarRelatoriosRecebiveis() {
+		Relatorios.recebidosFornecedor();
+	}
+	
+	public void requisitarRelatorioEstoque() {
+		Relatorios.estoqueInteiro();
+	}
+	
+	public void requisitarRelatoriosUsuarios() {
+		System.out.println("Digite a cidade na qual deseja verificar os usuários: ");
+		String cidade = s.nextLine();
+		try {
+			Relatorios.usuariosCidade(cidade);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void requisitarRelatoriosFornecedores() {
+		System.out.println("Digite o estado na qual deseja verificar os fornecedores: ");
+		String estado = s.nextLine();
+		try {
+			Relatorios.numerosFornecedores(estado);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

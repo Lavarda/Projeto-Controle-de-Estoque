@@ -1,4 +1,3 @@
-
 package interfaces;
 
 public class InterfaceLogin extends javax.swing.JFrame {

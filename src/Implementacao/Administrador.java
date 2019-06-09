@@ -46,14 +46,14 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 				matriculaFuncionario = result.getString("matricula_funcionario");
 				senhaFuncionario = result.getString("senha_funcionario");
 			}
-			System.out.println(matriculaFuncionario + " | " + senhaFuncionario);			
+//			System.out.println(matriculaFuncionario + " | " + senhaFuncionario);			
 			if(matricula.equals(matriculaFuncionario) && senha.equals(senhaFuncionario)) {
 				System.out.println("Login realizado com sucesso!!!");
 				return true;
 			}else{
 				System.err.println("E-mail ou senha incorreto");
 				return false;
-			}
+			}				
 		} catch (SQLException e) {
 			e.printStackTrace();
 			e.getMessage();
