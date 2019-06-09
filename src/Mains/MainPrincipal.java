@@ -3,6 +3,7 @@ package Mains;
 import java.util.Scanner;
 
 public class MainPrincipal {
+	
 	private static boolean sistema = true;
 	private static boolean sistemaSecundario = true;
 	private static int opcao;
@@ -37,7 +38,7 @@ public class MainPrincipal {
 	public static void main(String[] args) {
 		
 		do {
-			System.out.println("Você deseja logar como : \n "
+			System.out.println("Vocï¿½ deseja logar como : \n "
 			 		+ "1 - Funcionario \n "
 			 		+ "2 - Gerente \n "
 			 		+ "3 - Sair");
@@ -57,7 +58,7 @@ public class MainPrincipal {
 						 sistema = false; 
 				 }
 			}catch(NumberFormatException e){
-				System.out.println("Valor Inválido !!");
+				System.out.println("Valor Invï¿½lido !!");
 			}
 			 
 		}while(sistema);
