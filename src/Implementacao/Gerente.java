@@ -13,6 +13,9 @@ public class Gerente extends Administrador{
 		super(matricula, nome, senha,Cargos.GERENTE, categoria);
 	}
 	
+	public Gerente() {
+	}
+
 	public void incluirFuncionario(Funcionario funcionario) {
 		if(this.realizarAutenticacao() == true) {
 			try {
@@ -32,7 +35,40 @@ public class Gerente extends Administrador{
 			}
 		}
 	}
-	
+	public void incluirFuncionario() {
+		int codCategoriaFuncionario;
+		String nomeFuncionario;
+		String matriculaFuncionario;
+		String senhaFuncionario;
+		int codCargoFuncionario;
+		try {
+			System.out.println("Informe os dados do Funcionario: ");
+			System.out.println("========= CATEGORIA ===========");
+			codCategoriaFuncionario = Categoria.returnUserValueCodCategoria();
+			System.out.println("========= NOME ===========");
+			nomeFuncionario = Administrador.s.next();
+			System.out.println("========= MATRICULA ===========");
+			matriculaFuncionario = Administrador.s.next();
+			System.out.println("========= SENHA ===========");
+			senhaFuncionario = Administrador.s.next();
+			codCargoFuncionario = Cargos.returnUserValueCodCargos();
+			ConnectionDB.Conectar();
+			String sql = "INSERT INTO funcionarios(cod_categoria,nome_funcionario,matricula_funcionario,senha_funcionario,cod_cargo) VALUES (?,?,?,?,?)";
+			PreparedStatement stm = ConnectionDB.preparedStament(sql);
+			stm.setInt(1,codCategoriaFuncionario);
+			stm.setString(2,nomeFuncionario);
+			stm.setString(3,matriculaFuncionario);
+			stm.setString(4,senhaFuncionario);
+			stm.setInt(5, codCargoFuncionario);
+			ConnectionDB.runPreparedStatment(stm);
+			System.out.println("Funcionario Cadastrado com sucesso!!");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionDB.Desconectar();
+		}
+	}	
 	public void excluirFuncionario(Funcionario funcionario) {
 		if(this.realizarAutenticacao() == true) {
 			try {
@@ -49,6 +85,26 @@ public class Gerente extends Administrador{
 		}
 			
 	}
+	public void excluirFuncionario() {
+		if(this.realizarAutenticacao() == true) {
+			String matriculaFuncionario;
+			try {
+				System.out.println("Digite a matricula do funcionario que deseja excluir: ");
+				matriculaFuncionario = Administrador.s.next();
+				ConnectionDB.Conectar();
+				String sql = "DELETE FROM funcionarios WHERE matricula_funcionario = ?";
+				PreparedStatement stm = ConnectionDB.preparedStament(sql);
+				stm.setString(1, matriculaFuncionario);
+				ConnectionDB.runPreparedStatment(stm);
+				System.out.println("Funcionario excluido com sucesso!!");
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				ConnectionDB.Desconectar();
+			}			
+		}
+	}
 	public void editarSenhaFuncionario(Funcionario funcionario, String novaSenha) {
 		if(this.realizarAutenticacao() == true) {
 			try {
@@ -58,6 +114,29 @@ public class Gerente extends Administrador{
 				stm.setString(1, novaSenha);
 				stm.setString(2, funcionario.getMatricula());
 				ConnectionDB.runPreparedStatment(stm);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				ConnectionDB.Desconectar();
+			}			
+		}
+	}
+	public void editarSenhaFuncionario() {
+		if(this.realizarAutenticacao() == true) {
+			String matriculaFuncionario;
+			String novaSenhaFuncionario;
+			try {
+				System.out.println("Digite a matricula do funcionario que deseja alterar senha: ");
+				matriculaFuncionario = Administrador.s.next();
+				System.out.println("Digite sua nova senha: ");
+				novaSenhaFuncionario = Administrador.s.next();
+				ConnectionDB.Conectar();
+				String sql = "UPDATE funcionarios SET senha_funcionario = ? WHERE matricula_funcionario = ?";
+				PreparedStatement stm = ConnectionDB.preparedStament(sql);
+				stm.setString(1, novaSenhaFuncionario);
+				stm.setString(2, matriculaFuncionario);
+				ConnectionDB.runPreparedStatment(stm);
+				System.out.println("Nova Senha Cadastrada com sucesso!!");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {

@@ -75,12 +75,39 @@ public class Main {
 			 					sistema = false;
 			 					System.out.println("Saiu do sistema");
 			 					break;
+			 				default:
+			 					System.out.println("Opção inválida!!");
+			 					sistema = false;
+			 					break;
 			 			}
 			 		} while ( sistema );
 			 		
 			 		break;
 			 	case 2 :
-			 		Gerente gerente = new Gerente("1231231232","asdfasdfads","asdasdasda", Categoria.TODAS);
+			 		 Gerente gerente = new Gerente();
+			 		 gerente.realizarAutenticacao();
+			 		 	do {
+			 		 		System.out.println("Digite a opção desejada: \n" + "1 - Adcionar um novo Funcionario \n" + 
+			 		 							"2 - excluir um Funcionario \n" + "3 - Alterar Senha Funcionario \n" + "4 - Voltar");
+			 		 		opcao = s.nextInt();
+			 		 		switch(opcao) {
+			 		 		case 1:
+			 		 			gerente.incluirFuncionario();
+			 		 			break;
+			 		 		case 2:
+			 		 			gerente.excluirFuncionario();
+			 		 			break;
+			 		 		case 3:
+			 		 			gerente.editarSenhaFuncionario();
+			 		 			break;
+			 		 		case 4:
+			 		 			sistema = false;
+			 		 		default:
+			 		 			System.out.println("Opção invalida");
+			 		 			sistema = false;
+			 		 			break;
+			 		 		}
+			 		 	} while(sistema);
 			 		break;
 			 	case 3 :
 			 		sistema = false;

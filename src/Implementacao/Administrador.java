@@ -11,7 +11,7 @@ import Connections.ConnectionDB;
 
 public abstract class Administrador extends Pessoa implements Autenticacao {
 	
-	private static Scanner s = new Scanner(System.in);
+	protected static Scanner s = new Scanner(System.in);
 	private String senha;
 	private String matricula;
 	private Cargos cargo;

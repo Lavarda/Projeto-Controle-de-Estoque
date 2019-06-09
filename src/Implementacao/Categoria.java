@@ -1,5 +1,8 @@
 package Implementacao;
 
+import java.util.EnumSet;
+import java.util.Scanner;
+
 public enum Categoria {
 	NENHUMA(0),
 	ACHOCOLATADOS(1),
@@ -17,9 +20,19 @@ public enum Categoria {
 	private Categoria(int codCategoria) {
 		this.codCategoria = codCategoria;		
 	}
-
+	
 	public int getCodCategoria() {
-		return this.codCategoria;
+		return codCategoria;
+	}
+	public static int returnUserValueCodCategoria() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Selecione a opção desejada de Categorias: ");
+		for (Categoria categorias : EnumSet.allOf(Categoria.class)) {
+			System.out.println(categorias.name() + " " + "("+ categorias.getCodCategoria() +")");
+		}
+		int result = scanner.nextInt();
+		scanner.close();
+		return result;
 	}
 	
 }
