@@ -41,13 +41,13 @@ public class Main {
 			 						opcaoSecundaria = s.nextInt();
 			 						switch (opcaoSecundaria) {
 			 							case 1:
-			 								produto.inserirProduto();			 								
+			 								funcionario.requisitarInclusaoProduto(produto);;			 								
 			 								break;
 			 							case 2:
-			 								produto.excluirProduto();
+			 								funcionario.requisitarExclusaoProduto(produto);
 			 								break;
 			 							case 3:
-			 								produto.alterarProduto();
+			 								funcionario.requisitarAlteracaoProduto(produto);
 			 								break;
 			 							case 4:
 			 								sistemaSecundario = false;
@@ -55,13 +55,46 @@ public class Main {
 			 						
 			 					} while ( sistemaSecundario );
 			 					break;
+			 					
 			 				case 2:
-			 					Fornecedor fornecedor = new Fornecedor();
-			 					System.out.println("Fornecedores");
+			 					
+			 					do {
+			 						Fornecedor fornecedor = new Fornecedor();
+			 						System.out.println("Digite o que deseja fazer: \n 1 - Adicionar um novo Fornecedor \n 2 - Excluir um Fornecedor \n 3 - Voltar");
+			 						opcaoSecundaria = s.nextInt();
+			 						switch (opcaoSecundaria) {
+										case 1:
+											funcionario.requisitarInclusaoFornecedor(fornecedor);
+											break;
+										case 2:
+											funcionario.requisitarExclusaoFornecedor(fornecedor);
+											break;
+										case 3:
+											sistemaSecundario = false;
+									}
+			 					} while ( sistemaSecundario );
 			 					break;
+			 					
 			 				case 3:
-			 					System.out.println("Filiais");
+			 					
+			 					do {
+			 						Filiais filial = new Filiais();
+			 						System.out.println("Digite o que deseja fazer: \n 1 - Adicionar uma nova Filial \n 2 - Excluir uma Filial \n 3 - Voltar");
+			 						opcaoSecundaria = s.nextInt();
+			 						switch ( opcaoSecundaria ) {
+			 							case 1:
+			 								funcionario.requisitarInclusaoFilial(filial);
+			 								break;
+			 							case 2:
+			 								funcionario.requisitarExclusaoFilial(filial);
+			 								break;
+			 							case 3:
+			 								sistemaSecundario = false;
+			 						}
+			 						
+			 					} while ( sistemaSecundario );
 			 					break;
+			 					
 			 				case 4:
 			 					System.out.println("Usuários");
 			 					break;
