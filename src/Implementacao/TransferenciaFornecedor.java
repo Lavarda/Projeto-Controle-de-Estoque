@@ -27,7 +27,7 @@ public class TransferenciaFornecedor extends Transferencia{
 				String qr = "select * from transferencia_fornecedor where cod_saida = ?";
 				int codSaidaProdutoFornecedor;
 				try {
-					System.out.println("Digite o Código de Saída de Fornecedor: \n");
+					System.out.println("Digite o CÃ³digo de SaÃ­da de Fornecedor: \n");
 					codSaidaProdutoFornecedor = scan.nextInt();
 					ConnectionDB.Conectar();
 					PreparedStatement stm = ConnectionDB.preparedStament(qr);
@@ -91,12 +91,12 @@ public class TransferenciaFornecedor extends Transferencia{
 				int codFornecedor;
 				String dataSaidaProduto;
 				try {
-					System.out.println("Digite os valores abaixo para inserção \n");
-					System.out.println("Código do Produto: \n");
+					System.out.println("Digite os valores abaixo para inserÃ§Ã£o \n");
+					System.out.println("CÃ³digo do Produto: \n");
 					codProduto = scan.nextInt();
-					System.out.println("Código do Fornecedor: \n");
+					System.out.println("CÃ³digo do Fornecedor: \n");
 					codFornecedor = scan.nextInt();
-					System.out.println("Data de Saída do Produto");
+					System.out.println("Data de SaÃ­da do Produto");
 					dataSaidaProduto = scan.next();
 					ConnectionDB.Conectar();
 					PreparedStatement stm = ConnectionDB.preparedStament(qr);

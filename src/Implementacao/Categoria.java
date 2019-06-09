@@ -28,7 +28,7 @@ public enum Categoria {
 		int result;
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Selecione a opção desejada de Categorias: ");
+		System.out.println("Selecione a opÃ§Ã£o desejada de Categorias: ");
 		for (Categoria categorias : EnumSet.allOf(Categoria.class)) {
 			System.out.println(categorias.name() + " " + "("+ categorias.getCodCategoria() +")");
 		}

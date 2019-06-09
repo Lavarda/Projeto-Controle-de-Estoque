@@ -11,7 +11,7 @@ public class MainGerente extends MainPrincipal {
 			do {
 				System.out.println("Digite a opção desejada: \n "
 		 					+ "1 - Adcionar um novo Funcionario \n "
-		 					+ "2 - excluir um Funcionario \n "
+		 					+ "2 - Excluir um Funcionario \n "
 		 					+ "3 - Alterar Senha Funcionario \n "
 		 					+ "4 - Voltar");
 				MainPrincipal.setOpcao(s.nextInt());

@@ -65,7 +65,7 @@ public class Funcionario extends Administrador{
 		return codFuncionario;
 		}catch(SQLException e){
 			e.printStackTrace();
-			System.err.println("C�digo do funcionario n�o foi encontrado!!!");
+			System.err.println("Código do funcionario não foi encontrado!!!");
 			return 0;
 		}finally {
 			ConnectionDB.Desconectar();

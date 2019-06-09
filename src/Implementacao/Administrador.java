@@ -31,7 +31,7 @@ public abstract class Administrador extends Pessoa implements Autenticacao {
 		try {
 			String matriculaFuncionario = null;
 			String senhaFuncionario = null;
-			System.out.println("========= Realizando Auntenticação ==========");
+			System.out.println("========= Realizando AuntenticaÃ§Ã£o ==========");
 			System.out.println("Digite matricula para acesso: ");
 			String matricula = s.nextLine();
 			System.out.println("Digite sua senha para acesso: ");

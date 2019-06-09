@@ -37,23 +37,23 @@ public class MainPrincipal {
 	public static void main(String[] args) {
 		
 		do {
-			System.out.println("Você deseja logar como : \n "
+			System.out.println("VocÃª deseja logar como : \n "
 			 		+ "1 - Funcionario \n "
 			 		+ "2 - Gerente \n "
 			 		+ "3 - Sair");
 			 opcao = s.nextInt();
 			 switch(opcao) {
-			 case 1:
-				 MainFuncionario.main(args);
-				 break;
-			 case 2:
-				 MainGerente.main(args);
-				 break;
-			 case 3:
-				 sistema = false;
-			 default:
-				 System.out.println("Opção Inválida!!");
-				 sistema = false; 
+				 case 1:
+					 MainFuncionario.main(args);
+					 break;
+				 case 2:
+					 MainGerente.main(args);
+					 break;
+				 case 3:
+					 sistema = false;
+				 default:
+					 System.out.println("OpÃ§Ã£o Invalida!!");
+					 sistema = false; 
 			 }
 		}while(sistema);
 	}

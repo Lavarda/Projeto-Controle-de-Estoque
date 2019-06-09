@@ -6,10 +6,10 @@ public class MainUsuarios extends MainFuncionario {
 	public static void main(String[] args) {
 		do {
 			Usuario usuario = new Usuario();
-			System.out.println("Digite a opÁ„o desejada: \n "
-						+ "1 - Adicionar um novo usu·rio \n "
-						+ "2 - Modificar um usu·rio \n "
-						+ "3 - Excluir um usu·rio \n "
+			System.out.println("Digite a op√ß√£o desejada: \n "
+						+ "1 - Adicionar um novo usu√°rio \n "
+						+ "2 - Modificar um usu√°rio \n "
+						+ "3 - Excluir um usu√°rio \n "
 						+ "4 - Verificar todos produtos comprados \n "
 						+ "5 - Voltar");
 			MainPrincipal.setOpcaoSecundaria(s.nextInt());
@@ -30,7 +30,7 @@ public class MainUsuarios extends MainFuncionario {
 					MainPrincipal.setSistemaSecundario(false);
 					break;
 				default:
-					System.out.println("OpÁ„o invalida!!");
+					System.out.println("Op√ß√£o invalida!!");
 					break;
 			}
 		}while(MainPrincipal.isSistemaSecundario());

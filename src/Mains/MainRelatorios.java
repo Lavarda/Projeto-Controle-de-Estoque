@@ -3,12 +3,12 @@ package Mains;
 public class MainRelatorios extends MainFuncionario{
 	public static void main(String[] args) {
 		do {
-				System.out.println("Digite a opção desejada: \n "
-						+ "1 - Relatório de devoluções aos fornecedores \n "
-						+ "2 - Relatório de itens recebidos pelo fornecedor \n "
-						+ "3 - Relatório do estoque \n "
-						+ "4 - Número de fornecedores de determinado estado \n"
-						+ "5 - Usuários cadastrados de determinada cidade \n "
+				System.out.println("Digite a opÃ§Ã£o desejada: \n "
+						+ "1 - RelatÃ³rio de devoluÃ§oes aos fornecedores \n "
+						+ "2 - RelatÃ³rio de itens recebidos pelo fornecedor \n "
+						+ "3 - RelatÃ³rio do estoque \n "
+						+ "4 - NÃºmero de fornecedores de determinado estado \n "
+						+ "5 - UsuÃ¡rios cadastrados de determinada cidade \n "
 						+ "6 - Voltar");
 				MainPrincipal.setOpcaoSecundaria(s.nextInt());
 				switch ( MainPrincipal.getOpcaoSecundaria() ) {
@@ -31,9 +31,9 @@ public class MainRelatorios extends MainFuncionario{
 						MainPrincipal.setSistemaSecundario(false);
 						break;
 					default:
-						System.out.println("Opção invalida!!");
+						System.out.println("OpÃ§Ã£o invalida!!");
 						break;
 				}
-			} while ( MainPrincipal.isSistema());
+			} while ( MainPrincipal.isSistemaSecundario() );
 	}
 }

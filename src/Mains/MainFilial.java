@@ -22,7 +22,7 @@ public class MainFilial extends MainFuncionario{
 					MainPrincipal.setSistemaSecundario(false);
 					break;
 				default:
-					System.out.println("Opção invalida!!");
+					System.out.println("OpÃ§Ã£o invalida!!");
 					break;
 			}
 		}while(MainPrincipal.isSistemaSecundario());

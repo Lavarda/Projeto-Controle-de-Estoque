@@ -6,7 +6,7 @@ public class MainProdutos extends MainFuncionario{
 	public static void main(String[] args) {
 		do {
 			Produtos produto = new Produtos();
-			System.out.println("Digite a opção desejada: \n "
+			System.out.println("Digite a opÃ§Ã£o desejada: \n "
 					+ "1 - Adicionar um novo Produto \n "
 					+ "2 - Excluir um produto \n "
 					+ "3 - Editar um Produto \n "
@@ -26,7 +26,7 @@ public class MainProdutos extends MainFuncionario{
 					MainPrincipal.setSistemaSecundario(false);
 					break;
 				default:
-					System.out.println("Opção invalida!!");
+					System.out.println("OpÃ§Ã£o invalida!!");
 					break;
 			}
 		}while(MainPrincipal.isSistemaSecundario());
