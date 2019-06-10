@@ -52,7 +52,7 @@ public class MainPrincipal {
 						 MainGerente.main(args);
 						 break;
 					 case 3:
-						 sistema = false;
+						 System.exit(0);
 						 break;
 					 default:
 						 System.out.println("Opção Invalida!!");

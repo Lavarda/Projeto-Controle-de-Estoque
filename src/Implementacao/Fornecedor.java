@@ -263,7 +263,7 @@ public class Fornecedor{
 			System.out.println("Digite o estado do fornecedor que deseja cadastrar: ");
 			String estadoFornecedor = s.nextLine();
 			System.out.println("Digite o numero da loja do fornecedor que deseja cadastrar: ");
-			int numeroLoja = s.nextInt();
+			int numeroLoja = Integer.parseInt(s.nextLine());
 			
 			stm.setString(1, nomeFornecedor );
 			stm.setString(2, cnpjFornecedor );
@@ -276,8 +276,8 @@ public class Fornecedor{
 			stm.setInt(9, numeroLoja );
 			
 			ConnectionDB.runPreparedStatment(stm);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException | NumberFormatException e) {
+			System.out.println("Erro ao cadastrar fornecedor" + e);
 		}finally {
 			ConnectionDB.Desconectar();
 		}

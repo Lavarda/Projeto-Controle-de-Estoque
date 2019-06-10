@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import Connections.ConnectionDB;
 import Implementacao.Transferencia;
+import Implementacao.TransferenciaFiliais;
 
 public class transferenciaFiliais extends javax.swing.JInternalFrame {
 
@@ -222,15 +223,10 @@ public class transferenciaFiliais extends javax.swing.JInternalFrame {
     		codProduto = inputNomeProdutoCadastroCliente.getText();
     		int new_cod_produto = Integer.parseInt(codProduto);
     		
-    		Transferencia t = new Transferencia();
-    		t.transferirProdutoFilial(new_cod_produto, new_cod_filial, data);
-    		
+    		TransferenciaFiliais t = new TransferenciaFiliais();
+    		t.TransferirProduto(new_cod_produto, new_cod_filial, data);
     	}catch(NumberFormatException e) {
-    		
-    	} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	}
     }                                                           
 
     private javax.swing.JButton botaoLimparAdicionarProduto;

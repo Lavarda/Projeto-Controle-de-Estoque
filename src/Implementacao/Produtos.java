@@ -66,8 +66,7 @@ public class Produtos {
         System.out.println("Digite o nome do produto que deseja cadastrar: ");
         String nomeProduto = s.nextLine();
         System.out.println("Digite o preço do produto que deseja cadastrar: ");
-        String preco = s.nextLine();
-        double precoProduto = Double.parseDouble(preco);
+        double precoProduto = Double.parseDouble(s.nextLine());
         System.out.println("Digite o código da categoria do produto: ");
         int codCategoria = s.nextInt();
         
@@ -78,8 +77,8 @@ public class Produtos {
         ConnectionDB.runPreparedStatment(stm); 
         
 		System.out.println("Produto cadastrado com exito.");
-		} catch (SQLException ex) {
-			System.out.println("Erro ao inserir dados \nErro: "+ex);
+		} catch (SQLException | NumberFormatException ex) {
+			System.out.println("Erro ao inserir dados \nErro: "+ ex);
 		}
        ConnectionDB.Desconectar();
     }
@@ -88,17 +87,17 @@ public class Produtos {
     	ConnectionDB.Conectar();
     	try{
     		String sql = "UPDATE PRODUTOS SET preco_produto = ? WHERE nome_produto=?";
-			System.out.println("Nome do produto que deseja alterar o preÃ§o:");
+			System.out.println("Nome do produto que deseja alterar o preço:");
 			String nomeProduto = s.nextLine();
-			System.out.println("Novo preÃ§o:");
-			Double preco = s.nextDouble(); 
+			System.out.println("Novo preço:");
+			double preco = Double.parseDouble(s.nextLine()); 
     		PreparedStatement stm = ConnectionDB.preparedStament(sql);
     		stm.setDouble(1, preco);
     		stm.setString(2, nomeProduto);
     		ConnectionDB.runPreparedStatment(stm);
     		System.out.println("Produto alterado com exito.");
-    	} catch (SQLException ex) {
-    		System.out.println("Erro ao alterar dados");
+    	} catch (SQLException| NumberFormatException ex) {
+    		System.out.println("Erro ao alterar dados"+ ex);
     	}
     	ConnectionDB.Desconectar();
     }
@@ -107,13 +106,13 @@ public class Produtos {
     	ConnectionDB.Conectar();
         try{
 			System.out.println("Codigo do produto que deseja excluir:");
-			int codProduto = s.nextInt(); 
+			int codProduto = Integer.parseInt(s.nextLine()); 
         	String sql = "DELETE FROM produtos WHERE cod_produto=?";
         	PreparedStatement stm = ConnectionDB.preparedStament(sql);
         	stm.setInt(1, codProduto);
         	ConnectionDB.runPreparedStatment(stm);
         	System.out.println("Produto excluido com exito.");
-        } catch (SQLException ex) {
+        } catch (SQLException | NumberFormatException ex) {
         	System.out.println("Erro ao excluir dados \nErro: "+ex);
         }
         ConnectionDB.Desconectar();
@@ -136,7 +135,7 @@ public class Produtos {
     				System.out.println(codProduto + "|" + nomeProduto + "|" + precoProduto + "|" + codCategoriaProduto);
     		}
     		}catch(SQLException ex) {
-    			System.out.println("Erro ao listar dados \n");
+    			System.out.println("Erro ao listar dados \n" + ex);
     		}
     }
 }

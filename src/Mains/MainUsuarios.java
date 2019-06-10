@@ -16,13 +16,17 @@ public class MainUsuarios extends MainFuncionario {
 				MainPrincipal.setOpcaoSecundaria(Integer.parseInt(s.nextLine()));
 				switch (MainPrincipal.getOpcaoSecundaria()) {
 					case 1:
-						funcionario.requisitarInclusaoUsuario(usuario);			
+						funcionario.requisitarInclusaoUsuario(usuario);
+						break;
 					case 2:
 						funcionario.requisitarAlteracaoUsuario(usuario);
+						break;
 					case 3:
 						funcionario.requisitarExclusaoUsuario(usuario);
+						break;
 					case 4:
 						funcionario.requisitarHistorioCompras(usuario);
+						break;
 					case 5:
 						MainFuncionario.main(args);
 						break;

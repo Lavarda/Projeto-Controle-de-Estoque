@@ -21,8 +21,8 @@ public class TransferenciaFiliais extends Transferencia{
 		String qr = "select * from transferencia_filial where cod_transferencia = ?";
 		int codTranferenciaFilial;
 		try {
-			System.out.println("Digite o código de Tranferencia para Filiais: \n");
-			codTranferenciaFilial =  scan.nextInt();
+			System.out.println("Digite o c�digo de Tranferencia para Filiais: \n");
+			codTranferenciaFilial =  Integer.parseInt(scan.nextLine());
 			ConnectionDB.Conectar();
 			PreparedStatement stm = ConnectionDB.preparedStament(qr);
 			stm.setInt(1, codTranferenciaFilial);
@@ -31,8 +31,8 @@ public class TransferenciaFiliais extends Transferencia{
 				TransferenciaFiliais transf = new TransferenciaFiliais(result.getInt("cod_transferencia"),result.getInt("cod_produto"), result.getInt("cod_filial"), result.getString("dt_saida_produto_transferencia"));
 				transf.mostrarTransferencia();	
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException | NumberFormatException e) {
+			System.out.println("Erro ao realizar transferencia" + e);
 		}finally {
 			ConnectionDB.Desconectar();
 		}			
@@ -87,11 +87,11 @@ public class TransferenciaFiliais extends Transferencia{
 				try {
 					System.out.println("Digite os valores abaixo para inserção \n");
 					System.out.println("Código do Produto: \n");
-					codProduto = scan.nextInt();
+					codProduto = Integer.parseInt(scan.nextLine());
 					System.out.println("Código do Fornecedor: \n");
-					codfilial = scan.nextInt();
-					System.out.println("Data de Saída do Produto");
-					dataSaidaProduto = scan.next();
+					codfilial = Integer.parseInt(scan.nextLine());
+					System.out.println("Data de Sa�da do Produto");
+					dataSaidaProduto = scan.nextLine();
 					ConnectionDB.Conectar();
 					PreparedStatement stm = ConnectionDB.preparedStament(qr);
 					stm.setInt(1, codProduto);
@@ -99,8 +99,8 @@ public class TransferenciaFiliais extends Transferencia{
 					stm.setInt(3, codfilial);
 					System.out.println("Transferencia realizada com sucesso!");
 					ConnectionDB.runPreparedStatment(stm);
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException | NumberFormatException e) {
+					System.out.println("Erro ao realizar transferencia" + e);
 				}finally {
 					ConnectionDB.Desconectar();
 				}		

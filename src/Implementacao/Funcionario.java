@@ -119,7 +119,6 @@ public class Funcionario extends Administrador{
 //--------------------- METODOS FORNECEDOR ------------------//
 	public void requisitarInclusaoFornecedor(Fornecedor forn){
 		forn.newFornecedor();
-		
 	}
 	public void requisitarAlteracaoFornecedor(){
 		
@@ -145,23 +144,13 @@ public class Funcionario extends Administrador{
 	public void requisitarRelatoriosUsuarios() {
 		System.out.println("Digite a cidade na qual deseja verificar os usuários: ");
 		String cidade = s.nextLine();
-		try {
-			Relatorios.usuariosCidade(cidade);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Relatorios.usuariosCidade(cidade);
 	}
 	
 	public void requisitarRelatoriosFornecedores() {
 		System.out.println("Digite o estado na qual deseja verificar os fornecedores: ");
 		String estado = s.nextLine();
-		try {
-			Relatorios.numerosFornecedores(estado);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Relatorios.numerosFornecedores(estado);
 	}
 // -------------------------- METODOS TRANSFERENCIAS -------------------//
 	public void requisitarBuscaTransferenciasFiliais(TransferenciaFiliais transf) {
