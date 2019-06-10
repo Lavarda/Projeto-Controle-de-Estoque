@@ -31,33 +31,33 @@ public class Usuario extends Pessoa{
 		try {
 			ConnectionDB.Conectar();
 			PreparedStatement stm = ConnectionDB.preparedStament(sql);
-			System.out.println("Digite o nome do usuário que deseja cadastrar: ");
+			System.out.println("Digite o nome do usu�rio que deseja cadastrar: ");
 			String nomeUsuario = s.nextLine();
-			System.out.println("Digite a data de nascimento do usuário que deseja cadastrar: ");
+			System.out.println("Digite a data de nascimento do usu�rio que deseja cadastrar: ");
 			String dataNascimento = s.nextLine();
-			System.out.println("Digite o email do usuário que deseja cadastrar: ");
+			System.out.println("Digite o email do usu�rio que deseja cadastrar: ");
 			String emailUsuario = s.nextLine();
-			System.out.println("Digite o sexo do usuário que deseja cadastrar: ");
+			System.out.println("Digite o sexo do usu�rio que deseja cadastrar: ");
 			String sexoUsuario = s.nextLine();
-			System.out.println("Digite o estado civil do usuário que deseja cadastrar: ");
+			System.out.println("Digite o estado civil do usu�rio que deseja cadastrar: ");
 			String estadoCivilUsuario = s.nextLine();
-			System.out.println("Digite o cpf do usuário que deseja cadastrar: ");
+			System.out.println("Digite o cpf do usu�rio que deseja cadastrar: ");
 			String cpfUsuario = s.nextLine();
-			System.out.println("Digite o rg do usuário que deseja cadastrar: ");
+			System.out.println("Digite o rg do usu�rio que deseja cadastrar: ");
 			String rgUsuario = s.nextLine();
 			String dataCadastro = this.dataFormatada;
-			System.out.println("Digite o telefone do usuário que deseja cadastrar: ");
+			System.out.println("Digite o telefone do usu�rio que deseja cadastrar: ");
 			String telefoneUsuario = s.nextLine();
 			System.out.println("Digite o cep do usuário que deseja cadastrar: ");
 			String cepUsuario = s.nextLine();
-			System.out.println("Digite o cidade do usuário que deseja cadastrar: ");
+			System.out.println("Digite o cidade do usu�rio que deseja cadastrar: ");
 			String cidadeUsuario = s.nextLine();
-			System.out.println("Digite o bairro do usuário que deseja cadastrar: ");
+			System.out.println("Digite o bairro do usu�rio que deseja cadastrar: ");
 			String bairroUsuario = s.nextLine();
-			System.out.println("Digite o estado do usuário que deseja cadastrar: ");
+			System.out.println("Digite o estado do usu�rio que deseja cadastrar: ");
 			String estadoUsuario = s.nextLine();
-			System.out.println("Digite o numero da residencia do usuário que deseja cadastrar: ");
-			int numeroResidenciaUsuario = s.nextInt();
+			System.out.println("Digite o numero da residencia do usu�rio que deseja cadastrar: ");
+			int numeroResidenciaUsuario = Integer.parseInt(s.nextLine());
 			
 			stm.setString(1, nomeUsuario);
 			stm.setString(2, dataNascimento);
@@ -74,8 +74,8 @@ public class Usuario extends Pessoa{
 			stm.setString(13, estadoUsuario);
 			stm.setInt(14, numeroResidenciaUsuario);
 			ConnectionDB.runPreparedStatment(stm);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException | NumberFormatException e) {
+			System.out.println("Erro ao cadastrar usuario" + e);
 		}finally{
 			ConnectionDB.Desconectar();
 		}
@@ -136,24 +136,24 @@ public class Usuario extends Pessoa{
 		}	
 	}
 		
-	public void pesquisarProduto() throws SQLException{
-		ConnectionDB.Conectar();
-        
-        System.out.println("Digite o nome do produto que deseja pesquisar: ");
-        String nomeProduto = s.nextLine();
-        
+	public void pesquisarProduto(){
         String sql = "select * from produtos where nome_produto = ?";
-        PreparedStatement stm = ConnectionDB.preparedStament(sql);
         
-        stm.setString(1, nomeProduto);
-        
-        ResultSet result = ConnectionDB.runPreparedSelect(stm);
-        
-        while( result.next() ) {
-        	System.out.println(result.getInt("cod_produto") + " " + result.getString("nome_produto") + " " + result.getFloat("preco_produto") + " " + result.getInt("cod_categoria"));
-        }
-        
-        ConnectionDB.Desconectar();
-        
+        try {
+        	ConnectionDB.Conectar();
+            System.out.println("Digite o nome do produto que deseja pesquisar: ");
+            String nomeProduto = s.nextLine();
+            PreparedStatement stm = ConnectionDB.preparedStament(sql);
+			stm.setString(1, nomeProduto);
+			 ResultSet result = ConnectionDB.runPreparedSelect(stm);
+			 while( result.next() ) {
+		        	System.out.println(result.getInt("cod_produto") + " " + result.getString("nome_produto") + " " + result.getFloat("preco_produto") + " " + result.getInt("cod_categoria"));
+		        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+	        ConnectionDB.Desconectar();
+
+		}  
 	}	
 }

@@ -28,7 +28,7 @@ public class TransferenciaFornecedor extends Transferencia{
 				int codSaidaProdutoFornecedor;
 				try {
 					System.out.println("Digite o Código de Saída de Fornecedor: \n");
-					codSaidaProdutoFornecedor = scan.nextInt();
+					codSaidaProdutoFornecedor = Integer.parseInt(scan.nextLine());
 					ConnectionDB.Conectar();
 					PreparedStatement stm = ConnectionDB.preparedStament(qr);
 					stm.setInt(1, codSaidaProdutoFornecedor);
@@ -37,7 +37,7 @@ public class TransferenciaFornecedor extends Transferencia{
 						Transferencia transf = new Transferencia(result.getInt("cod_saida"),result.getInt("cod_produto"), result.getInt("cod_fornecedor"), result.getString("dt_saida_produto"));
 						transf.mostrarTransferencia();
 					}
-				} catch (SQLException e) {
+				} catch (SQLException | NumberFormatException e) {
 					e.printStackTrace();
 				}finally {
 					ConnectionDB.Desconectar();
@@ -93,11 +93,11 @@ public class TransferenciaFornecedor extends Transferencia{
 				try {
 					System.out.println("Digite os valores abaixo para inserção \n");
 					System.out.println("Código do Produto: \n");
-					codProduto = scan.nextInt();
+					codProduto = Integer.parseInt(scan.nextLine());
 					System.out.println("Código do Fornecedor: \n");
-					codFornecedor = scan.nextInt();
+					codFornecedor = Integer.parseInt(scan.nextLine());
 					System.out.println("Data de Saída do Produto");
-					dataSaidaProduto = scan.next();
+					dataSaidaProduto = scan.nextLine();
 					ConnectionDB.Conectar();
 					PreparedStatement stm = ConnectionDB.preparedStament(qr);
 					stm.setInt(1, codProduto);
@@ -105,7 +105,7 @@ public class TransferenciaFornecedor extends Transferencia{
 					stm.setInt(3, codFornecedor);
 					ConnectionDB.runPreparedStatment(stm);
 					System.out.println("Transferencia realizada com sucesso!");
-				} catch (SQLException e) {
+				} catch (SQLException | NumberFormatException e) {
 					e.printStackTrace();
 				}finally {
 					ConnectionDB.Desconectar();	
