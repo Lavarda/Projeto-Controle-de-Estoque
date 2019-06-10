@@ -46,9 +46,9 @@ public class Gerente extends Administrador{
 			System.out.println("========= CATEGORIA ===========");
 			codCategoriaFuncionario = Categoria.returnUserValueCodCategoria();
 			System.out.println("========= NOME ===========");
-			nomeFuncionario = Administrador.s.next();
+			nomeFuncionario = Administrador.s.nextLine();
 			System.out.println("========= MATRICULA ===========");
-			matriculaFuncionario = Administrador.s.next();
+			matriculaFuncionario = Administrador.s.nextLine();
 			System.out.println("========= SENHA ===========");
 			senhaFuncionario = Administrador.s.next();
 			codCargoFuncionario = Cargos.returnUserValueCodCargos();
