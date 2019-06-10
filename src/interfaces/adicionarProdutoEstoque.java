@@ -189,7 +189,7 @@ public class adicionarProdutoEstoque extends javax.swing.JInternalFrame {
     private void botaoSalvarAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                                            
     	String nomeProduto;
     	String categoria;
-    	Categoria new_categoria = Categoria.NENHUMA;
+    	Categoria new_categoria = null;
     	String preco;
     	double precoDouble;
     	try {
@@ -201,22 +201,19 @@ public class adicionarProdutoEstoque extends javax.swing.JInternalFrame {
     				new_categoria = Categoria.ACHOCOLATADOS;
     				break;
     			case "AGUA POTAVEL":
-    				new_categoria = Categoria.AGUA_POTAVEL;
-    				break;
-    			case "BEBIDAS A BASE DE ANIS":
-    				new_categoria = Categoria.BEBIDAS_A_BASE_DE_ANIS;
+    				new_categoria = Categoria.AGUA;
     				break;
     			case "BEBIDAS ALCOOLICAS":
-    				new_categoria = Categoria.BEBIDAS_ALCOOLICAS;
+    				new_categoria = Categoria.ALCOOLICAS;
     				break;
     			case "BEBIDAS DE SOJA":
-    				new_categoria = Categoria.BEBIDAS_DE_SOJA;
+    				new_categoria = Categoria.SOJA;
     				break;
     			case "BEBIDAS ENERGETICAS":
-    				new_categoria = Categoria.BEBIDAS_ENERGETICAS;
+    				new_categoria = Categoria.ENERGETICAS;
     				break;
     			case "BEBIDAS ESPORTIVAS":
-    				new_categoria = Categoria.BEBIDAS_ESPORTIVAS;
+    				new_categoria = Categoria.ESPORTIVAS;
     				break;
     			case "CAFES":
     				new_categoria = Categoria.CAFES;
