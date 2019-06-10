@@ -6,17 +6,17 @@ public class MainUsuarios extends MainFuncionario {
 	public static void main(String[] args) {
 		do {
 			Usuario usuario = new Usuario();
-			System.out.println("Digite a opçãoo desejada: \n "
-						+ "1 - Adicionar um novo usuário \n "
-						+ "2 - Modificar um usuário \n "
-						+ "3 - Excluir um usuário \n "
+			System.out.println("Digite a opï¿½ï¿½oo desejada: \n "
+						+ "1 - Adicionar um novo usuï¿½rio \n "
+						+ "2 - Modificar um usuï¿½rio \n "
+						+ "3 - Excluir um usuï¿½rio \n "
 						+ "4 - Verificar todos produtos comprados \n "
 						+ "5 - Voltar");
 			try {
-				MainPrincipal.setOpcao(Integer.parseInt(s.nextLine()));
+				MainPrincipal.setOpcaoSecundaria(Integer.parseInt(s.nextLine()));
 				switch (MainPrincipal.getOpcaoSecundaria()) {
 					case 1:
-						funcionario.requisitarInclusaoUsuario(usuario);			 								
+						funcionario.requisitarInclusaoUsuario(usuario);			
 					case 2:
 						funcionario.requisitarAlteracaoUsuario(usuario);
 					case 3:
@@ -25,13 +25,14 @@ public class MainUsuarios extends MainFuncionario {
 						funcionario.requisitarHistorioCompras(usuario);
 					case 5:
 						MainFuncionario.main(args);
+						break;
 					default:
-						System.out.println("Opção invalida!!");
+						System.out.println("Opï¿½ï¿½o invalida!!");
 						MainPrincipal.setSistemaSecundario(false);
 						break;
 				}
 			}catch(NumberFormatException e) {
-				System.out.println("Valor inválido !!");
+				System.out.println("Valor invï¿½lido !!");
 			}
 		}while(MainPrincipal.isSistemaSecundario());
 	}

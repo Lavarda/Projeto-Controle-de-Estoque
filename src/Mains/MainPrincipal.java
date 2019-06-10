@@ -53,6 +53,7 @@ public class MainPrincipal {
 						 break;
 					 case 3:
 						 sistema = false;
+						 break;
 					 default:
 						 System.out.println("Opção Invalida!!");
 						 sistema = false; 
