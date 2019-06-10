@@ -32,7 +32,7 @@ public class TransferenciaFiliais extends Transferencia{
 				transf.mostrarTransferencia();	
 			}
 		} catch (SQLException | NumberFormatException e) {
-			e.printStackTrace();
+			System.out.println("Erro ao realizar transferencia" + e);
 		}finally {
 			ConnectionDB.Desconectar();
 		}			
@@ -100,7 +100,7 @@ public class TransferenciaFiliais extends Transferencia{
 					System.out.println("Transferencia realizada com sucesso!");
 					ConnectionDB.runPreparedStatment(stm);
 				} catch (SQLException | NumberFormatException e) {
-					e.printStackTrace();
+					System.out.println("Erro ao realizar transferencia" + e);
 				}finally {
 					ConnectionDB.Desconectar();
 				}		

@@ -123,7 +123,7 @@ public class Filiais {
 			System.out.println("Digite o estado da filial que deseja cadastrar: ");
 			String estadoFilial = s.nextLine();
 			System.out.println("Digite o numero da loja da filial que deseja cadastrar: ");
-			int numeroFilial = s.nextInt();	
+			int numeroFilial = Integer.parseInt(s.nextLine());
 			
 			stm.setString(1, nomeFilial );
 			stm.setString(2, cnpjFilial );
@@ -135,8 +135,8 @@ public class Filiais {
 			stm.setInt(8, numeroFilial );
 			ConnectionDB.runPreparedStatment(stm);
 			System.out.println("Dados de endereço de filial inseridos");
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException | NumberFormatException e) {
+			System.out.println("Erro ao realizar cadastro filial " + e);
 		}finally {
 			ConnectionDB.Desconectar();
 		}		

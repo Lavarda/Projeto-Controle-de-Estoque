@@ -38,7 +38,7 @@ public class TransferenciaFornecedor extends Transferencia{
 						transf.mostrarTransferencia();
 					}
 				} catch (SQLException | NumberFormatException e) {
-					e.printStackTrace();
+						System.out.println("Erro ao realizar transferencia" + e);
 				}finally {
 					ConnectionDB.Desconectar();
 				}			
@@ -106,8 +106,8 @@ public class TransferenciaFornecedor extends Transferencia{
 					ConnectionDB.runPreparedStatment(stm);
 					System.out.println("Transferencia realizada com sucesso!");
 				} catch (SQLException | NumberFormatException e) {
-					e.printStackTrace();
-				}finally {
+					System.out.println("Erro ao realizar transferencia" + e);
+					}finally {
 					ConnectionDB.Desconectar();	
 				}		
 	}
