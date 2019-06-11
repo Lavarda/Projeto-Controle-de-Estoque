@@ -29,12 +29,12 @@ public class MainGerente extends MainPrincipal {
 			 				MainPrincipal.main(args);
 			 				break;
 			 			default:
-		 				System.out.println("Opção invalida!!");
+		 				System.out.println("Opï¿½ï¿½o invalida!!");
 		 				MainPrincipal.setSistema(false);
 		 				 break;
 					}
 				}catch(NumberFormatException e) {
-					System.out.println("Valor Inválido!!");
+					System.out.println("Valor Invï¿½lido!!");
 				}
 			}while(MainPrincipal.isSistema());
 		}

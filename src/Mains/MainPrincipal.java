@@ -56,8 +56,9 @@ public class MainPrincipal {
 						 break;
 					 default:
 						 System.out.println("Opção Invalida!!");
-						 sistema = false; 
+						 MainPrincipal.main(args);
 				 }
+				 
 			}catch(NumberFormatException e){
 				System.out.println("Valor Inv�lido !!");
 			}
