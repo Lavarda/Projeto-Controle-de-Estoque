@@ -3,9 +3,7 @@ ALTER TABLE telefone_usuario ADD FOREIGN KEY (cod_usuario) REFERENCES cadastro_u
 ALTER TABLE endereco_usuario ADD FOREIGN KEY (cod_usuario) REFERENCES cadastro_usuario (cod_usuario);
 
 
-ALTER TABLE telefone_funcionario ADD FOREIGN KEY (cod_funcionario) REFERENCES funcionarios (cod_funcionario);
-ALTER TABLE cargo_funcionario ADD FOREIGN KEY (cod_funcionario) REFERENCES funcionarios (cod_funcionario);
-ALTER TABLE cadastro_usuario ADD FOREIGN KEY (cod_funcionario) REFERENCES funcionarios (cod_funcionario);
+ALTER TABLE funcionarios ADD FOREIGN KEY (cod_cargo) REFERENCES cargo_funcionario (cod_cargo);
 
 
 ALTER TABLE telefone_filial ADD FOREIGN KEY (cod_filial) REFERENCES filiais (cod_filial);

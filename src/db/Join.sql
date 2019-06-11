@@ -41,5 +41,13 @@ select p.cod_produto, nome_produto, preco_produto, qntd_produto from produtos p
 join estoque e
 on (p.cod_produto = e.cod_produto);
 
+select nome_produto,nome_categoria from produtos p full outer join categoria c on (p.cod_categoria = c.cod_categoria);
 
-select cod_usuario, count(cod_usuario) as numero_compras from venda group by cod_usuario order by cod_usuario;
+
+select nome_fornecedor,dt_saida_produto,nome_produto,preco_produto from transferencia_fornecedor tf inner join fornecedor f on (tf.cod_fornecedor = f.cod_fornecedor) join produtos p on (tf.cod_produto = p.cod_produto );
+
+select nome_fornecedor,dt_entrada_produto,nome_produto,preco_produto from entrada tf inner join fornecedor f on (tf.cod_fornecedor = f.cod_fornecedor) join produtos p on (tf.cod_produto = p.cod_produto );
+
+
+select estado_usuario from endereco_usuario where estado_usuario = 'SC' UNION ALL select estado_fornecedor from endereco_fornecedor where estado_fornecedor = 'SC';
+
