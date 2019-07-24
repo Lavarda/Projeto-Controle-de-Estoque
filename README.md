@@ -8,8 +8,10 @@ Criação da APS 3º Semestre IES-2019
 
 3º Definir ligação entre DB e code em Java
 
-4º Criar interface
+4º Criar interface 
 
-5º Adicionar detalhes !
+5º Interligar interfaces #TO-DO
 
-# Vamo dalé
+6º Estrutura via console
+
+7º Adicionar detalhes
